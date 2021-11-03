@@ -7,6 +7,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Rol{
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String rol;
 	
