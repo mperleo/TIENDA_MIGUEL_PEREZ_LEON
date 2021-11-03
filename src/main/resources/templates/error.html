@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <div th:replace="fragments/head :: head"></div>
+  <body>
+    <div class="page-holder">
+      <div th:replace="fragments/header :: header"></div>
+
+          <div class="container-fluid">
+          
+            <div class="alert alert-danger" role="alert">
+            	<p><strong>Error:</strong> No tienes permiso para acceder a esta página</p>
+            	<hr>
+			  <img src="./img/error.jpeg" alt="Error imagen"/>
+			</div>
+                 
+          </div>
+
+	    	<div th:replace="fragments/footer :: footer"></div>
+	      	<div th:replace="fragments/scripts :: scripts"></div>
+        </div>
+    </body>      
+</html>
