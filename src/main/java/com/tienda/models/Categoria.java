@@ -1,6 +1,15 @@
 package com.tienda.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Categoria {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String nombre;
 	private String descripcion;
@@ -9,6 +18,7 @@ public class Categoria {
 	 * @param nombre
 	 * @param descripcion
 	 */
+	
 	public Categoria(int id, String nombre, String descripcion) {
 		this.id = id;
 		this.nombre = nombre;
