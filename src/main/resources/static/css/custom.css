@@ -1,0 +1,25 @@
+/* your styles go here */
+.font-syne{
+    font-family: 'Syne', sans-serif;
+}
+
+.bg-header-page{
+    background-color: whitesmoke;
+    border-bottom: 1px solid gray;
+    margin-bottom: 15px;
+}
+
+footer h6{
+    font-family: 'Syne', sans-serif;
+}
+
+.border-category{
+    padding: 5px;
+    border: 5px solid white;
+    background-color: whitesmoke;
+}
+
+legend{
+    font-family: 'Syne', sans-serif;
+    font-size: medium;
+}
