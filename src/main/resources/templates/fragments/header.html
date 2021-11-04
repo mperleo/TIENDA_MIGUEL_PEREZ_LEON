@@ -1,12 +1,12 @@
  <!-- navbar-->
  <header class="header bg-header-page" th:fragment="header">
    <div class="container-fluid px-0 px-lg-3">
-     <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="index.jsp"><span class="font-weight-bold text-dark font-syne fs-2">Bikë<span class="text-primary">Meisters</span></span></a>
+     <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="index.html"><span class="font-weight-bold text-dark font-syne fs-2">Bikë<span class="text-primary">Meisters</span></span></a>
        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
          <ul class="navbar-nav me-auto font-syne">
            <li class="nav-item">
-             <!-- Link--><a class="nav-link active" href="index.jsp">&#5125; Home</a>
+             <!-- Link--><a class="nav-link active" href="index.html">&#5125; Home</a>
            </li>
            <li class="nav-item">
              <!-- Link--><a class="nav-link" href="shop.html">Ofertas</a>
@@ -14,7 +14,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categorias</a>
               <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
-                <a class="dropdown-item border-0 transition-link" href="index.jsp">Homepage</a>
+                <a class="dropdown-item border-0 transition-link" href="index.html">Homepage</a>
                 <a class="dropdown-item border-0 transition-link" href="shop.html">Category</a>
                 <a class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a>
                 <a class="dropdown-item border-0 transition-link" href="cart.html">Shopping cart</a>
@@ -28,7 +28,7 @@
             	
             <c:set var="usuarioNombre" scope="session" value="${sessionScope.usuarioNombre}"/>
             
-            <c:if test="${usuarioNombre != null}">
+           <!--  <c:if test="${usuarioNombre != null}">
             	<li class="nav-item dropdown">
             		<a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             			<i class='fas fa-user-alt mx-1 text-gray'></i><c:out value="${sessionScope.usuarioNombre}"></c:out>
@@ -39,10 +39,10 @@
             		 </div>	
             	</li>   
 		
-			</c:if>
+			</c:if>-->
 
 			<c:if test="${usuarioNombre == null}">
-            	<li class='nav-item'><a class='nav-link' href='login.jsp'><i class='fas fa-user-alt mx-1 text-gray'></i>Login</a></li>
+            	<li class='nav-item'><a class='nav-link' href='login.html'><i class='fas fa-user-alt mx-1 text-gray'></i>Login</a></li>
             </c:if>
           </ul>
         </div>
