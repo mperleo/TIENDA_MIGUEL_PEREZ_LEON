@@ -1,4 +1,4 @@
-package curso.java.tienda.models;
+package curso.java.tienda.models.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
