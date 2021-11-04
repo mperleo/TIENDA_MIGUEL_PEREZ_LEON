@@ -23,27 +23,26 @@
             </li>
           </ul>
           <ul class="navbar-nav ms-auto flex-row-reverse">               
-            <li class="nav-item"><a class="nav-link" href="cart.html"><i class="fas fa-dolly-flatbed mx-1 text-gray"></i>Cart<small class="text-gray"> (2)</small></a></li>
+            <li class="nav-item"><a class="nav-link" href="cesta"><i class="fas fa-dolly-flatbed mx-1 text-gray"></i>Cart<small class="text-gray"> (2)</small></a></li>
             <li class="nav-item"><a class="nav-link" href="#"><i class="far fa-heart mx-1"></i><small class="text-gray"></small></a></li>
             	
-            <c:set var="usuarioNombre" scope="session" value="${sessionScope.usuarioNombre}"/>
             
-           <!--  <c:if test="${usuarioNombre != null}">
+           <div th:if="${session.usuario != null}">
             	<li class="nav-item dropdown">
             		<a class="nav-link dropdown-toggle" id="pagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            			<i class='fas fa-user-alt mx-1 text-gray'></i><c:out value="${sessionScope.usuarioNombre}"></c:out>
+            			<i class='fas fa-user-alt mx-1 text-gray'></i><span th:text="${session.usuario.nombre}"></span>
             		</a>
             		 <div class="dropdown-menu mt-3" aria-labelledby="pagesDropdown">
             		 	<a class="dropdown-item border-0 transition-link" href='#'>Opciones de usuario</a><hr>
-            		 	<a class="dropdown-item border-0 transition-link text-danger" href='/ProyectoTienda/Login?logout=true'>Cerrar sesión</a>
+            		 	<a class="dropdown-item border-0 transition-link text-danger" href='/login/cerrarSesion'>Cerrar sesión</a>
             		 </div>	
             	</li>   
 		
-			</c:if>-->
+			</div>
 
-			<c:if test="${usuarioNombre == null}">
+			<div th:if="${session.usuario == null}">
             	<li class='nav-item'><a class='nav-link' href='/login'><i class='fas fa-user-alt mx-1 text-gray'></i>Login</a></li>
-            </c:if>
+            </div>
           </ul>
         </div>
       </nav>

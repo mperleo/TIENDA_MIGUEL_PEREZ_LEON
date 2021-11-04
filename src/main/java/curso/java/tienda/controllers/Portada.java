@@ -1,12 +1,20 @@
 package curso.java.tienda.controllers;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import curso.java.tienda.models.DAO.Productos;
+import curso.java.tienda.models.entities.Producto;
 
 @Controller
 @RequestMapping("")
 public class Portada {
+	
+	public ArrayList<Producto> productos = new ArrayList<Producto>();
 	
 	@GetMapping("")
 	public String portada() {
@@ -19,7 +27,9 @@ public class Portada {
 	}
 	
 	@GetMapping("/tienda")
-	public String shop() {
+	public String shop(Model model) {
+		productos = Productos.seleccionar();
+		model.addAttribute("productos", productos);
 		return "shop";
 	}
 	

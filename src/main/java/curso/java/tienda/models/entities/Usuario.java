@@ -1,15 +1,7 @@
 package curso.java.tienda.models.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Usuario{
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int codigo;
 	private int id_rol;
 	private String email;
@@ -25,8 +17,11 @@ public class Usuario{
 
 	public Usuario() {
 	}
-
 	
+	public Usuario(String email, String clave) {
+		this.email = email;
+		this.clave = clave;
+	}
 
 	public Usuario(int codigo, int id_rol, String email, String clave, String nombre, String apellido1,
 			String apellido2, String direccion, String provincia, String localidad, String telefono, String dni) {
