@@ -36,9 +36,9 @@ public class Login {
 			return "redirect:/home";
 		}
 		else {
-			model.addAttribute("mensaje", "<strong>Error:</strong> datos erroneos");
+			model.addAttribute("mensaje", "Error: Los datos indicados no estan en la base de datos");
 			logger.error("Fallo de inicio de sesion "+usuario.getClave()+" "+usuario.getEmail());
-			return "redirect:/login";
+			return "login";
 		}
 	}
 	

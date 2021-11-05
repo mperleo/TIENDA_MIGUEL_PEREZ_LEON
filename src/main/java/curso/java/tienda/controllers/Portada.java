@@ -17,12 +17,16 @@ public class Portada {
 	public ArrayList<Producto> productos = new ArrayList<Producto>();
 	
 	@GetMapping("")
-	public String portada() {
+	public String portada(Model model) {
+		productos = Productos.seleccionar();
+		model.addAttribute("productos", productos);
 		return "index";
 	}
 	
 	@GetMapping("/home")
-	public String home() {
+	public String home(Model model) {
+		productos = Productos.seleccionar();
+		model.addAttribute("productos", productos);
 		return "index";
 	}
 	

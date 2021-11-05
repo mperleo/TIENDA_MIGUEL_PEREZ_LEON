@@ -31,6 +31,7 @@ public class Cesta {
 		
 		ArrayList<DetallePedido> cestaLista = new ArrayList<DetallePedido>();
 		Double total = (double) 0;
+		Integer nProds = 0;
 		
 		if(cesta != null) {
 			Set<Integer> i = cesta.keySet();
@@ -38,7 +39,13 @@ public class Cesta {
 			for( Integer key: i) {
 				cestaLista.add(cesta.get(key));
 				total+=cesta.get(key).getTotal();
+				nProds+=cesta.get(key).getUnidades();
+				
 			}
+			session.setAttribute("nProds", nProds);
+		}
+		else {
+			session.setAttribute("nProds", 0);
 		}
 		
 		model.addAttribute("cesta", cestaLista);
@@ -91,18 +98,56 @@ public class Cesta {
 		ArrayList<DetallePedido> cestaLista = new ArrayList<DetallePedido>();
 		Double total = (double) 0;
 		
-		Set<Integer> i = cesta.keySet();
+		return "redirect:/cesta";
+	}
+	
+	@GetMapping("down/{id_prod}")
+	public String downProd(Model model, HttpSession session, @PathVariable("id_prod") String id_prod) {
+		Integer id_producto = Integer.parseInt(id_prod);
 		
-		for( Integer key: i) {
-			cestaLista.add(cesta.get(key));
-			total+=cesta.get(key).getTotal();
+		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
+		
+		if(cesta != null && cesta.containsKey(id_producto)) {
+			DetallePedido lineaPedido = cesta.get(id_producto);
+			
+			lineaPedido.setUnidades(lineaPedido.getUnidades()-1);
+			lineaPedido.setTotal(lineaPedido.getPrecioUnidad()*lineaPedido.getUnidades());
+			
+			if(lineaPedido.getUnidades()!=0) {
+				cesta.replace(id_producto, lineaPedido);
+				
+			}
+			else {
+				cesta.remove(id_producto);
+			}
+			
+		}
+		else {
+			logger.error("Intento de retirar del carro un producto que no esta en la cesta, n.ref: "+id_prod);
 		}
 		
-		model.addAttribute("cesta", cestaLista);
-		model.addAttribute("total", total);
+		session.setAttribute("cesta", cesta);
 		
-		return "cart";
-		//return "redirect: /cesta";
+		return "redirect:/cesta";
+	}
+	
+	@GetMapping("eliminar/{id_prod}")
+	public String elimLineaProd(Model model, HttpSession session, @PathVariable("id_prod") String id_prod) {
+		Integer id_producto = Integer.parseInt(id_prod);
+		
+		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
+		
+		if(cesta != null && cesta.containsKey(id_producto)) {
+			cesta.remove(id_producto);			
+		}
+		else {
+			logger.error("Intento de retirar del carro un producto que no esta en la cesta, n.ref: "+id_prod);
+		}
+		
+		session.setAttribute("cesta", cesta);
+		
+		
+		return "redirect:/cesta";
 	}
 	
 	@GetMapping("vaciarCesta")
