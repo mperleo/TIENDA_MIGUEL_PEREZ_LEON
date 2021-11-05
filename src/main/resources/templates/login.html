@@ -7,8 +7,9 @@
 		<div class="container-fluid">
 
 			<div class="alert alert-danger" role="alert"
-				th:if="${mensaje != null}">
+				th:if="${mensaje != null or session.mensaje != null}">
 				<span th:text="${mensaje}"></span>
+				<span th:text="${session.mensaje}"></span>
 			</div>
 
 			<div class="card mb-4" id="forms">

@@ -26,7 +26,7 @@
 			</section>
 			<section class="py-5" >
 				<h2 class="h5 text-uppercase mb-4">Productos</h2>
-				<div class="alert alert-primary" role="alert" th:if="${cesta == null}">
+				<div class="alert alert-primary" role="alert" th:if="${cesta == null or session.nProds == 0}">
 					<span>No has añadido productos a la cesta</span>
 				</div>
 				<div class="row">
@@ -54,7 +54,7 @@
 										<th class="pl-0 border-0" scope="row">
 											<div class="media align-items-center">
 												<a class="reset-anchor d-block animsition-link"
-													href="detail.html"><img src="img/product-detail-3.jpg"
+													href="detail.html"><img src="/img/product-detail-3.jpg"
 													alt="..." width="70" /></a>
 												<div class="media-body ml-3">
 													<strong class="h6"><a
@@ -106,7 +106,7 @@
 										class="fas fa-long-arrow-alt-left mr-2"> </i>Vaciar cesta</a>
 								</div>
 								<div class="col-md-6 text-md-right">
-									<a class="btn btn-outline-dark btn-sm" href="/cesta/pedido">Finaliza
+									<a class="btn btn-outline-dark btn-sm" href="/pedido">Finaliza
 										el pedido<i class="fas fa-long-arrow-alt-right ml-2"></i>
 									</a>
 								</div>

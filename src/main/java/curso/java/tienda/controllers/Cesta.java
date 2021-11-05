@@ -24,7 +24,6 @@ public class Cesta {
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	
-	
 	@GetMapping("")
 	public String portada(Model model, HttpSession session) {
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
@@ -156,9 +155,4 @@ public class Cesta {
 		return "cart";
 	}
 	
-	@GetMapping("pedido")
-	public String hacerPedido(Model model, HttpSession session) {
-		session.setAttribute("cesta", null);
-		return "cart";
-	}
 }

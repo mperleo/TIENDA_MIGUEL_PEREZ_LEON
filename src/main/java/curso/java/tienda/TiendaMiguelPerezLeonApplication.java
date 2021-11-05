@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class TiendaMiguelPerezLeonApplication {
 
 	public static void main(String[] args) {
+		
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		URL url = loader.getResource("log4j.properties");
 		PropertyConfigurator.configure(url);
