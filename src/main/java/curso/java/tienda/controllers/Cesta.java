@@ -8,19 +8,23 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import curso.java.tienda.models.DAO.Productos;
 import curso.java.tienda.models.entities.DetallePedido;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.service.ProductoService;
 
 @Controller
 @RequestMapping("/cesta")
 public class Cesta {
+	
+	@Autowired
+	private ProductoService ps;
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	
@@ -60,7 +64,7 @@ public class Cesta {
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		if(cesta == null || !cesta.containsKey(id_producto)) {
-			Producto nuevo = Productos.seleccionarUno(id_producto);
+			Producto nuevo = ps.getProductoXId(id_producto);
 			
 			if(nuevo != null) {
 				DetallePedido nuevaLinea = new DetallePedido();

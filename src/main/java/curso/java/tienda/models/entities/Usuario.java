@@ -1,8 +1,16 @@
 package curso.java.tienda.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuarios")
 public class Usuario{
 	
-	private int codigo;
+	@Id @GeneratedValue
+	private int id;
 	private int id_rol;
 	private String email;
 	private String clave;
@@ -23,9 +31,9 @@ public class Usuario{
 		this.clave = clave;
 	}
 
-	public Usuario(int codigo, int id_rol, String email, String clave, String nombre, String apellido1,
+	public Usuario(int id, int id_rol, String email, String clave, String nombre, String apellido1,
 			String apellido2, String direccion, String provincia, String localidad, String telefono, String dni) {
-		this.codigo = codigo;
+		this.id = id;
 		this.id_rol = id_rol;
 		this.email = email;
 		this.clave = clave;
@@ -44,8 +52,8 @@ public class Usuario{
 	/**
 	 * @return the codigo
 	 */
-	public int getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
 
 
@@ -53,8 +61,8 @@ public class Usuario{
 	/**
 	 * @param codigo the codigo to set
 	 */
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(int codigo) {
+		this.id = codigo;
 	}
 
 
