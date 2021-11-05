@@ -5,8 +5,8 @@ public class DetallePedido {
 
 	private Integer id;
 	private int id_pedido;
-	private Producto producto;
-	private Float precioUnidad;
+	private Integer producto;
+	private Double precioUnidad;
 	private Integer unidades;
 	private Float impuesto;
 	private Double total;
@@ -20,7 +20,7 @@ public class DetallePedido {
 	 * @param impuesto
 	 * @param total
 	 */
-	public DetallePedido(Integer id, int id_pedido, Producto producto, Float precioUnidad, Integer unidades,
+	public DetallePedido(Integer id, int id_pedido, Integer producto, Double precioUnidad, Integer unidades,
 			Float impuesto, Double total) {
 		super();
 		this.id = id;
@@ -52,11 +52,11 @@ public class DetallePedido {
 		this.id_pedido = id_pedido;
 	}
 
-	public Producto getProducto() {
+	public Integer getProducto() {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(Integer producto) {
 		this.producto = producto;
 	}
 
@@ -84,12 +84,12 @@ public class DetallePedido {
 		this.total = total;
 	}
 	
-	public Float getPrecioUnidad() {
+	public Double getPrecioUnidad() {
 		return precioUnidad;
 	}
 
-	public void setPrecioUnidad(Float precioUnidad) {
-		this.precioUnidad = precioUnidad;
+	public void setPrecioUnidad(Double double1) {
+		this.precioUnidad = double1;
 	}
 	
 }
