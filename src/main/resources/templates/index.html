@@ -32,22 +32,22 @@
 					<div class="row">
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=1"><img
-								class="img-fluid" src="img/bici-city.png" alt=""><strong
+								class="img-fluid" src="img/bici-city.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas urbanas</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=2"><img
-								class="img-fluid" src="img/bici-gravel.png" alt=""><strong
+								class="img-fluid" src="img/bici-gravel.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de gravel</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=3"><img
-								class="img-fluid" src="img/bici-mountain.png" alt=""><strong
+								class="img-fluid" src="img/bici-mountain.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de montaña</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=4"><img
-								class="img-fluid" src="img/bici-road.png" alt=""><strong
+								class="img-fluid" src="img/bici-road.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de carretera</strong></a>
 						</div>
 					</div>
@@ -68,7 +68,7 @@
 						<div class="product text-center">
 							<div class="position-relative mb-3">
 								<div class="badge text-white badge-"></div>
-								<a class="d-block" href="detail.html">
+								<a class="d-block" th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}">
 									<img class="img-fluid w-100" th:src="@{img/products/{name}/ (name = ${prod.imagen})}" th:alt="${prod.imagen}">
 								</a>
 								<div class="product-overlay">
@@ -95,7 +95,7 @@
 				</div>
 			</section>
 			<!-- SERVICES-->
-			<section class="py-5 bg-light container-fluid">
+			<section class="py-5 bg-light">
 				<div class="container">
 					<div class="row text-center">
 						<div class="col-lg-4 mb-3 mb-lg-0">
@@ -139,29 +139,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- NEWSLETTER-->
-			<section class="py-5">
-				<div class="container p-0">
-					<div class="row">
-						<div class="col-lg-6 mb-3 mb-lg-0">
-							<h5 class="text-uppercase">Let's be friends!</h5>
-							<p class="text-small text-muted mb-0">Nisi nisi tempor
-								consequat laboris nisi.</p>
-						</div>
-						<div class="col-lg-6">
-							<form action="#">
-								<div class="input-group flex-column flex-sm-row mb-3">
-									<input class="form-control form-control-lg py-3" type="email"
-										placeholder="Enter your email address"
-										aria-describedby="button-addon2">
-									<button class="btn btn-dark btn-block" id="button-addon2"
-										type="submit">Subscribe</button>
-								</div>
-							</form>
 						</div>
 					</div>
 				</div>

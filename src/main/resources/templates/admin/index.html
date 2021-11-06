@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <div th:replace="fragments/head :: head"></div>
+    <div th:replace="admin/fragments/head :: head"></div>
     <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
     	<div id="layoutSidenav">
-        	<div th:replace="fragments/headerYnav :: nav"></div>
-         	<div th:replace="fragments/headerYnav :: header"></div>
+         	<div th:replace="admin/fragments/nav :: nav"></div>
         
             <div id="layoutSidenav_content">
                 <main>
@@ -29,7 +29,7 @@
                     </div>
                 </main>
                 
-                <div th:replace="fragments/footerYscripts :: footer"></div>
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
     
             </div>
             

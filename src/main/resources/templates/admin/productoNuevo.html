@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div id="layoutSidenav">
+	        <div th:replace="admin/fragments/nav :: nav"></div>
+	        <div th:replace="admin/fragments/header :: header"></div>
+			
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Nuevo rol</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="roles.html">Roles</a></li>
+                             <li class="breadcrumb-item active">Nuevo rol</li>
+                        </ol>
+                        <!--<div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                   Esto queda bien para poner los errores
+                                </p>
+                            </div>
+                        </div>-->
+
+						<form method="post" th:object="${prod}" th:action="@{/admin/productos/nuevo/guardar}">
+						  <div class="form-group">
+						    <label for="id_categoria">id_categorial</label>
+						    <input type="text" class="form-control" id="id_categoria" name="id_categoria" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="nombre">Nombre de producto</label>
+						    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="descripcion">Descripcion</label>
+						    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="precio">Precio</label>
+						    <input type="text" class="form-control" id="precio" name="precio" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="stock">Stock</label>
+						    <input type="text" class="form-control" id="stock" name="stock" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="fecha_alta">Fecha alta</label>
+						    <input type="date" class="form-control" id="fecha_alta" name="fecha_alta" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="fecha_baja">Fecha baja</label>
+						    <input type="date" class="form-control" id="fecha_baja" name="fecha_baja" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="impuesto">Impuesto</label>
+						    <input type="text" class="form-control" id="impuesto" name="impuesto" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="imagen">Imagen</label>
+						    <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Indica el nombre del rol nuevo" required>
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
+						  
+						</form>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

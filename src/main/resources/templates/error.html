@@ -8,9 +8,17 @@
 		<div class="container-fluid">
 
 			<div class="alert alert-danger" role="alert">
-				<p>
-					<strong>Error:</strong> No tienes permiso para acceder a estap�gina
-				</p>
+				<h1>Error!</h1>
+				<p th:text="${mensaje}"></p>
+				<p> Hay un problema con la direccion indicada ( <span th:if="${path != null}" th:text="${path}" /> ). </p>
+				<p th:if="${exception != null}" th:text="${'Details: ' + message}" />
+				<p th:if="${error != null}" th:text="${'Error type : ' + error }" />
+				<p th:if="${exception != null}" th:text="${'Exception: ' + exception}" />
+				<p th:if="${trace != null}" th:text="${'Trace : ' + trace }" />
+				<p th:if="${timestamp != null}" th:text="${'Timestamp: ' + timestamp}" />
+				<p th:if="${status != null}" th:text="${'Status: ' + status}" />
+				
+	
 				<hr>
 				<img src="/img/error.jpeg" alt="Error imagen" />
 			</div>

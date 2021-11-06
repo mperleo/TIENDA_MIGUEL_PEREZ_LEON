@@ -28,7 +28,7 @@ public class ProductoService {
 		pr.delete(p);
 	}
 	
-	public void editUsuario(Producto p) {
+	public void editProducto(Producto p) {
 		pr.save(p);
 	}
 	

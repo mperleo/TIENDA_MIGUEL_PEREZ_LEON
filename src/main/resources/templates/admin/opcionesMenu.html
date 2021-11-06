@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-    <div th:replace="admin/fragments/head :: head"></div>
+	<div th:replace="fragments/head :: head"></div>
     <body>
     	<div id="layoutSidenav">
-	         <div th:replace="admin/fragments/nav :: nav"></div>
-	         <div th:replace="admin/fragments/header:: header"></div>
+        	<div th:replace="fragments/headerYnav :: nav"></div>
+         	<div th:replace="fragments/headerYnav :: header"></div>
+
             <div id="layoutSidenav_content">
                 <main>
-                	
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Roles</h1>
+                        <h1 class="mt-4">Usuarios</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
-                            <li class="breadcrumb-item active">Roles</li>
-                            
+                            <li class="breadcrumb-item active">Usuarios</li>
                         </ol>
-                        
-                        <a class="btn btn-primary " href="rolNuevo.html" role="button">Nuevo rol</a>
-                        
                         <!--<div class="card mb-4">
                             <div class="card-body">
                                 <p class="mb-0">
@@ -30,22 +26,34 @@
                             <thead class="table-dark">
                               <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">id_rol</th>
+                                <th scope="col">Email</th>
                                 <th scope="col">Nombre</th>
+                                <th scope="col">Apellidos</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">TelÃ©fono</th>
+                                <th scope="col">DNI</th>
                                 <th scope="col">Acciones</th>
                               </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach items="${pageScope.roles}" var="rol">
+                            	<c:forEach items="${pageScope.usuariosLista}" var="usuario" >
 	                              <tr>
-	                                <th scope="row"><c:out value="${rol.getId()}"></c:out></th>
-	                                <th><c:out value="${rol.getRol()}"></c:out></th>
-	                                <th>
+	                                <th scope="row"><c:out value="${usuario.getCodigo()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getId_rol()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getEmail()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getNombre()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getApellido1()}"></c:out> <c:out value="${usuario.getApellido2()}" ></c:out></th>
+	                                <th ><c:out value="${usuario.getDireccion()}"></c:out>, <c:out value="${usuario.getProvincia()}"></c:out>,  <c:out value="${usuario.getLocalidad()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getTelefono()}"></c:out></th>
+	                                <th ><c:out value="${usuario.getDni()}"></c:out></th>
+	                                <td>
 	                                    <a class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</a>
 	                                    <a class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Modificar</a>
-	                                </th>
+	                                </td>
 	                              </tr>
-                                </c:forEach>
-                              
+	                             </c:forEach>
+	                            
                             </tbody>
                         </table>
 
@@ -72,10 +80,9 @@
                     </div>
                 </main>
                 
-                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                <div th:replace="fragments/footerYscripts :: footer"></div>
                  
-            </div>
+            </div>  
         </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
-
     </body>
 </html>

@@ -4,49 +4,53 @@
 <body>
 	<div class="page-holder">
 		<div th:replace="fragments/header :: header"></div>
-		<div class="container-fluid">
-
-			<div class="alert alert-danger" role="alert"
-				th:if="${mensaje != null or session.mensaje != null}">
-				<span th:text="${mensaje}"></span>
-				<span th:text="${session.mensaje}"></span>
-			</div>
-
-			<div class="card mb-4" id="forms">
-				<div class="card-header font-syne">Inicia sesión</div>
-				<div class="card-body">
-					<form action="/login/entrar" th:object="${usuario}" method="POST">
-						<fieldset>
-							<div class="form-group">
-								<label class="text-small text-uppercase" for="email">Correo
-									electrónico</label> <input class="form-control" id="email" name="email"
-									type="email" placeholder="Indica tu correo">
-							</div>
-							<div class="form-group">
-								<label class="text-small text-uppercase" for="clave">Contraseña</label>
-								<input class="form-control" id="clave" name="clave"
-									type="password" placeholder="Indica tu contraseña">
-							</div>
-							<!--  <div class="form-check form-group">
-                        <input class="form-check-input" id="checkbox-1" type="checkbox">
-                        <label class="text-small text-uppercase form-check-label" for="checkbox-1">Recuerdame</label>
-                      </div>-->
-							<button class="btn btn-primary font-syne" type="submit">Iniciar
-								sesión</button>
-						</fieldset>
-					</form>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-9">
+					<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+						<span th:text="${mensaje}"></span>
+						<span th:text="${session.mensaje}"></span>
+					</div>
+		
+					<div class="card mb-4" id="forms">
+						<div class="h4 card-header font-syne py-lg-4">Inicia sesión</div>
+						<div class="card-body">
+							<form action="/login/entrar" th:object="${usuario}" method="POST">
+								<fieldset>
+									<div class="form-group">
+										<label class="text-small text-uppercase" for="email">Correo
+											electrónico</label> <input class="form-control" id="email" name="email"
+											type="email" placeholder="Indica tu correo">
+									</div>
+									<div class="form-group">
+										<label class="text-small text-uppercase" for="clave">Contraseña</label>
+										<input class="form-control" id="clave" name="clave"
+											type="password" placeholder="Indica tu contraseÃ±a">
+									</div>
+									<!--  <div class="form-check form-group">
+		                        <input class="form-check-input" id="checkbox-1" type="checkbox">
+		                        <label class="text-small text-uppercase form-check-label" for="checkbox-1">Recuerdame</label>
+		                      </div>-->
+		                      		<br>
+									<button class="btn btn-primary font-syne" type="submit">Iniciar sesión</button>
+								</fieldset>
+							</form>
+						</div>
+					</div>
+		
+					<div class="card mb-4" id="forms">
+						<div class="h6 card-header font-syne py-lg-4">No tienes un usuario,
+							registrate</div>
+						<div class="card-body">
+							<a th:href="@{login/registrate}" class="btn btn-primary font-syne">Crea
+								tu usuario</a>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-3">
+					<img src="img/bike.gif" alt="bike login" height="490px"/>
 				</div>
 			</div>
-
-			<div class="card mb-4" id="forms">
-				<div class="card-header font-syne">No tienes un usuario,
-					registrate</div>
-				<div class="card-body">
-					<a th:href="@{login/registrate}" class="btn btn-primary font-syne">Crea
-						tu usuario</a>
-				</div>
-			</div>
-
 		</div>
 
 		<div th:replace="fragments/footer :: footer"></div>

@@ -37,7 +37,13 @@ public class Login {
 		if(us.comprobarLogin(usuario) !=null) {
 			session.setAttribute("usuario", busqueda);
 			logger.info("Usuario: "+usuario.getEmail()+" ha iniciado sesión");
-			return "redirect:/home";
+			if(busqueda.getId_rol()==1) {
+				logger.info("Administrador: "+usuario.getEmail()+" ha iniciado sesión");
+				return "redirect:/admin";
+			}
+			else {
+				return "redirect:/home";
+			}
 		}
 		else {
 			session.setAttribute("mensaje", "Error: Los datos indicados no estan en la base de datos");

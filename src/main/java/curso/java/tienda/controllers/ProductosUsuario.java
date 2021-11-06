@@ -12,7 +12,8 @@ import curso.java.tienda.service.ProductoService;
 
 @Controller
 @RequestMapping("/producto")
-public class Productos {
+public class ProductosUsuario {
+	
 	@Autowired
 	private ProductoService ps;
 	
