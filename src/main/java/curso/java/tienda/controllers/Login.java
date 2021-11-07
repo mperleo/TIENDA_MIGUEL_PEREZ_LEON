@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.UsuarioService;
 
@@ -61,5 +63,33 @@ public class Login {
 	@GetMapping("registrate")
 	public String crearCuenta(){
 		return "signin";
+	}
+	
+	@PostMapping("registrate/guardar")
+	public String crearCuenta(@ModelAttribute Usuario user, @RequestParam String contraComp , @RequestParam String condiciones, Model model){
+		if(condiciones.equals("true")) {
+			user.setId_rol(3);
+			if(user.getClave().equals(contraComp)) {
+				if(us.getUsuarioXEmail(user.getEmail()) == null) {
+					us.addUsuario(user);
+					return "redirect:/login";
+				}
+				else {
+					logger.error("Fallo en el proceso de login de un usuario, el correo ya esta en la base de datos");
+					model.addAttribute("mensaje", "El correo indicado ya esta en la base de datos");
+					return "signin";
+				}
+			}
+			else {
+				logger.error("Fallo en el proceso de login de un usuario, fallo al introducir la verificacion de la contraseña");
+				model.addAttribute("mensaje", "No has indicado las mismas contraseñas");
+				return "signin";
+			}
+		}
+		else {
+			logger.error("Fallo en el proceso de login de un usuario, usuario no ha acpetado las condiciones");
+			model.addAttribute("mensaje", "Debes aceptar las condiciones para registrarte");
+			return "signin";
+		}
 	}
 }

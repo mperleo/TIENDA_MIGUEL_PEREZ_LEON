@@ -42,4 +42,9 @@ public class UsuarioService {
 		Usuario u = ur.getById(id);
 		return u;
 	}
+	
+	public Usuario getUsuarioXEmail(String email) {
+		Usuario u = ur.findByEmail(email);
+		return u;
+	}
 }

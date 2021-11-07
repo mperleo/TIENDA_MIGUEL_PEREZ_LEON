@@ -6,92 +6,108 @@
 		<div th:replace="fragments/header :: header"></div>
 
 		<div class="container-fluid">
+		
+			<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+				<span th:text="${mensaje}"></span>
+				<span th:text="${session.mensaje}"></span>
+			</div>
+		
 			<div class="card mb-4" id="forms">
 				<div class="h4 card-header font-syne py-lg-4">Registrate</div>
 				<div class="card-body">
-					<form class="form-inline">
+					<form class="form-inline" th:object="${user}" th:action="@{/login/registrate/guardar}" method="post">
 						<fieldset>
 							<legend>Indica tus datos personales</legend>
 							<hr class="my-2">
 							<div class="form-group">
-								<label class="text-small text-uppercase" for="exampleInputEmail">Nombre</label>
-								<input class="form-control" id="exampleInputEmail" type="text"
-									placeholder="Indica tu correo">
+								<label class="text-small text-uppercase" for="nombre">Nombre</label>
+								<input class="form-control" id="nombre" type="text" name="nombre"
+									placeholder="Indica tu nombre">
 							</div>
 							<div class="form-group">
 								<div class=row>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
-											for="exampleInputEmail">Primer apellido</label> <input
-											class="form-control" id="exampleInputEmail" type="text"
-											placeholder="Indica tu correo">
+											for="apellido1">Primer apellido</label> <input
+											class="form-control" id="apellido1" type="text" name="apellido1"
+											placeholder="Indica tu primer apellido">
 									</div>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
-											for="exampleInputEmail">Segundo apellido</label> <input
-											class="form-control" id="exampleInputEmail" type="text"
-											placeholder="Indica tu correo">
+											for="apellido2">Segundo apellido</label> <input
+											class="form-control" id="apellido2" type="text" name="apellido2"
+											placeholder="Indica tu segundo apellido">
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="text-small text-uppercase" for="exampleInputEmail">DNI</label>
-								<input class="form-control" id="exampleInputEmail" type="email"
+								<label class="text-small text-uppercase" for="dni">DNI</label>
+								<input class="form-control" id="dni" type="text" name="dni"
+									placeholder="Indica tu dni">
+							</div>
+							
+							<div class="form-group">
+								<label class="text-small text-uppercase" for="telefono">Teléfono</label>
+								<input class="form-control" id="telefono" type="text" name="telefono"
+									placeholder="Indica tu número de teléfono">
+							</div>
+							
+							<div class="form-group">
+								<label class="text-small text-uppercase" for="email">Correo</label>
+								<input class="form-control" id="email" type="email" name="email"
 									placeholder="Indica tu correo">
 							</div>
 						</fieldset>
 						<br>
 						<fieldset>
-							<legend>Indica tu direccion</legend>
+							<legend>Indica los datos de tu dirección</legend>
 							<hr class="my-2">
 							<div class="form-group">
-								<label class="text-small text-uppercase" for="exampleInputEmail">Direccion</label>
-								<input class="form-control" id="exampleInputEmail" type="text"
+								<label class="text-small text-uppercase" for="direccion">Dirección</label>
+								<input class="form-control" id="direccion" type="text" name="direccion"
 									placeholder="Indica tu correo">
 							</div>
 							<div class="form-group">
 								<div class=row>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
-											for="exampleInputEmail">Provincia</label> <input
-											class="form-control" id="exampleInputEmail" type="text"
-											placeholder="Indica tu correo">
+											for="provincia">Provincia</label> <input
+											class="form-control" id="provincia" type="text" name="provincia"
+											placeholder="Indica tu provincia">
 									</div>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
-											for="exampleInputEmail">Localidad</label> <input
-											class="form-control" id="exampleInputEmail" type="text"
-											placeholder="Indica tu correo">
+											for="localidad">Localidad</label> <input
+											class="form-control" id="localidad" type="text" name="localidad"
+											placeholder="Indica tu localidad">
 									</div>
 								</div>
 							</div>
 						</fieldset>
 						<br>
 						<fieldset>
-							<legend>Indica tu contraseï¿½a</legend>
+							<legend>Indica tu contraseña</legend>
 							<hr class="my-2">
 							<div class="form-group">
 								<label class="text-small text-uppercase"
-									for="exampleInputPassword">Contraseï¿½a</label> <input
-									class="form-control" id="exampleInputPassword" type="password"
-									placeholder="Indica tu contraseÃ±a">
+									for="clave">Contraseña</label> <input
+									class="form-control" id="exampleInputPassword" type="password" name="clave"
+									placeholder="Indica tu contraseña">
 							</div>
 							<div class="form-group">
+							<label class="text-small text-uppercase" for="contraComp">Repite la contraseña</label> 
 								<div class="input-group flex-column flex-sm-row mb-3">
-									<label class="text-small text-uppercase"
-										for="exampleInputPassword">Repite la contraseï¿½a</label> <input
-										class="form-control" id="exampleInputPassword2"
-										type="password2" placeholder="Indica tu contraseÃ±a">
-									<button class="btn btn-dark btn-block" id="button-addon2"
-										type="submit">Verifica</button>
+									
+									<input class="form-control" id="exampleInputPassword2" name="contraComp" type="password" placeholder="Indica tu contraseña">
+									<button class="btn btn-dark btn-block" id="button-addon2" type="submit">Verifica</button>
 								</div>
 							</div>
 						</fieldset>
 						<hr class="my-4">
 						<fieldset>
 							<div class="form-check form-group">
-								<input class="form-check-input" id="checkbox-1" type="checkbox">
-								<label class="text-small text-uppercase" for="checkbox-1">Acepto
+								<input class="form-check-input" id="condiciones" type="checkbox" name="condiciones" value="true">
+								<label class="text-small text-uppercase" for="condiciones">Acepto
 									los terminos y condiciones</label>
 							</div>
 							<button class="btn btn-primary font-syne" type="submit">Crear
