@@ -40,11 +40,12 @@ public class ProductosAdmin {
 	public String editar(Model model, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
-		model.addAttribute("producto", prod);
+		model.addAttribute("prod", prod);
+		
 		return "admin/productoEditar";
 	}
 	
-	@GetMapping("editar/{id_prod}/guardar")
+	@PostMapping("editar/{id_prod}/guardar")
 	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		prod.setId(id_producto);
