@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="fragments/head :: head"></div>
+<body>
+	<div class="page-holder">
+		<div th:replace="fragments/header :: header"></div>
+
+		<div class="container-fluid">
+		
+			<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+				<span th:text="${mensaje}"></span>
+				<span th:text="${session.mensaje}"></span>
+			</div>
+		
+			<div class="card mb-4" id="forms">
+				<div class="h4 card-header font-syne py-lg-4">Modifica tu contraseña</div>
+				<div class="card-body">
+					<form class="form-inline" th:action="@{/login/registrate/guardar}" method="post">
+						<fieldset>
+							<legend>Indica tu contraseña actual</legend>
+							<hr class="my-2">
+							<div class="form-group">
+								<label class="text-small text-uppercase"
+									for="contraAct">Contraseña</label> <input
+									class="form-control" id="contraAct" type="password" name="contraAct"
+									placeholder="Indica tu contraseña">
+							</div>
+						</fieldset>
+						<fieldset>
+							<legend>Indica tu contraseña nueva</legend>
+							<hr class="my-2">
+							<div class="form-group">
+								<label class="text-small text-uppercase"
+									for="contraNueva">Contraseña</label> <input
+									class="form-control" id="contraNueva" type="password" name="contraNueva"
+									placeholder="Indica tu contraseña">
+							</div>
+							<div class="form-group">
+								<label class="text-small text-uppercase" for="contraComp">Repite la contraseña</label> 
+								<div class="input-group flex-column flex-sm-row mb-3">
+									<input class="form-control" id="exampleInputPassword2" name="contraComp" type="password" placeholder="Indica tu contraseña">
+									<button class="btn btn-dark btn-block" id="button-addon2" type="submit">Verifica</button>
+								</div>
+							</div>
+						</fieldset>
+						<hr class="my-4">
+						<fieldset>
+							<button class="btn btn-primary font-syne" type="submit">Modificar contraseña</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div th:replace="fragments/footer :: footer"></div>
+		<div th:replace="fragments/importScripts :: scripts"></div>
+	</div>
+</body>
+</html>
