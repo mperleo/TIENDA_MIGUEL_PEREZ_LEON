@@ -7,64 +7,63 @@
 
 		<div class="container-fluid">
 		
-			<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
-				<span th:text="${mensaje}"></span>
-				<span th:text="${session.mensaje}"></span>
+			<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+				<span th:text="${mensajeOk}"></span>
 			</div>
 		
 			<div class="card mb-4" id="forms">
 				<div class="h4 card-header font-syne py-lg-4">Datos de usuario</div>
 				<div class="card-body">
 						<fieldset>
-							<legend>Indica tus datos personales</legend>
+							<legend>Datos personales</legend>
 							<hr class="my-2">
 							<div class="form-group">
 								<label class="text-small text-uppercase" for="nombre">Nombre</label>
 								<input class="form-control" id="nombre" type="text" name="nombre"
-									placeholder="Indica tu nombre">
-							</div>readonly
+									placeholder="Indica tu nombre"  th:value="${session.usuario.nombre}" readonly>
+							</div>
 							<div class="form-group">
 								<div class=row>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
 											for="apellido1">Primer apellido</label> <input
 											class="form-control" id="apellido1" type="text" name="apellido1"
-											placeholder="Indica tu primer apellido">
+											placeholder="Indica tu primer apellido" th:value="${session.usuario.apellido1}" readonly>
 									</div>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
 											for="apellido2">Segundo apellido</label> <input
 											class="form-control" id="apellido2" type="text" name="apellido2"
-											placeholder="Indica tu segundo apellido">
+											placeholder="Indica tu segundo apellido" th:value="${session.usuario.apellido2}" readonly>
 									</div>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="text-small text-uppercase" for="dni">DNI</label>
 								<input class="form-control" id="dni" type="text" name="dni"
-									placeholder="Indica tu dni">
+									placeholder="Indica tu dni" th:value="${session.usuario.dni}" readonly>
 							</div>
 							
 							<div class="form-group">
 								<label class="text-small text-uppercase" for="telefono">Teléfono</label>
 								<input class="form-control" id="telefono" type="text" name="telefono"
-									placeholder="Indica tu número de teléfono">
+									placeholder="Indica tu número de teléfono" th:value="${session.usuario.telefono}" readonly>
 							</div>
 							
 							<div class="form-group">
 								<label class="text-small text-uppercase" for="email">Correo</label>
 								<input class="form-control" id="email" type="email" name="email"
-									placeholder="Indica tu correo">
+									placeholder="Indica tu correo" th:value="${session.usuario.email}" readonly>
 							</div>
 						</fieldset>
 						<br>
 						<fieldset>
-							<legend>Indica los datos de tu dirección</legend>
+							<legend>Datos de tu dirección</legend>
 							<hr class="my-2">
 							<div class="form-group">
 								<label class="text-small text-uppercase" for="direccion">Dirección</label>
 								<input class="form-control" id="direccion" type="text" name="direccion"
-									placeholder="Indica tu correo">
+									placeholder="Indica tu correo" th:value="${session.usuario.direccion}" readonly>
 							</div>
 							<div class="form-group">
 								<div class=row>
@@ -72,19 +71,18 @@
 										<label class="text-small text-uppercase"
 											for="provincia">Provincia</label> <input
 											class="form-control" id="provincia" type="text" name="provincia"
-											placeholder="Indica tu provincia">
+											placeholder="Indica tu provincia" th:value="${session.usuario.provincia}" readonly>
 									</div>
 									<div class="col-md-6">
 										<label class="text-small text-uppercase"
 											for="localidad">Localidad</label> <input
 											class="form-control" id="localidad" type="text" name="localidad"
-											placeholder="Indica tu localidad">
+											placeholder="Indica tu localidad" th:value="${session.usuario.localidad}" readonly>
 									</div>
 								</div>
 							</div>
 						</fieldset>
 						<br>
-						<hr class="my-4">
 				</div>
 			</div>
 		</div>
