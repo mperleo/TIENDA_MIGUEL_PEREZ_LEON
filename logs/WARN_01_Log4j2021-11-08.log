@@ -9,3 +9,9 @@
 [2021-11-08 13:09:26] [ ERROR] [Admin:56] Intento de acceso sin permisos en pagina admin/roles
 [2021-11-08 13:29:59] [ ERROR] [Admin:28] Intento de acceso sin permisos en pagina admin
 [2021-11-08 13:49:44] [ ERROR] [Login:52] Fallo de inicio de sesion admin admin@admin.com
+[2021-11-08 14:03:24] [ ERROR] [Admin:28] Intento de acceso sin permisos en pagina admin
+[2021-11-08 14:05:49] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:06:06] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:06:19] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:08:52] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:09:13] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com

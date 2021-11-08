@@ -47,9 +47,11 @@
 	                                <td th:text="${user.direccion} + ${user.provincia} + ${user.localidad}"></td>
 	                                <td th:text="${user.telefono}"></td>
 	                                <td th:text="${user.dni}"></td>
-	                                <td>
-	                                    <a th_if="${session.usuario.rol == 1}" class="btn btn-danger btn-sm" th:href="@{/admin/usuarios/borrar/{userID}/ (userID = ${user.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
-	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/usuarios/editar/{userID}/ (userID = ${user.id})}"><i class="fas fa-pen"></i> Modificar</a>
+	                                <td >
+	                                	<span th:if="${session.usuario.id_rol < user.id_rol} or ${session.usuario.id_rol == 1}">
+		                                    <a th:if="${session.usuario.id_rol == 1}" class="btn btn-danger btn-sm" th:href="@{/admin/usuarios/borrar/{userID}/ (userID = ${user.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+		                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/usuarios/editar/{userID}/ (userID = ${user.id})}"><i class="fas fa-pen"></i> Modificar</a>
+	                                	</span>
 	                                </td>
 	                              </tr>
 	                            

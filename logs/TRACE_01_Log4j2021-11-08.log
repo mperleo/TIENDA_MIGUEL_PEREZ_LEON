@@ -27,3 +27,19 @@
 [2021-11-08 13:49:44] [ ERROR] [Login:52] Fallo de inicio de sesion admin admin@admin.com
 [2021-11-08 13:49:49] [ INFO ] [Login:41] Usuario: admin@admin.com ha iniciado sesión
 [2021-11-08 13:49:49] [ INFO ] [Login:43] Administrador: admin@admin.com ha iniciado sesión
+[2021-11-08 14:03:24] [ ERROR] [Admin:28] Intento de acceso sin permisos en pagina admin
+[2021-11-08 14:04:08] [ INFO ] [Login:41] Usuario: admin@admin.com ha iniciado sesión
+[2021-11-08 14:04:08] [ INFO ] [Login:43] Administrador: admin@admin.com ha iniciado sesión
+[2021-11-08 14:05:49] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:06:06] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:06:12] [ INFO ] [Login:41] Usuario: admin@admin.com ha iniciado sesión
+[2021-11-08 14:06:12] [ INFO ] [Login:43] Administrador: admin@admin.com ha iniciado sesión
+[2021-11-08 14:06:19] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:07:00] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-08 14:08:52] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:09:13] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:12:55] [ INFO ] [Login:41] Usuario: 12@12.12 ha iniciado sesión
+[2021-11-08 14:13:31] [ INFO ] [Login:41] Usuario: empleado@empleado.com ha iniciado sesión
+[2021-11-08 14:13:31] [ INFO ] [Login:43] Administrador: empleado@empleado.com ha iniciado sesión
+[2021-11-08 14:19:09] [ INFO ] [Login:41] Usuario: admin@admin.com ha iniciado sesión
+[2021-11-08 14:19:09] [ INFO ] [Login:43] Administrador: admin@admin.com ha iniciado sesión

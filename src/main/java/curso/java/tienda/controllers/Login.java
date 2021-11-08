@@ -36,10 +36,10 @@ public class Login {
 	@PostMapping("entrar")
 	public String validar(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
 		Usuario busqueda = us.comprobarLogin(usuario);
-		if(us.comprobarLogin(usuario) !=null) {
+		if(us.comprobarLogin(usuario) != null) {
 			session.setAttribute("usuario", busqueda);
 			logger.info("Usuario: "+usuario.getEmail()+" ha iniciado sesión");
-			if(busqueda.getId_rol()==1) {
+			if(busqueda.getId_rol()==1 || busqueda.getId_rol()==2) {
 				logger.info("Administrador: "+usuario.getEmail()+" ha iniciado sesión");
 				return "redirect:/admin";
 			}

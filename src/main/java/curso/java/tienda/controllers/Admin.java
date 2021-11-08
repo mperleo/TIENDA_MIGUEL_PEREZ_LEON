@@ -20,7 +20,7 @@ public class Admin {
 	@GetMapping("")
 	public String portada(Model model, HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() == 1) {
+		if(usuario != null && usuario.getId_rol() <= 2) {
 			return "admin/index";
 		}
 		else {
@@ -30,10 +30,10 @@ public class Admin {
 		}
 	}
 	
-	@GetMapping("categorias")
+	/*@GetMapping("categorias")
 	public String categorias(Model model, HttpSession session) {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() == 1) {
+		if(usuario != null && usuario.getId_rol() <= 2) {
 			return "admin/categorias";
 		}
 		
@@ -84,5 +84,5 @@ public class Admin {
 			logger.error("Intento de acceso sin permisos en pagina admin/configuraciones");
 			return "error";
 		}
-	}
+	}*/
 }
