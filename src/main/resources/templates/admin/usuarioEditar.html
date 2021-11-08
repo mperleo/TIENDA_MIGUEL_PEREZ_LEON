@@ -2,18 +2,17 @@
 <html lang="en">
     <div th:replace="admin/fragments/head :: head"></div>
     <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
     	<div id="layoutSidenav">
-	        <div th:replace="admin/fragments/nav :: nav"></div>
-	        <div th:replace="admin/fragments/header :: header"></div>
-			
+         	<div th:replace="admin/fragments/nav :: nav"></div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Nuevo rol</h1>
+                        <h1 class="mt-4">Editar usuario</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
-                            <li class="breadcrumb-item"><a href="roles.html">Roles</a></li>
-                             <li class="breadcrumb-item active">Nuevo rol</li>
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/usuarios">Usuarios</a></li>
+                             <li class="breadcrumb-item active">Nuevo usuario</li>
                         </ol>
                         <!--<div class="card mb-4">
                             <div class="card-body">
@@ -23,26 +22,28 @@
                             </div>
                         </div>-->
 
-						<form method="post" th:object="${prod}" th:action="@{/admin/productos/nuevo/guardar}">
+						<form method="post" th:object="${user}" th:action="@{/admin/usuarios/editar/{usrID}/guardar (usrID = ${usuario.id}) }">
 						  <div class="form-group">
-						    <label for="id_categoria">id_categorial</label>
-						    <input type="text" class="form-control" id="id_categoria" name="id_categoria" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="nombre">Nombre de producto</label>
-						    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="descripcion">Descripcion</label>
-						    <input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="precio">Precio</label>
-						    <input type="text" class="form-control" id="precio" name="precio" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="stock">Stock</label>
-						    <input type="text" class="form-control" id="stock" name="stock" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="fecha_alta">Fecha alta</label>
-						    <input type="date" class="form-control" id="fecha_alta" name="fecha_alta" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="fecha_baja">Fecha baja</label>
-						    <input type="date" class="form-control" id="fecha_baja" name="fecha_baja" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="impuesto">Impuesto</label>
-						    <input type="text" class="form-control" id="impuesto" name="impuesto" placeholder="Indica el nombre del rol nuevo" required>
-						    <label for="imagen">Imagen</label>
-						    <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="id_rol">id_rol</label>
+						    <input type="text" class="form-control" id="id_rol" name="id_rol" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.id_rol}" required>
+						    <label for="nombre">Nombre</label>
+						    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.nombre}" required>
+						    <label for="email">Correo</label>
+						    <input type="email" class="form-control" id="email" name="email" placeholder="Indica el correo"  th:value="${usuario.email}" readonly>
+						    <label for="apellido1">Apellido 1</label>
+						    <input type="text" class="form-control" id="apellido1" name="apellido1" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.apellido1}" required>
+						    <label for="precio">Apellido 2</label>
+						    <input type="text" class="form-control" id="apellido2" name="apellido2" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.apellido2}" required>
+						    <label for="direccion">Direcion</label>
+						    <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.direccion}" required>
+						    <label for="provincia">Provincia</label>
+						    <input type="text" class="form-control" id="provincia" name="provincia" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.provincia}" required>
+						    <label for="localidad">Localidad</label>
+						    <input type="text" class="form-control" id="localidad" name="localidad" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.localidad}" required>
+						    <label for="telefono">Telefono</label>
+						    <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.telefono}" required>
+						    <label for="imagen">Dni</label>
+						    <input type="text" class="form-control" id="dni" name="dni" placeholder="Indica el nombre del rol nuevo" th:value="${usuario.dni}" required>
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

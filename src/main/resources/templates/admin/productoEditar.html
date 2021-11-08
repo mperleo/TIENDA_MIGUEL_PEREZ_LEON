@@ -2,18 +2,17 @@
 <html lang="en">
     <div th:replace="admin/fragments/head :: head"></div>
     <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
     	<div id="layoutSidenav">
-	        <div th:replace="admin/fragments/nav :: nav"></div>
-	        <div th:replace="admin/fragments/header :: header"></div>
-			
+         	<div th:replace="admin/fragments/nav :: nav"></div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Nuevo rol</h1>
+                        <h1 class="mt-4">Editar producto</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
-                            <li class="breadcrumb-item"><a href="roles.html">Roles</a></li>
-                             <li class="breadcrumb-item active">Nuevo rol</li>
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
+                             <li class="breadcrumb-item active">Editar producto</li>
                         </ol>
                         <!--<div class="card mb-4">
                             <div class="card-body">
@@ -25,7 +24,7 @@
 
 						<form method="post" th:object="${prod}" th:action="@{/admin/productos/editar/{prodID}/guardar (prodID = ${prod.id}) } " >
 						  <div class="form-group">
-						    <label for="id_categoria">id_categorial</label>
+						    <label for="id_categoria">id_categoria</label>
 						    <input type="text" class="form-control" id="id_categoria" name="id_categoria" th:value="${prod.id_categoria}" placeholder="Indica el nombre del rol nuevo" required>
 						    <label for="nombre">Nombre de producto</label>
 						    <input type="text" class="form-control" id="nombre" name="nombre" th:value="${prod.nombre}" placeholder="Indica el nombre del rol nuevo" required>

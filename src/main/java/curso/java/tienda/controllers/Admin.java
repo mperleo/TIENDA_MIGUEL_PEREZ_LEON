@@ -57,20 +57,6 @@ public class Admin {
 			return "error";
 		}
 	}
-
-	@GetMapping("usuarios")
-	public String usuarios(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() == 1) {
-			return "admin/usuarios";
-		}
-		
-		else {
-			model.addAttribute("mensaje", "no tienes permiso para acceder a esta página");
-			logger.error("Intento de acceso sin permisos en pagina admin/usuarios");
-			return "error";
-		}
-	}
 	
 	@GetMapping("opcionesMenu")
 	public String opcionesMenu(Model model, HttpSession session) {

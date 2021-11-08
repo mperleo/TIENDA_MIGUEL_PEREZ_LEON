@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-	<div th:replace="fragments/head :: head"></div>
+    <div th:replace="admin/fragments/head :: head"></div>
     <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
     	<div id="layoutSidenav">
-        	<div th:replace="fragments/headerYnav :: nav"></div>
-         	<div th:replace="fragments/headerYnav :: header"></div>
-
+         	<div th:replace="admin/fragments/nav :: nav"></div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Usuarios</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
                             <li class="breadcrumb-item active">Usuarios</li>
                         </ol>
                         <!--<div class="card mb-4">
@@ -21,6 +20,8 @@
                                 </p>
                             </div>
                         </div>-->
+                        
+                        <a class="btn btn-primary " th:href="@{/admin/usuarios/nuevo}" role="button">Nuevo usuario</a>
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">
@@ -31,28 +32,26 @@
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellidos</th>
                                 <th scope="col">Direccion</th>
-                                <th scope="col">TelÃ©fono</th>
+                                <th scope="col">Teléfono</th>
                                 <th scope="col">DNI</th>
                                 <th scope="col">Acciones</th>
                               </tr>
                             </thead>
                             <tbody>
-                            	<c:forEach items="${pageScope.usuariosLista}" var="usuario" >
-	                              <tr>
-	                                <th scope="row"><c:out value="${usuario.getCodigo()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getId_rol()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getEmail()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getNombre()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getApellido1()}"></c:out> <c:out value="${usuario.getApellido2()}" ></c:out></th>
-	                                <th ><c:out value="${usuario.getDireccion()}"></c:out>, <c:out value="${usuario.getProvincia()}"></c:out>,  <c:out value="${usuario.getLocalidad()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getTelefono()}"></c:out></th>
-	                                <th ><c:out value="${usuario.getDni()}"></c:out></th>
+                            	 <tr th:each="user : ${usuarios}">
+	                                <th th:text="${user.id}"></th>
+	                                <td th:text="${user.id_rol}"></td>
+	                                <td th:text="${user.email}"></td>
+	                                <td th:text="${user.nombre}"></td>
+	                                <td th:text="${user.apellido1} + ${user.apellido2}"></td>
+	                                <td th:text="${user.direccion} + ${user.provincia} + ${user.localidad}"></td>
+	                                <td th:text="${user.telefono}"></td>
+	                                <td th:text="${user.dni}"></td>
 	                                <td>
-	                                    <a class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> Eliminar</a>
-	                                    <a class="btn btn-primary btn-sm"><i class="fas fa-pen"></i> Modificar</a>
+	                                    <a th_if="${session.usuario.rol == 1}" class="btn btn-danger btn-sm" th:href="@{/admin/usuarios/borrar/{userID}/ (userID = ${user.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/usuarios/editar/{userID}/ (userID = ${user.id})}"><i class="fas fa-pen"></i> Modificar</a>
 	                                </td>
 	                              </tr>
-	                             </c:forEach>
 	                            
                             </tbody>
                         </table>
@@ -80,7 +79,7 @@
                     </div>
                 </main>
                 
-                <div th:replace="fragments/footerYscripts :: footer"></div>
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
                  
             </div>  
         </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->

@@ -40,12 +40,18 @@ public class UsuarioGest {
 		// meto los datos que del usuario que no estan en el formulario
 		usuario.setId(user.getId());
 		usuario.setClave(user.getClave());
+		usuario.setId_rol(user.getId_rol());
 		
 		// compruebo si el correo indicado es unico en la bbdd o si no lo ha cambiado al guardar
 		Usuario compEmail = us.getUsuarioXEmail(usuario.getEmail());
 		if(compEmail == null || compEmail.getId() == usuario.getId()) {
 			us.editUsuario(usuario);
 			model.addAttribute("mensajeOk", "Datos de usuario modficados correctamente");
+			
+			// obtengo los datos del usuario nuevos y los cambio para el objeto guardado en sesion
+			Usuario usuarioSesionModif = us.getUsuarioXId(user.getId());
+			session.setAttribute("usuario", usuarioSesionModif);
+			
 			return "ver";
 		}
 		else {

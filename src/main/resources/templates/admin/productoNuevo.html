@@ -2,18 +2,17 @@
 <html lang="en">
     <div th:replace="admin/fragments/head :: head"></div>
     <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
     	<div id="layoutSidenav">
-	        <div th:replace="admin/fragments/nav :: nav"></div>
-	        <div th:replace="admin/fragments/header :: header"></div>
-			
+         	<div th:replace="admin/fragments/nav :: nav"></div>
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Nuevo rol</h1>
+                        <h1 class="mt-4">Nuevo producto</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
-                            <li class="breadcrumb-item"><a href="roles.html">Roles</a></li>
-                             <li class="breadcrumb-item active">Nuevo rol</li>
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
+                             <li class="breadcrumb-item active">Nuevo producto</li>
                         </ol>
                         <!--<div class="card mb-4">
                             <div class="card-body">
