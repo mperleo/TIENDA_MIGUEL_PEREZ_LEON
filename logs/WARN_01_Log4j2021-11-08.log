@@ -15,3 +15,5 @@
 [2021-11-08 14:06:19] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
 [2021-11-08 14:08:52] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
 [2021-11-08 14:09:13] [ ERROR] [Login:52] Fallo de inicio de sesion 1234 empleado@empleado.com
+[2021-11-08 14:36:05] [ ERROR] [Admin:28] Intento de acceso sin permisos en pagina admin
+[2021-11-08 14:51:01] [ ERROR] [Admin:28] Intento de acceso sin permisos en pagina admin
