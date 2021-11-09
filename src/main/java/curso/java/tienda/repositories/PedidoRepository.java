@@ -12,4 +12,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	
 	@Query(value="select MAX(id) from pedidos", nativeQuery=true)
 	Integer buscarMaxId();
+	
+	@Query(value="select * from pedidos where id_usuario=?", nativeQuery=true)
+	List<Pedido> buscarPedidosUsuario(String id_usuario);
 }

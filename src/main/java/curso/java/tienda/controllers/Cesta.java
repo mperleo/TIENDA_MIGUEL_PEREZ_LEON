@@ -209,14 +209,17 @@ public class Cesta {
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("cesta", cestaLista);
 				
+				logger.info("Pedido con los datos iniciados y guardado en la sesion");
 				return "checkout";
 			}
 			else{
+				logger.error("Intento de relizar pedido sin productos en la cesta");
 				model.addAttribute("mensaje", "No hay productos en la cesta");
 				return "error";
 			}
 		}
 		else {
+			logger.error("Intento de realizar pedido por un usuario no registrado");
 			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
 			return "login";
 		}	
@@ -252,15 +255,18 @@ public class Cesta {
 				session.setAttribute("cesta", null);
 				session.setAttribute("nProds", 0);
 				
+				logger.info("Pedido guardado en la bbdd con exito");
 				model.addAttribute("mensajeOk", "Pedido creado con exito ");
 				return "index";
 			}
 			else {
+				logger.error("Intento de guardar un pedido sin tener el pedido en sesion");
 				model.addAttribute("mensaje", "No hay pedido en la sesion");
 				return "error";
 			}
 		}
 		else {
+			logger.error("Intento de guardar un pedido sin estar iniciada la sesión");
 			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
 			return "login";
 		}

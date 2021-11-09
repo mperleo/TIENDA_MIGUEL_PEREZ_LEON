@@ -70,19 +70,5 @@ public class Admin {
 			logger.error("Intento de acceso sin permisos en pagina admin/opcionesMenu");
 			return "error";
 		}
-	}
-	
-	@GetMapping("configuraciones")
-	public String configuraciones(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() == 1) {
-			return "admin/configuraciones";
-		}
-		
-		else {
-			model.addAttribute("mensaje", "no tienes permiso para acceder a esta página");
-			logger.error("Intento de acceso sin permisos en pagina admin/configuraciones");
-			return "error";
-		}
 	}*/
 }
