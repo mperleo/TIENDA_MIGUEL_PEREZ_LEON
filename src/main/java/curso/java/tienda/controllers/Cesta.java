@@ -1,6 +1,8 @@
 package curso.java.tienda.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -13,11 +15,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.DetallePedido;
+import curso.java.tienda.models.entities.Pedido;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.models.entities.Usuario;
+
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.service.PedidoService;
+import curso.java.tienda.service.DetallePedidoService;
 
 @Controller
 @RequestMapping("/cesta")
@@ -25,6 +34,12 @@ public class Cesta {
 	
 	@Autowired
 	private ProductoService ps;
+	
+	@Autowired
+	private PedidoService peds;
+	
+	@Autowired
+	private DetallePedidoService dps;
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	
@@ -73,6 +88,7 @@ public class Cesta {
 				nuevaLinea.setImpuesto(nuevo.getImpuesto());
 				nuevaLinea.setUnidades(1);
 				nuevaLinea.setTotal(nuevo.getPrecio()*nuevaLinea.getUnidades());
+				nuevaLinea.setProductoNombre(nuevo.getNombre());
 				
 				// si la cesta no tiene elementos
 				// si la cesta contiene elementos pero no contiene el objeto no se mira
@@ -157,6 +173,98 @@ public class Cesta {
 	public String vaciarLista(Model model, HttpSession session) {
 		session.setAttribute("cesta", null);
 		return "cart";
+	}
+	
+	@GetMapping("pedido")
+	public String pedido(Model model, HttpSession session) {
+		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		ArrayList<DetallePedido> cestaLista = new ArrayList<DetallePedido>();
+		
+		if(usuario !=null) {
+			if(cesta !=null) {
+				// creo el objeto pedido y los objetos para calcular datos
+				Pedido pedido = new Pedido();
+				LocalDate fecha = LocalDate.now(); // Create a date object
+				Double total = 0.0;
+				
+				// calculo el total de las lineas de pedido
+				Set<Integer> i = cesta.keySet();
+				for( Integer key: i) {
+					cestaLista.add(cesta.get(key));
+					total+=cesta.get(key).getTotal();
+				}
+				
+				// meto los datos del pedido
+				pedido.setIdUsuario(usuario.getId());
+				pedido.setEstado("pendiente");
+				pedido.setTotal(total);
+				pedido.setFecha(fecha.toString());
+				
+				//guardo el pedido en la sesion
+				session.setAttribute("pedido", pedido);
+				
+				// guardo los parametros que se van a mostrar en la vista
+				model.addAttribute("pedido", pedido);
+				model.addAttribute("cesta", cestaLista);
+				
+				return "checkout";
+			}
+			else{
+				model.addAttribute("mensaje", "No hay productos en la cesta");
+				return "error";
+			}
+		}
+		else {
+			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
+			return "login";
+		}	
+	
+	}
+	
+	@PostMapping("pedido/guardar")
+	public String pedidoGuardar(Model model, HttpSession session, @RequestParam String metodo_pago) {
+		Pedido pedido = (Pedido) session.getAttribute("pedido");
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
+		
+		if(usuario !=null) {
+			if(pedido !=null) {
+				// completo los datos que faltan
+				pedido.setMetodo_pago(metodo_pago);
+				pedido.setId(peds.getPedidoIdMax());
+				
+				// guardo en la base de datos el pedido
+				peds.addPedido(pedido);
+				
+				// completo los datos que faltan a las lineas y las guardo en la base de datos
+				Set<Integer> i = cesta.keySet();
+				for( Integer key: i) {
+					// completo el dato
+					cesta.get(key).setId_pedido(pedido.getId());
+					// subo el elemento
+					dps.addDetallePedido(cesta.get(key));
+				}
+				
+				// anulo los elementos de sesion
+				session.setAttribute("pedido", null);
+				session.setAttribute("cesta", null);
+				session.setAttribute("nProds", 0);
+				
+				model.addAttribute("mensajeOk", "Pedido creado con exito ");
+				return "index";
+			}
+			else {
+				model.addAttribute("mensaje", "No hay pedido en la sesion");
+				return "error";
+			}
+		}
+		else {
+			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
+			return "login";
+		}
+		
 	}
 	
 }

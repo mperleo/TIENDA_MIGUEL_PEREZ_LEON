@@ -1,156 +1,157 @@
 <!DOCTYPE html>
 <html>
-  <div th:replace="fragments/head :: head"></div>
-  <body>
-    <div class="page-holder">
-      <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/head :: head"></div>
+<body>
+	<div class="page-holder">
+		<div th:replace="fragments/header :: header"></div>
 
-        <!-- HERO SECTION-->
-        <section class="py-5 bg-light">
-          <div class="container">
-            <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
-              <div class="col-lg-6">
-                <h1 class="h2 text-uppercase mb-0">Checkout</h1>
-              </div>
-              <div class="col-lg-6 text-lg-right">
-                <nav aria-label="breadcrumb">
-                  <ol class="breadcrumb justify-content-lg-end mb-0 px-0">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
-                  </ol>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section class="py-5">
-          <!-- BILLING ADDRESS-->
-          <h2 class="h5 text-uppercase mb-4">Billing details</h2>
-          <div class="row">
-            <div class="col-lg-8">
-              <form action="#">
-                <div class="row">
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="firstName">First name</label>
-                    <input class="form-control form-control-lg" id="firstName" type="text" placeholder="Enter your first name">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="lastName">Last name</label>
-                    <input class="form-control form-control-lg" id="lastName" type="text" placeholder="Enter your last name">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="email">Email address</label>
-                    <input class="form-control form-control-lg" id="email" type="email" placeholder="e.g. Jason@example.com">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="phone">Phone number</label>
-                    <input class="form-control form-control-lg" id="phone" type="tel" placeholder="e.g. +02 245354745">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="company">Company name (optional)</label>
-                    <input class="form-control form-control-lg" id="company" type="text" placeholder="Your company name">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="country">Country</label>
-                    <select class="selectpicker country" id="country" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
-                  </div>
-                  <div class="col-lg-12 form-group">
-                    <label class="text-small text-uppercase" for="address">Address line 1</label>
-                    <input class="form-control form-control-lg" id="address" type="text" placeholder="House number and street name">
-                  </div>
-                  <div class="col-lg-12 form-group">
-                    <label class="text-small text-uppercase" for="address">Address line 2</label>
-                    <input class="form-control form-control-lg" id="addressalt" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="city">Town/City</label>
-                    <input class="form-control form-control-lg" id="city" type="text">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <label class="text-small text-uppercase" for="state">State/County</label>
-                    <input class="form-control form-control-lg" id="state" type="text">
-                  </div>
-                  <div class="col-lg-6 form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input class="custom-control-input" id="alternateAddressCheckbox" type="checkbox">
-                      <label class="custom-control-label text-small" for="alternateAddressCheckbox">Alternate billing address</label>
-                    </div>
-                  </div>
-                  <div class="col-lg-12">
-                    <div class="row d-none" id="alternateAddress">
-                      <div class="col-12 mt-4">
-                        <h2 class="h4 text-uppercase mb-4">Alternative billing details</h2>
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="firstName2">First name</label>
-                        <input class="form-control form-control-lg" id="firstName2" type="text" placeholder="Enter your first name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="lastName2">Last name</label>
-                        <input class="form-control form-control-lg" id="lastName2" type="text" placeholder="Enter your last name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="email2">Email address</label>
-                        <input class="form-control form-control-lg" id="email2" type="email" placeholder="e.g. Jason@example.com">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="phone2">Phone number</label>
-                        <input class="form-control form-control-lg" id="phone2" type="tel" placeholder="e.g. +02 245354745">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="company2">Company name (optional)</label>
-                        <input class="form-control form-control-lg" id="company2" type="text" placeholder="Your company name">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="country2">Country</label>
-                        <select class="selectpicker country" id="country2" data-width="fit" data-style="form-control form-control-lg" data-title="Select your country"></select>
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 1</label>
-                        <input class="form-control form-control-lg" id="address2" type="text" placeholder="House number and street name">
-                      </div>
-                      <div class="col-lg-12 form-group">
-                        <label class="text-small text-uppercase" for="address2">Address line 2</label>
-                        <input class="form-control form-control-lg" id="addressalt2" type="text" placeholder="Apartment, Suite, Unit, etc (optional)">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="city3">Town/City</label>
-                        <input class="form-control form-control-lg" id="city3" type="text">
-                      </div>
-                      <div class="col-lg-6 form-group">
-                        <label class="text-small text-uppercase" for="state4">State/County</label>
-                        <input class="form-control form-control-lg" id="state4" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-12 form-group">
-                    <button class="btn btn-dark" type="submit">Place order</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <!-- ORDER SUMMARY-->
-            <div class="col-lg-4">
-              <div class="card border-0 rounded-0 p-lg-4 bg-light">
-                <div class="card-body">
-                  <h5 class="text-uppercase mb-4">Your order</h5>
-                  <ul class="list-unstyled mb-0">
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Red digital smartwatch</strong><span class="text-muted small">$250</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="small font-weight-bold">Gray Nike running shoes</strong><span class="text-muted small">$351</span></li>
-                    <li class="border-bottom my-2"></li>
-                    <li class="d-flex align-items-center justify-content-between"><strong class="text-uppercase small font-weight-bold">Total</strong><span>$601</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-      
-      	      <div th:replace="fragments/footer :: footer"></div>
-	      <div th:replace="fragments/importScripts :: scripts"></div>
-        </div>
-    </body>      
+		<!-- HERO SECTION-->
+		<div class="container-fluid">
+			<section class="py-5 bg-light">
+				<div class="container">
+					<div class="row px-4 px-lg-5 py-lg-2 align-items-center">
+						<div class="col-lg-6">
+							<h1 class="h2 text-uppercase mb-0">Finaliza el pedido</h1>
+						</div>
+						<div class="col-lg-6 text-lg-right">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb justify-content-lg-end mb-0 px-0">
+									<li class="breadcrumb-item"><a href="/home">Home</a></li>
+									<li class="breadcrumb-item"><a href="/cesta">Cesta</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Checkout</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section class="py-5">
+				<!-- BILLING ADDRESS-->
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="card">
+							<div class="h4 card-header font-syne py-lg-4">Detalles de
+								facturación</div>
+							<div class="card-body">
+								<fieldset>
+									<legend>Tus datos de envio y contacto</legend>
+									<div class="row">
+										<div class="col-lg-6 form-group">
+											<label class="text-small text-uppercase" for="nombre">Nombre</label>
+											<input class="form-control form-control-lg" id="nombre"
+												type="text" th:value="${session.usuario.nombre}" readonly>
+										</div>
+										<div class="col-lg-6 form-group">
+											<label class="text-small text-uppercase" for="apellidos">Apellidos</label>
+											<input class="form-control form-control-lg" id="apellidos"
+												type="text"
+												th:value="${session.usuario.apellido1} + ${' '} + ${session.usuario.apellido2}"
+												readonly>
+										</div>
+										<div class="col-lg-6 form-group">
+											<label class="text-small text-uppercase" for="email">Email</label>
+											<input class="form-control form-control-lg" id="email"
+												type="email" th:value="${session.usuario.email}" readonly>
+										</div>
+										<div class="col-lg-6 form-group">
+											<label class="text-small text-uppercase" for="phone">Telefono</label>
+											<input class="form-control form-control-lg" id="phone"
+												type="tel" th:value="${session.usuario.telefono}" readonly>
+										</div>
+										<div class="col-lg-4 form-group">
+											<label class="text-small text-uppercase" for="company">Direccion</label>
+											<input class="form-control form-control-lg" id="company"
+												type="text" th:value="${session.usuario.direccion}" readonly>
+										</div>
+										<div class="col-lg-4 form-group">
+											<label class="text-small text-uppercase" for="company">Direccion</label>
+											<input class="form-control form-control-lg" id="company"
+												type="text" th:value="${session.usuario.provincia}" readonly>
+										</div>
+										<div class="col-lg-4 form-group">
+											<label class="text-small text-uppercase" for="address">Localidad</label>
+											<input class="form-control form-control-lg" id="address"
+												type="text" th:value="${session.usuario.localidad}" readonly>
+										</div>
+										<div class="col-lg-12 form-group mb-2 mt-2">
+											<a class="btn btn-dark" th:href="@{/miUsuario/modificar}">Modificar
+												datos de usuario y direcciones de envio </a>
+										</div>
+
+										<br>
+
+										<legend>Datos del pedido</legend>
+
+										<form th:action="@{/cesta/pedido/guardar}" method="post">
+											<div class="col-lg-12 form-group">
+												<label class="text-small text-uppercase" for="estado">Estado</label>
+												<input class="form-control form-control-lg" id="estado"
+													type="text" th:value="${pedido.estado}" readonly>
+											</div>
+
+											<div class="col-lg-12 form-group">
+												<label class="text-small text-uppercase" for="email">Fecha</label>
+												<input class="form-control form-control-lg" id="email"
+													type="date" th:value="${pedido.fecha}" readonly>
+											</div>
+
+											<br>
+											<legend>Método de pago</legend>
+
+											<div class="col-lg-6 form-group">
+												<div class="form-check">
+													<input class="form-check-input" type="radio"
+														name="metodo_pago" id="tarjeta" value="tarjeta"> <label
+														class="form-check-label" for="flexRadioDefault1">
+														Tarjeta </label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="radio"
+														name="metodo_pago" id="paypal" value="paypal" checked>
+													<label class="form-check-label" for="flexRadioDefault2">
+														PayPal </label>
+												</div>
+											</div>
+
+
+											<div class="col-lg-12 form-group mt-3">
+												<button class="btn btn-primary" type="submit">Finalizar
+													pedido</button>
+											</div>
+										</form>
+									</div>
+								</fieldset>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- ORDER SUMMARY-->
+					<div class="col-lg-4">
+						<div class="card border-0 rounded-0 p-lg-4 bg-light">
+							<div class="card-body">
+								<h5 class="text-uppercase mb-4">Tu pedido</h5>
+								<ul class="list-unstyled mb-0">
+									<div th:each="linea : ${cesta}">
+										<li class="d-flex align-items-center justify-content-between">
+										<span class="text-muted small" th:text="${'x'} + ${linea.unidades}"></span>
+											<span class="small font-weight-bold" th:text="${linea.productoNombre}"></span> 
+											<span class="text-muted small" th:text="${linea.total}+ ${'€'}"></span>
+										</li>
+										<li class="border-bottom my-2"></li>
+									</div>
+									<li class="d-flex align-items-center justify-content-between"><strong
+										class="text-uppercase small font-weight-bold">Total</strong><span th:text="${pedido.total}+ ${'€'}"></span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<div th:replace="fragments/footer :: footer"></div>
+		<div th:replace="fragments/importScripts :: scripts"></div>
+	</div>
+</body>
 </html>

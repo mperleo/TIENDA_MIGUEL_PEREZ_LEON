@@ -53,13 +53,10 @@
 									<tr th:each="linea : ${cesta}">
 										<th class="pl-0 border-0" scope="row">
 											<div class="media align-items-center">
-												<a class="reset-anchor d-block animsition-link"
-													href="detail.html"><img src="/img/product-detail-3.jpg"
-													alt="..." width="70" /></a>
 												<div class="media-body ml-3">
 													<strong class="h6"><a
-														class="reset-anchor animsition-link" href="detail.html"
-														th:text="${linea.producto}"></a></strong>
+														class="reset-anchor animsition-link" th:href="@{/producto/ver/{prodID}/ (prodID = ${linea.producto})}"
+														th:text="${linea.productoNombre}"></a></strong>
 												</div>
 											</div>
 										</th>
@@ -106,7 +103,7 @@
 										class="fas fa-long-arrow-alt-left mr-2"> </i>Vaciar cesta</a>
 								</div>
 								<div class="col-md-6 text-md-right">
-									<a class="btn btn-outline-dark btn-sm" href="/pedido">Finaliza
+									<a class="btn btn-outline-dark btn-sm" href="/cesta/pedido">Finaliza
 										el pedido<i class="fas fa-long-arrow-alt-right ml-2"></i>
 									</a>
 								</div>

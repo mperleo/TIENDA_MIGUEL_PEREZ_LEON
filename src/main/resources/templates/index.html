@@ -7,16 +7,20 @@
 
 		<!-- HERO SECTION-->
 		<div class="container-fluid">
+			
+			<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+				<span th:text="${mensajeOk}"></span>
+			</div>
+			
 			<section
 				class="hero pb-3 bg-cover bg-center d-flex align-items-center"
-				style="background: url(img/hero-banner-alt.jpg)">
+				style="background: url(/img/hero-banner-alt.jpg)">
 				<div class="container py-5">
 					<div class="row px-4 px-lg-5">
 						<div class="col-lg-6">
-							<p class="text-muted small text-uppercase mb-2">New
-								Inspiration 2020</p>
-							<h1 class="h2 text-uppercase mb-3">20% off on new season</h1>
-							<a class="btn btn-dark" href="shop.html">Browse collections</a>
+							<p class="text-muted small text-uppercase mb-2">Temporada 2021-2022</p>
+							<h1 class="h2 text-uppercase mb-3">La mejor seleccion</h1>
+							<a class="btn btn-dark" th:href="@{/tienda}">Ver todos los prodcutos</a>
 						</div>
 					</div>
 				</div>
@@ -24,30 +28,29 @@
 			<!-- CATEGORIES SECTION-->
 			<section class="pt-5">
 				<header>
-					<p class="small text-muted small text-uppercase mb-1">Carefully
-						created collections</p>
-					<h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
+					<p class="small text-muted small text-uppercase mb-1">Como los profesionales</p>
+					<h2 class="h5 text-uppercase mb-4">Categorias</h2>
 				</header>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=1"><img
-								class="img-fluid" src="img/bici-city.png" alt="cat city"><strong
+								class="img-fluid" src="/img/bici-city.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas urbanas</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=2"><img
-								class="img-fluid" src="img/bici-gravel.png" alt="cat city"><strong
+								class="img-fluid" src="/img/bici-gravel.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de gravel</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=3"><img
-								class="img-fluid" src="img/bici-mountain.png" alt="cat city"><strong
+								class="img-fluid" src="/img/bici-mountain.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de montaña</strong></a>
 						</div>
 						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
 							<a class="category-item" href="tienda?cat=4"><img
-								class="img-fluid" src="img/bici-road.png" alt="cat city"><strong
+								class="img-fluid" src="/img/bici-road.png" alt="cat city"><strong
 								class="category-item-title">Bicicletas de carretera</strong></a>
 						</div>
 					</div>
@@ -57,9 +60,8 @@
 			<!-- TRENDING PRODUCTS-->
 			<section class="py-5">
 				<header>
-					<p class="small text-muted small text-uppercase mb-1">Made the
-						hard way</p>
-					<h2 class="h5 text-uppercase mb-4">Top trending products</h2>
+					<p class="small text-muted small text-uppercase mb-1">Lo mas nuevo de la temporada</p>
+					<h2 class="h5 text-uppercase mb-4">Productos mas recientes</h2>
 				</header>
 				
 				<div class="row">
@@ -69,7 +71,7 @@
 							<div class="position-relative mb-3">
 								<div class="badge text-white badge-"></div>
 								<a class="d-block" th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}">
-									<img class="img-fluid w-100" th:src="@{img/products/{name}/ (name = ${prod.imagen})}" th:alt="${prod.imagen}">
+									<img class="img-fluid w-100" th:src="@{/img/products/{name}/ (name = ${prod.imagen})}" th:alt="${prod.imagen}">
 								</a>
 								<div class="product-overlay">
 									<ul class="mb-0 list-inline">
@@ -101,13 +103,10 @@
 						<div class="col-lg-4 mb-3 mb-lg-0">
 							<div class="d-inline-block">
 								<div class="media align-items-end">
-									<svg class="svg-icon svg-icon-big svg-icon-light">
-                      <use xlink:href="#delivery-time-1"> </use>
-                    </svg>
+									
 									<div class="media-body text-left ml-3">
-										<h6 class="text-uppercase mb-1">Free shipping</h6>
-										<p class="text-small mb-0 text-muted">Free shipping
-											worlwide</p>
+										<h6 class="text-uppercase mb-1">Envio gratis</h6>
+										<p class="text-small mb-0 text-muted">Envio gratis en la peninsula</p>
 									</div>
 								</div>
 							</div>
@@ -115,13 +114,10 @@
 						<div class="col-lg-4 mb-3 mb-lg-0">
 							<div class="d-inline-block">
 								<div class="media align-items-end">
-									<svg class="svg-icon svg-icon-big svg-icon-light">
-                      <use xlink:href="#helpline-24h-1"> </use>
-                    </svg>
+									
 									<div class="media-body text-left ml-3">
-										<h6 class="text-uppercase mb-1">24 x 7 service</h6>
-										<p class="text-small mb-0 text-muted">Free shipping
-											worlwide</p>
+										<h6 class="text-uppercase mb-1">24 x 7 disponible</h6>
+										<p class="text-small mb-0 text-muted">Servicio activo siempre</p>
 									</div>
 								</div>
 							</div>
@@ -129,13 +125,10 @@
 						<div class="col-lg-4">
 							<div class="d-inline-block">
 								<div class="media align-items-end">
-									<svg class="svg-icon svg-icon-big svg-icon-light">
-                      <use xlink:href="#label-tag-1"> </use>
-                    </svg>
+									
 									<div class="media-body text-left ml-3">
-										<h6 class="text-uppercase mb-1">Festival offer</h6>
-										<p class="text-small mb-0 text-muted">Free shipping
-											worlwide</p>
+										<h6 class="text-uppercase mb-1">Montaje sencillo</h6>
+										<p class="text-small mb-0 text-muted">Nuestro equipo monta y comprueba antes del envio</p>
 									</div>
 								</div>
 							</div>

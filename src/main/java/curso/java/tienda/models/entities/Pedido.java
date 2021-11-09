@@ -3,12 +3,21 @@ package curso.java.tienda.models.entities;
 
 import java.util.Date;
 
-public class Pedido {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="pedidos")
+public class Pedido {
+	
+	@Id @GeneratedValue
 	private Integer id;
-	private Usuario usuario;
-	private Date fecha;
-	private String metodo__pago;
+	
+	private Integer id_usuario;
+	private String fecha;
+	private String metodo_pago;
 	private String estado;
 	private String num_factura;
 	private Double total;
@@ -22,12 +31,12 @@ public class Pedido {
 	 * @param num_factura
 	 * @param total
 	 */
-	public Pedido(Integer id, Usuario usuario, Date fecha, String metodo__pago, String estado, String num_factura,
+	public Pedido(Integer id, Integer usuario, String fecha, String metodo__pago, String estado, String num_factura,
 			Double total) {
 		this.id = id;
-		this.usuario = usuario;
+		this.id_usuario = usuario;
 		this.fecha = fecha;
-		this.metodo__pago = metodo__pago;
+		this.metodo_pago = metodo__pago;
 		this.estado = estado;
 		this.num_factura = num_factura;
 		this.total = total;
@@ -45,23 +54,23 @@ public class Pedido {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Usuario getUsuario() {
-		return usuario;
+	public Integer getIdUsuario() {
+		return id_usuario;
 	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setIdUsuario(Integer usuario) {
+		this.id_usuario = usuario;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
-	public String getMetodo__pago() {
-		return metodo__pago;
+	public String getMetodo_pago() {
+		return metodo_pago;
 	}
-	public void setMetodo__pago(String metodo__pago) {
-		this.metodo__pago = metodo__pago;
+	public void setMetodo_pago(String metodo_pago) {
+		this.metodo_pago = metodo_pago;
 	}
 	public String getEstado() {
 		return estado;

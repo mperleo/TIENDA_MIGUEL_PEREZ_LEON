@@ -1,11 +1,14 @@
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark" th:fragment="header">
+<nav class="navbar navbar-expand navbar-dark bg-dark" th:fragment="header">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3" th:href="@{/admin}">BikëMesiters Admin</a>
     <!-- Navbar-->
- 	<a class="nav-link" th:href='@{/miUsuario/ver}'>Ver perfil</a>
- 	<a class="nav-link" th:href='@{/miUsuario/modificar/}'>Modificar perfil</a>
- 	<a class="nav-link" th:href='@{/miUsuario/modificarPass/}'>Cambiar contraseña</a>
- 	<a class="nav-link text-danger" href='/login/cerrarSesion'>Cerrar sesión</a>	 	
+	    <div class="d-flex justify-content-end align-items-stretch">
+		    <a class="nav-link justify-content-end" th:href='@{/miUsuario/ver}'>Ver perfil</a>
+		 	<a class="nav-link justify-content-end" th:href='@{/miUsuario/modificar/}'>Modificar perfil</a>
+		 	<a class="nav-link justify-content-end" th:href='@{/miUsuario/modificarPass/}'>Cambiar contraseña</a>
+		 	<a class="nav-link text-danger justify-content-end" href='/login/cerrarSesion'>Cerrar sesión</a>
+	    </div> 
+ 		 	
 </nav>
 
     

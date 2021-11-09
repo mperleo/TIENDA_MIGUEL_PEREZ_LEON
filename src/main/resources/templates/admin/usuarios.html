@@ -43,8 +43,8 @@
 	                                <td th:text="${user.id_rol}"></td>
 	                                <td th:text="${user.email}"></td>
 	                                <td th:text="${user.nombre}"></td>
-	                                <td th:text="${user.apellido1} + ${user.apellido2}"></td>
-	                                <td th:text="${user.direccion} + ${user.provincia} + ${user.localidad}"></td>
+	                                <td th:text="${user.apellido1} + ${' '} + ${user.apellido2}"></td>
+	                                <td th:text="${user.direccion} + ${' '} + ${user.provincia} + ${' '} + ${user.localidad}"></td>
 	                                <td th:text="${user.telefono}"></td>
 	                                <td th:text="${user.dni}"></td>
 	                                <td >

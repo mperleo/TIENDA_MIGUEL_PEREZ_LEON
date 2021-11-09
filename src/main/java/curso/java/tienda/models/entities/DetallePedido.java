@@ -1,8 +1,16 @@
 package curso.java.tienda.models.entities;
 // Generated 4 nov 2021 19:04:44 by Hibernate Tools 4.3.5.Final
 
-public class DetallePedido {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="detalles_pedidos")
+public class DetallePedido {
+	
+	@Id @GeneratedValue
 	private Integer id;
 	private int id_pedido;
 	private Integer producto;
@@ -10,6 +18,7 @@ public class DetallePedido {
 	private Integer unidades;
 	private Float impuesto;
 	private Double total;
+	private String productoNombre;
 	
 	/**
 	 * @param id
@@ -19,9 +28,10 @@ public class DetallePedido {
 	 * @param unidades
 	 * @param impuesto
 	 * @param total
+	 * @param producto_nombre
 	 */
 	public DetallePedido(Integer id, int id_pedido, Integer producto, Double precioUnidad, Integer unidades,
-			Float impuesto, Double total) {
+			Float impuesto, Double total, String productoNombre) {
 		super();
 		this.id = id;
 		this.id_pedido = id_pedido;
@@ -30,6 +40,7 @@ public class DetallePedido {
 		this.unidades = unidades;
 		this.impuesto = impuesto;
 		this.total = total;
+		this.productoNombre = productoNombre;
 	}
 	
 	public DetallePedido() {
@@ -90,6 +101,14 @@ public class DetallePedido {
 
 	public void setPrecioUnidad(Double double1) {
 		this.precioUnidad = double1;
+	}
+
+	public String getProductoNombre() {
+		return productoNombre;
+	}
+
+	public void setProductoNombre(String producto_nombre) {
+		this.productoNombre = producto_nombre;
 	}
 	
 }
