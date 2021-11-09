@@ -29,7 +29,7 @@
 				<div class="h4 card-header font-syne py-lg-4">Lista pedidos</div>
 				<div class="card-body">
 				
-					<a th:if="${pedido.estado == 'enviado'}" lass="btn btn-outline-primary btn-large" th:href="@{/pedidos/generarFactura/{pedidoID}/ (pedidoID = ${pedido.id})}">Generar factura en pdf »</a>
+					<a th:if="${pedido.estado == 'enviado'}" class="btn btn-outline-primary btn-large" target="blank" th:href="@{/pedidos/generarFactura/{pedidoID}/ (pedidoID = ${pedido.id})}">Generar factura en pdf »</a>
 					
 					<div class="h3 py-lg-4">Detalles del pedido</div>
 					
@@ -38,6 +38,7 @@
 					        <tr>
 					            <th>Fecha</th>
 					            <th>Total</th>
+					            <th th:if="${pedido.num_factura != null}" >Número Factura</th>
 					            <th>Método pago</th>
 					            <th>Estado</th>
 					        </tr>
@@ -46,6 +47,7 @@
 					        <tr>
 					            <td th:text="${pedido.fecha}"></td>
 	                            <td th:text="${pedido.total} + ${'€'}"></td>
+	                            <td th:if="${pedido.num_factura != null}" th:text="${pedido.num_factura}"></td>
 	                            <td th:text="${pedido.metodo_pago}"></td>
 	                            <td th:if="${pedido.estado == 'pendiente'}" class="text-warning" th:text="${pedido.estado}"></td>
 	                            <td th:if="${pedido.estado == 'pendiente cancelación'}" class="text-warning" th:text="${pedido.estado}"></td>

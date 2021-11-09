@@ -1,5 +1,6 @@
 package curso.java.tienda.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,17 @@ public class ConfiguracionService {
 	public Configuracion getConfiguracionXId(int id) {
 		Configuracion c = cr.getById(id);
 	    return c;
+	}
+	
+	public HashMap<String, Configuracion> getDatosFactura() {
+		List<Configuracion> c = cr.buscarDatosFactura();
+		
+		HashMap<String, Configuracion> mapaFactura = new HashMap<String, Configuracion>();
+		
+		for(Configuracion i: c){
+			mapaFactura.put(i.getClave(), i);
+		}
+			
+	    return mapaFactura;
 	}
 }

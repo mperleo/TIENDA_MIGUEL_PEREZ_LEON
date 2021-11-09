@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Pedidos</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin/pedidos}">Pedidos</a></li>
+                            <li class="breadcrumb-item active">Ver pedido</li>
+                        </ol>
+                        
+                        <a th:if="${pedido.estado == 'enviado'}" class="btn btn-outline-primary btn-large" target="blank" th:href="@{/pedidos/generarFactura/{pedidoID}/ (pedidoID = ${pedido.id})}">Generar factura en pdf »</a>
+                        
+                        <h3>Datos del pedido</h3>
+					
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id Usuario</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Número Factura</th>
+                                <th scope="col">Método pago</th>
+                                <th scope="col">Estado</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+	                              <tr>
+	                              	<td th:text="${pedido.id}"></td>
+	                              	<td th:text="${pedido.idUsuario}"></td>
+						            <td th:text="${pedido.fecha}"></td>
+		                            <td th:text="${pedido.total}"></td>
+		                            <td th:text="${pedido.num_factura}"></td>
+		                            <td th:text="${pedido.metodo_pago}"></td>
+		                            
+		                            <td th:if="${pedido.estado == 'pendiente'}" class="text-warning" th:text="${pedido.estado}"></td>
+		                            <td th:if="${pedido.estado == 'pendiente cancelación'}" class="text-warning" th:text="${pedido.estado}"></td>
+		                            <td th:if="${pedido.estado == 'cancelado'}" class="text-danger" th:text="${pedido.estado}"></td>
+		                            <td th:if="${pedido.estado == 'enviado'}" class="text-info" th:text="${pedido.estado}"></td>
+	                              </tr>
+	                            
+                            </tbody>
+                        </table>
+                        
+                        <br>
+
+                        <h3>Detalle del pedido</h3>
+                        
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark">
+					        <tr>
+					        	<th>Id</th>
+					            <th>Nombre producto</th>
+					            <th>Unidades</th>
+					            <th>Precio unidad</th>
+					            <th>Impuesto</th>
+					            <th>total</th>
+					            
+					        </tr>
+					    </thead>
+					    <tbody class="text-capitalize">
+					        <tr  th:each="linea : ${lineas}">
+					        	<td th:text="${linea.producto}"></td>
+					            <td th:text="${linea.productoNombre}"></td>
+					            <td th:text="${linea.unidades}"></td>
+					            <td th:text="${linea.precioUnidad} + ${'€'}"></td>
+					            <td th:text="${linea.impuesto}"></td>
+	                            <td th:text="${linea.total} + ${'€'}"></td>
+	                           
+                             </tr>
+					        
+					    </tbody>
+					</table>
+                         
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>  
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+    </body>
+</html>
