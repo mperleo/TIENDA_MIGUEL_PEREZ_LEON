@@ -36,4 +36,8 @@ public class DetallePedidoService {
 		DetallePedido dp = dpr.getById(id);
 		return dp;
 	}
+	
+	public List<DetallePedido> getDetallePedidoXIdPedido(Integer id) {
+		return  dpr.buscarLineasPedido(id.toString());
+	}
 }

@@ -1,0 +1,4 @@
+[2021-11-09 18:25:32] [ ERROR] [PedidosUsuario:73] Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: 1
+[2021-11-09 18:32:59] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 18:33:41] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 18:52:23] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada

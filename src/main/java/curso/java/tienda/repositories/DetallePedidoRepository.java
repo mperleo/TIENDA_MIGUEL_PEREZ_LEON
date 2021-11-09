@@ -11,6 +11,6 @@ public interface DetallePedidoRepository extends JpaRepository<DetallePedido, In
 	DetallePedido findById(String id);
 	
 	@Query(value="select * from detalles_pedidos where id_pedido=?", nativeQuery=true)
-	List<DetallePedido> buscarPedidosUsuario(String id_pedido);
+	List<DetallePedido> buscarLineasPedido(String id_pedido);
 }
 

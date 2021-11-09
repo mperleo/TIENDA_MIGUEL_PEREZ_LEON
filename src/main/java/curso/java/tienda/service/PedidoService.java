@@ -40,4 +40,9 @@ public class PedidoService {
 	public Integer getPedidoIdMax() {
 		return pr.buscarMaxId() +1;
 	}
+	
+	public List<Pedido> getPedidosUsuario(Integer id_usuario) {
+		
+		return pr.buscarPedidosUsuario(id_usuario.toString());
+	}
 }

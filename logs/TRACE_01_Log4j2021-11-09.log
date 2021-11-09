@@ -18,3 +18,21 @@
 [2021-11-09 13:09:30] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
 [2021-11-09 13:21:15] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
 [2021-11-09 13:23:35] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 14:15:16] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 14:15:30] [ INFO ] [Cesta:212] Pedido con los datos iniciados y guardado en la sesion
+[2021-11-09 14:15:50] [ INFO ] [Cesta:258] Pedido guardado en la bbdd con exito
+[2021-11-09 14:27:06] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 14:39:03] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 14:42:25] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 14:44:15] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 17:41:48] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 18:25:32] [ ERROR] [PedidosUsuario:73] Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: 1
+[2021-11-09 18:25:34] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 18:32:59] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 18:33:02] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 18:33:41] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 18:33:44] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 18:52:23] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 18:52:27] [ INFO ] [Login:41] Usuario: perezleon.miguel@gmail.com ha iniciado sesión
+[2021-11-09 18:55:03] [ INFO ] [Login:41] Usuario: admin@admin.com ha iniciado sesión
+[2021-11-09 18:55:03] [ INFO ] [Login:43] Administrador: admin@admin.com ha iniciado sesión
