@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                    
+                    	<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+							<span th:text="${mensaje}"></span>
+							<span th:text="${session.mensaje}"></span>
+						</div>
+						
+						<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
+                        <h1 class="mt-4">Pedidos</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item active">Pedidos</li>
+                        </ol>
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Id Usuario</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Método pago</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+	                              <tr th:each="ped : ${pedidos}">
+	                              	<td th:text="${ped.id}"></td>
+	                              	<td th:text="${ped.idUsuario}"></td>
+						            <td th:text="${ped.fecha}"></td>
+		                            <td th:text="${ped.total}"></td>
+		                            <td th:text="${ped.metodo_pago}"></td>
+		                            
+		                            <td th:if="${ped.estado == 'pendiente'}" class="text-warning" th:text="${ped.estado}"></td>
+		                            <td th:if="${ped.estado == 'pendiente cancelación'}" class="text-warning" th:text="${ped.estado}"></td>
+		                            <td th:if="${ped.estado == 'cancelado'}" class="text-danger" th:text="${ped.estado}"></td>
+		                            <td th:if="${ped.estado == 'enviado'}" class="text-info" th:text="${ped.estado}"></td>
+		                            
+	                                <td>
+	                                    <a th:if="${ped.estado == 'pendiente cancelación' and session.usuario.id_rol == 1}" class="btn btn-danger btn-sm" th:href="@{/admin/pedidos/cancelar/{pedID}/ (pedID = ${ped.id})}"><i class="fas fa-trash-alt"></i> Cancelar</a>
+	                                    <a th:if="${ped.estado == 'pendiente'}" class="btn btn-primary btn-sm" th:href="@{/admin/pedidos/procesar/{pedID}/ (pedID = ${ped.id})}"><i class="fas fa-pen"></i> Procesar</a>
+	                                    <a class="btn btn-info btn-sm" th:href="@{/admin/pedidos/ver/{pedID}/ (pedID = ${ped.id})}"> Ver Detalle</a>
+	                                </td>
+	                              </tr>
+	                            
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-end">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>  
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+    </body>
+</html>

@@ -2,3 +2,6 @@
 [2021-11-09 18:32:59] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
 [2021-11-09 18:33:41] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
 [2021-11-09 18:52:23] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada
+[2021-11-09 20:47:53] [ ERROR] [Cesta:269] Intento de guardar un pedido sin estar iniciada la sesión
+[2021-11-09 21:25:21] [ ERROR] [PedidosAdmin:117] El pedido id:' 1' no se puede enviado
+[2021-11-09 21:32:44] [ ERROR] [PedidosUsuario:46] Intento de acceder a los listados de pedidos sin sesion iniciada

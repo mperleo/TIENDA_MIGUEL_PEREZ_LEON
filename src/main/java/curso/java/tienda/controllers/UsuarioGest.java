@@ -47,6 +47,7 @@ public class UsuarioGest {
 		if(compEmail == null || compEmail.getId() == usuario.getId()) {
 			us.editUsuario(usuario);
 			model.addAttribute("mensajeOk", "Datos de usuario modficados correctamente");
+			logger.info("Usuario "+user.getId()+" ha modificado su perfil");
 			
 			// obtengo los datos del usuario nuevos y los cambio para el objeto guardado en sesion
 			Usuario usuarioSesionModif = us.getUsuarioXId(user.getId());
@@ -75,6 +76,7 @@ public class UsuarioGest {
 				us.editUsuario(user);
 				
 				model.addAttribute("mensajeOk", "Contraseña modficada correctamente");
+				logger.info("Usuario "+user.getId()+" ha modificado su contraseña");
 				return "ver";
 			}
 			else {

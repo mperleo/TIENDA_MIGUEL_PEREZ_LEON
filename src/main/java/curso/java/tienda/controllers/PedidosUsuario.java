@@ -84,6 +84,7 @@ public class PedidosUsuario {
 			if(usuario.getId() == pedido.getIdUsuario()) {
 				// marco el estado del pedido como pendiente de cancelar
 				pedido.setEstado("pendiente cancelación");
+				peds.editPedido(pedido);
 				
 				// vuelvo a la vista de listar los pedidos
 				List<Pedido> listaPedidos = peds.getPedidosUsuario(usuario.getId());
