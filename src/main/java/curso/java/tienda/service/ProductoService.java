@@ -19,6 +19,10 @@ public class ProductoService {
 		//return listaUsuarios;
 	}
 	
+	public List<Producto> getListaProductosPorCat(String id_cat) {
+		return pr.buscarProductosPorCat(id_cat);
+	}
+	
 	public void addProducto(Producto p) {
 		pr.save(p);
 	}

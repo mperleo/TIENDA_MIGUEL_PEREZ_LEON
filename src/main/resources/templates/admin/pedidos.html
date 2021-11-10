@@ -18,11 +18,26 @@
 						<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
 							<span th:text="${mensajeOk}"></span>
 						</div>
+						
                         <h1 class="mt-4">Pedidos</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
                             <li class="breadcrumb-item active">Pedidos</li>
+                            
                         </ol>
+                        
+                        <form method="post" th:action="@{/admin/pedidos}" class="mb-3">
+                        	<label for="estado" class="form-label">Indica un estado para buscar</label>
+                        	<select class="form-select" id="estado" name="estado" aria-label="Default select example">
+                        	  <option selected value="todos" >Todos</option>
+							  <option value="pendiente">Pendiente</option>
+							  <option value="pendiente cancelación">Pendiente cancelación</option>
+							  <option value="enviado">Enviado</option>
+							  <option value="cancelado">Cancelado</option>
+							</select>
+							
+							<button type="submit" class="btn btn-primary mt-3">Buscar</button>
+                        </form>
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">

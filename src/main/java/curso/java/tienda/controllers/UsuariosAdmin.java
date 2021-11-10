@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.UsuarioService;
@@ -32,6 +33,23 @@ public class UsuariosAdmin {
 	    List<Usuario> users = us.getListaUsuarios();
 	    model.addAttribute("usuarios", users);
 	    return "admin/usuarios";
+	}
+	
+	@PostMapping("")
+	public String verRol(Model model, @RequestParam String id_rol) {
+		List<Usuario> usuarios = null;
+		
+		if(id_rol.equals("todos")) {
+			usuarios = us.getListaUsuarios();
+		}
+		else {
+			usuarios = us.getListaUsuarioPorRol(id_rol);
+		}
+		
+		model.addAttribute("mensajeOk", "Mostrando los pedidos con el rol' "+id_rol+"'");
+		model.addAttribute("usuarios", usuarios);
+		
+		return "admin/usuarios";
 	}
 
 	@GetMapping("editar/{id_usuario}")

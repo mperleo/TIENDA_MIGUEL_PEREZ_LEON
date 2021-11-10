@@ -15,4 +15,10 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	
 	@Query(value="select * from pedidos where id_usuario=?", nativeQuery=true)
 	List<Pedido> buscarPedidosUsuario(String id_usuario);
+	
+	@Query(value="select * from pedidos where id_usuario=? AND estado=?", nativeQuery=true)
+	List<Pedido> buscarPedidosUsuarioEstado(String id_usuario, String estado);
+	
+	@Query(value="select * from pedidos where estado=?", nativeQuery=true)
+	List<Pedido> buscarPedidosEstado(String estado);
 }

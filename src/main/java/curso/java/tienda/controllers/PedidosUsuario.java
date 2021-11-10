@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.DetallePedido;
 import curso.java.tienda.models.entities.Pedido;
@@ -38,6 +40,30 @@ public class PedidosUsuario {
 		if(usuario !=null) {
 			List<Pedido> listaPedidos = peds.getPedidosUsuario(usuario.getId());
 			model.addAttribute("pedidos",listaPedidos);
+			return "pedidosUsuario";
+		}
+		else {
+			model.addAttribute("mensaje", "para ver los pedidos tienes que iniciar sesión");
+			logger.error("Intento de acceder a los listados de pedidos sin sesion iniciada");
+			return "login";
+		}
+	}
+	
+	@PostMapping("")
+	public String verEstado(HttpSession session, Model model, @RequestParam String estado) {
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		if(usuario !=null) {
+			List<Pedido> listaPedidos = null;
+			
+			if(estado.equals("todos")) {
+				listaPedidos = peds.getPedidosUsuario(usuario.getId());
+			}
+			else {
+				listaPedidos = peds.getPedidosUsuarioEstado(usuario.getId(),estado);
+			}
+			model.addAttribute("mensajeOk", "Mostrando los pedidos con estado '"+estado+"'");
+			model.addAttribute("pedidos", listaPedidos);
 			return "pedidosUsuario";
 		}
 		else {

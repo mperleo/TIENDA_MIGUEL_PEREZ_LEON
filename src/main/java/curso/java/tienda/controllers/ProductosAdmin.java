@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
 
 @Controller
@@ -22,13 +25,39 @@ public class ProductosAdmin {
 	
 	@Autowired
 	private ProductoService ps;
+	@Autowired
+	private CategoriaService cs;
 	
 	private static Logger logger = LogManager.getLogger(ProductosAdmin.class);
 	
 	@GetMapping("")
 	public String verTodos(Model model) {
+		
 		List<Producto> prods = ps.getListaProductos();
+		List<Categoria> cats = cs.getListaCategorias();
+		
 		model.addAttribute("productos", prods);
+		model.addAttribute("categorias", cats);
+		return "admin/productos";
+	}
+	
+	@PostMapping("")
+	public String verCat(Model model, @RequestParam String id_cat) {
+		List<Producto> productos = null;
+		
+		List<Categoria> cats = cs.getListaCategorias();
+		
+		if(id_cat.equals("todos")) {
+			productos = ps.getListaProductos();
+		}
+		else {
+			productos = ps.getListaProductosPorCat(id_cat);
+		}
+		
+		model.addAttribute("mensajeOk", "Mostrando los productos con la categoria' "+id_cat+"'");
+		model.addAttribute("productos", productos);
+		model.addAttribute("categorias", cats);
+		
 		return "admin/productos";
 	}
 	
@@ -45,6 +74,9 @@ public class ProductosAdmin {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
 		model.addAttribute("prod", prod);
+		
+		List<Categoria> cats = cs.getListaCategorias();
+		model.addAttribute("categorias", cats);
 		
 		logger.info("Producto id_prod: "+id_prod+" editado");
 		return "admin/productoEditar";
@@ -68,6 +100,10 @@ public class ProductosAdmin {
 	
 	@GetMapping("nuevo")
 	public String pnuevo(Model model) {
+		
+		List<Categoria> cats = cs.getListaCategorias();
+		model.addAttribute("categorias", cats);
+		
 		return "admin/productoNuevo";
 	}
 	

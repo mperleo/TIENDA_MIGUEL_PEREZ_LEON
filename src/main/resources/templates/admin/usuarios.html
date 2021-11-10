@@ -13,15 +13,25 @@
                             <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
                             <li class="breadcrumb-item active">Usuarios</li>
                         </ol>
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
                         
-                        <a class="btn btn-primary " th:href="@{/admin/usuarios/nuevo}" role="button">Nuevo usuario</a>
+                        <a class="btn btn-primary mb-3" th:href="@{/admin/usuarios/nuevo}" role="button">Nuevo usuario</a>
+                        
+                        <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
+                        
+                        
+                        <form method="post" th:action="@{/admin/usuarios}" class="mb-3">
+                        	<label for="id_rol" class="form-label">Indica un estado para buscar</label>
+                        	<select class="form-select" id="id_rol" name="id_rol" aria-label="Default select example">
+                        	  <option selected value="todos" >Todos</option>
+							  <option value="1">Admin</option>
+							  <option value="2">Empleados</option>
+							  <option value="3">Usuarios registrados</option>
+							</select>
+							
+							<button type="submit" class="btn btn-primary mt-3">Buscar</button>
+                        </form>
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">

@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.Configuracion;
 import curso.java.tienda.models.entities.DetallePedido;
@@ -44,6 +46,23 @@ public class PedidosAdmin {
 		
 		return "admin/pedidos";
 	}	
+	
+	@PostMapping("")
+	public String verEstado(Model model, @RequestParam String estado) {
+		List<Pedido> pedidos = null;
+		
+		if(estado.equals("todos")) {
+			pedidos = ps.getListaPedidos();
+		}
+		else {
+			pedidos = ps.getListaPedidosPorEstado(estado);
+		}
+		
+		model.addAttribute("mensajeOk", "Mostrando los pedidos con estado' "+estado+"'");
+		model.addAttribute("pedidos", pedidos);
+		
+		return "admin/pedidos";
+	}
 	
 	@GetMapping("ver/{id_pedido}")
 	public String verPedido(Model model, @PathVariable("id_pedido") String id_pedido) {

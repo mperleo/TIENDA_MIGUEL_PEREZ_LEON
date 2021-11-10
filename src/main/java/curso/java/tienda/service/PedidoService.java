@@ -16,7 +16,10 @@ public class PedidoService {
 	
 	public List<Pedido> getListaPedidos() {
 		return pr.findAll();
-		//return listaUsuarios;
+	}
+	
+	public List<Pedido> getListaPedidosPorEstado(String estado) {
+		return pr.buscarPedidosEstado(estado);
 	}
 	
 	public void addPedido(Pedido p) {
@@ -50,5 +53,10 @@ public class PedidoService {
 	public List<Pedido> getPedidosUsuario(Integer id_usuario) {
 		
 		return pr.buscarPedidosUsuario(id_usuario.toString());
+	}
+	
+	public List<Pedido> getPedidosUsuarioEstado(Integer id_usuario, String estado) {
+		
+		return pr.buscarPedidosUsuarioEstado(id_usuario.toString(), estado);
 	}
 }

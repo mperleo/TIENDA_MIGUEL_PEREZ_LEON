@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
 
 @Controller
@@ -17,6 +20,9 @@ public class Portada {
 	
 	@Autowired
 	private ProductoService ps;
+	
+	@Autowired
+	private CategoriaService cs;
 	
 	@GetMapping("")
 	public String portada(Model model) {
@@ -33,9 +39,24 @@ public class Portada {
 	}
 	
 	@GetMapping("/tienda")
-	public String shop(Model model) {
-		List<Producto> productos = ps.getListaProductos();
+	public String verCat(Model model, @RequestParam(required=false, defaultValue="todos") String id_cat) {
+		List<Producto> productos = null;
+		
+		List<Categoria> cats = cs.getListaCategorias();
+		
+		if(id_cat.equals("todos")) {
+			productos = ps.getListaProductos();
+		}
+		else {
+			productos = ps.getListaProductosPorCat(id_cat);
+			Categoria categoria = cs.getCategoriaXId(Integer.parseInt(id_cat));
+			model.addAttribute("categoria", categoria);
+		}
+		
 		model.addAttribute("productos", productos);
+		model.addAttribute("categorias", cats);
+		model.addAttribute("nRes", productos.size());
+		
 		return "shop";
 	}
 }

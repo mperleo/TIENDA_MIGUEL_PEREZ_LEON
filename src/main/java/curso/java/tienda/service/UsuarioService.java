@@ -17,6 +17,10 @@ public class UsuarioService {
 		return ur.findAll();
 	}
 	
+	public List<Usuario> getListaUsuarioPorRol(String id_rol) {
+		return ur.buscarUsuarioPorRol(id_rol);
+	}
+	
 	public void addUsuario(Usuario usuario) {
 		ur.save(usuario);
 	}

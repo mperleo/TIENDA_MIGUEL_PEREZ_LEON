@@ -15,4 +15,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
 	@Query(value="select * from usuarios where email=?1 and clave=?2", nativeQuery=true)
 	List<Usuario> buscarUsuarioLogin(String email, String clave);
+
+	@Query(value="select * from usuarios where id_rol=?1 ", nativeQuery=true)
+	List<Usuario> buscarUsuarioPorRol(String id_rol);
 }
