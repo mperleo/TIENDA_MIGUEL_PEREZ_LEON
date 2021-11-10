@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Editar categoría</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/categorias">Categorías</a></li>
+                             <li class="breadcrumb-item active">Editar categoría</li>
+                        </ol>
+                        <!--<div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                   Esto queda bien para poner los errores
+                                </p>
+                            </div>
+                        </div>-->
+                        
+
+						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/editar/{catID}/guardar (catID = ${cat.id}) } " >
+						  <div class="form-group">
+						    <label for="nombre">Nombre</label>
+						    <input type="text" class="form-control" id="nombre_opcion" name="nombre" th:value="${cat.nombre}" placeholder="Indica el nombre" required>
+						    <label for="descripcion">Descripcion</label>
+						    <input type="text" class="form-control" id="url_opcion" name="descripcion" th:value="${cat.descripcion}" placeholder="Indica la descripción" required>
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
+						  
+						</form>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

@@ -30,19 +30,7 @@ public class Admin {
 		}
 	}
 	
-	/*@GetMapping("categorias")
-	public String categorias(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() <= 2) {
-			return "admin/categorias";
-		}
-		
-		else {
-			model.addAttribute("mensaje", "no tienes permiso para acceder a esta página");
-			logger.error("Intento de acceso sin permisos en pagina admin/categorias");
-			return "error";
-		}
-	}
+	/*
 	
 	@GetMapping("roles")
 	public String roles(Model model, HttpSession session) {

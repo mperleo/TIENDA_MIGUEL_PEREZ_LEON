@@ -14,7 +14,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository cr;
 	
-	public List<Categoria> getListaProductos() {
+	public List<Categoria> getListaCategorias() {
 	    return cr.findAll();
 	    //return listaUsuarios;
 	}
