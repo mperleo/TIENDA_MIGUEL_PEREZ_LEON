@@ -14,13 +14,15 @@
 				<p th:if="${exception != null}" th:text="${'Details: ' + message}" />
 				<p th:if="${error != null}" th:text="${'Error type : ' + error }" />
 				<p th:if="${exception != null}" th:text="${'Exception: ' + exception}" />
-				<p th:if="${trace != null}" th:text="${'Trace : ' + trace }" />
+				
 				<p th:if="${timestamp != null}" th:text="${'Timestamp: ' + timestamp}" />
 				<p th:if="${status != null}" th:text="${'Status: ' + status}" />
 				
 	
 				<hr>
-				<img src="/img/error.jpeg" alt="Error imagen" />
+				<div class="text-center">
+					<img class="text-center" src="/img/error.jpeg" alt="Error imagen" />
+				</div>
 			</div>
 
 		</div>
