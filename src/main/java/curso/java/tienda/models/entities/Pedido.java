@@ -1,8 +1,6 @@
 package curso.java.tienda.models.entities;
 // Generated 4 nov 2021 19:04:44 by Hibernate Tools 4.3.5.Final
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

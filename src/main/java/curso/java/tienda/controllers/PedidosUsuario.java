@@ -1,6 +1,5 @@
 package curso.java.tienda.controllers;
 
-import java.sql.PseudoColumnUsage;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;

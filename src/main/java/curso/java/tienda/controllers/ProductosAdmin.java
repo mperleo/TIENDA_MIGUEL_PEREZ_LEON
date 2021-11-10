@@ -46,6 +46,7 @@ public class ProductosAdmin {
 		Producto prod = ps.getProductoXId(id_producto);
 		model.addAttribute("prod", prod);
 		
+		logger.info("Producto id_prod: "+id_prod+" editado");
 		return "admin/productoEditar";
 	}
 	
@@ -61,6 +62,7 @@ public class ProductosAdmin {
 	public String borrar(Model model, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		ps.delProducto(id_producto);
+		logger.info("Producto id_prod: "+id_prod+" borrado");
 		return "redirect:/admin/productos";
 	}
 	
@@ -72,6 +74,7 @@ public class ProductosAdmin {
 	@PostMapping("nuevo/guardar")
 	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod) {
 		ps.addProducto(prod);
+		logger.info("Nuevo producto dado de alta");
 		return "redirect:/admin/productos";
 	}
 }

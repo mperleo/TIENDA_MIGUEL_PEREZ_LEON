@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.UsuarioService;
 

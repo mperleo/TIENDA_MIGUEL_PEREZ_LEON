@@ -2,7 +2,6 @@ package curso.java.tienda.controllers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -45,6 +44,7 @@ public class Cesta {
 	
 	@GetMapping("")
 	public String portada(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		ArrayList<DetallePedido> cestaLista = new ArrayList<DetallePedido>();
@@ -75,7 +75,7 @@ public class Cesta {
 	@GetMapping("add/{id_prod}")
 	public String addProd(Model model, HttpSession session, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
-		
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		if(cesta == null || !cesta.containsKey(id_producto)) {
@@ -114,16 +114,13 @@ public class Cesta {
 		
 		session.setAttribute("cesta", cesta);
 		
-		ArrayList<DetallePedido> cestaLista = new ArrayList<DetallePedido>();
-		Double total = (double) 0;
-		
 		return "redirect:/cesta";
 	}
 	
 	@GetMapping("down/{id_prod}")
 	public String downProd(Model model, HttpSession session, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
-		
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		if(cesta != null && cesta.containsKey(id_producto)) {
@@ -154,6 +151,7 @@ public class Cesta {
 	public String elimLineaProd(Model model, HttpSession session, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		if(cesta != null && cesta.containsKey(id_producto)) {
@@ -177,6 +175,7 @@ public class Cesta {
 	
 	@GetMapping("pedido")
 	public String pedido(Model model, HttpSession session) {
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
@@ -230,6 +229,7 @@ public class Cesta {
 	public String pedidoGuardar(Model model, HttpSession session, @RequestParam String metodo_pago) {
 		Pedido pedido = (Pedido) session.getAttribute("pedido");
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		@SuppressWarnings("unchecked")
 		HashMap<Integer, DetallePedido> cesta = (HashMap<Integer, DetallePedido>) session.getAttribute("cesta");
 		
 		if(usuario !=null) {

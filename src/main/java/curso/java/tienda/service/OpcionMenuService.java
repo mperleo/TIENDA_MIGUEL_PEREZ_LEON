@@ -14,9 +14,12 @@ public class OpcionMenuService {
 	@Autowired
 	private OpcionMenuRepository omr;
 	
-	public List<OpcionMenu> getListaProductos() {
+	public List<OpcionMenu> getOpcionesMenu() {
 	    return omr.findAll();
-	    //return listaUsuarios;
+	}
+	
+	public List<OpcionMenu> getOpcionesMenuRol(Integer id_rol) {
+	    return omr.buscarOpcionesRol(id_rol);
 	}
 
 	public void addOpcionMenu(OpcionMenu om) {
@@ -36,4 +39,5 @@ public class OpcionMenuService {
 		OpcionMenu om = omr.getById(id);
 	    return om;
 	}
+	
 }

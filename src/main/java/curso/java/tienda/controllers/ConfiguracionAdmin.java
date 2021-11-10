@@ -2,8 +2,6 @@ package curso.java.tienda.controllers;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +46,7 @@ public class ConfiguracionAdmin {
 	    Integer id_configuracion = Integer.parseInt(id_config);
 	    config.setId(id_configuracion);
 	    cs.editConfiguracion(config);
+	    logger.info("Configuracion editada con exito");
 	    return "redirect:/admin/configuraciones";
 	}
 
@@ -55,6 +54,7 @@ public class ConfiguracionAdmin {
 	public String borrar(Model model, @PathVariable("id_configuracion") String id_config) {
 	    Integer id_configuracion = Integer.parseInt(id_config);
 	    cs.delConfiguracion(id_configuracion);
+	    logger.info("Configuracion borrada con exito");
 	    return "redirect:/admin/configuraciones";
 	}
 
@@ -66,6 +66,7 @@ public class ConfiguracionAdmin {
 	@PostMapping("nuevo/guardar")
 	public String nuevoGuardar(Model model, @ModelAttribute Configuracion config) {
 	    cs.addConfiguracion(config);
+	    logger.info("Configuracion guardada con exito");
 	    return "redirect:/admin/configuraciones";
 	}
 	

@@ -3,7 +3,6 @@ package curso.java.tienda.controllers;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -59,7 +58,6 @@ public class PedidosAdmin {
 	@GetMapping("cancelar/{id_pedido}")
 	public String cancelarPedido(Model model, @PathVariable("id_pedido") String id_pedido) {
 		Pedido pedido = ps.getPedidoXId(Integer.parseInt(id_pedido));
-		List<DetallePedido> lineas = dps.getDetallePedidoXIdPedido(Integer.parseInt(id_pedido));
 		
 		if(pedido.getEstado().equals("pendiente cancelación")) {
 			pedido.setEstado("cancelado");
@@ -111,9 +109,9 @@ public class PedidosAdmin {
 			// -------- MODIFICO LOS DATOS DEL PEDIDO Y GUARDO
 			pedido.setEstado("enviado");
 			
-			Integer nFactNuevo = Integer.parseInt(datos_factura.get("factura_nfact").getValor())  +1;
+			Integer nFactNuevo = Integer.parseInt(datos_factura.get("factura_num").getValor())  +1;
 			// actualizo el número de la factura al hacer el cmaibio de estado y lo meto
-			datos_factura.get("factura_nfact").setValor(nFactNuevo.toString());
+			datos_factura.get("factura_num").setValor(nFactNuevo.toString());
 			// guardo el numero de la factura al pedido
 			pedido.setNum_factura(nFactNuevo.toString());
 			// guardo el pedido modificado en la bbdd, con el nuevo estado y el número de la factura
