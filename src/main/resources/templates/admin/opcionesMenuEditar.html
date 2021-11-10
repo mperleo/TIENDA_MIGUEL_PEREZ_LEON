@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Editar opción menu</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/opcionesMenu">Opciones Menu</a></li>
+                             <li class="breadcrumb-item active">Editar opción menu</li>
+                        </ol>
+                        <!--<div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                   Esto queda bien para poner los errores
+                                </p>
+                            </div>
+                        </div>-->
+                        
+
+						<form method="post" th:object="${opmen}" th:action="@{/admin/opcionesMenu/editar/{opmID}/guardar (opmID = ${opcion.id}) } " >
+						  <div class="form-group">
+						    <label for="nombre_opcion">Nombre</label>
+						    <input type="text" class="form-control" id="nombre_opcion" name="nombre_opcion" th:value="${opcion.nombre_opcion}" placeholder="Indica el nombre" required>
+						    <label for="url_opcion">Url</label>
+						    <input type="text" class="form-control" id="url_opcion" name="url_opcion" th:value="${opcion.url_opcion}" placeholder="Indica el valor" required>
+						    <label for="id_rol">id_rol</label>
+						   	<input type="text" class="form-control" id="id_rol" name="id_rol" th:value="${opcion.id_rol}" placeholder="Indica el valor" required>
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
+						  
+						</form>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

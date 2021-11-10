@@ -26,8 +26,8 @@ public class OpcionMenuService {
 	    omr.save(om);
 	}
 
-	public void delOpcionMenu(int id) {
-		OpcionMenu om = omr.getById(id);
+	public void delOpcionMenu(Integer id_opcion) {
+		OpcionMenu om = omr.getById(id_opcion);
 	    omr.delete(om);
 	}
 

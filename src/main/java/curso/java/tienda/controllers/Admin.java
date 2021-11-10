@@ -57,18 +57,5 @@ public class Admin {
 			return "error";
 		}
 	}
-	
-	@GetMapping("opcionesMenu")
-	public String opcionesMenu(Model model, HttpSession session) {
-		Usuario usuario = (Usuario) session.getAttribute("usuario");
-		if(usuario != null && usuario.getId_rol() == 1) {
-			return "admin/opcionesMenu";
-		}
-		
-		else {
-			model.addAttribute("mensaje", "no tienes permiso para acceder a esta página");
-			logger.error("Intento de acceso sin permisos en pagina admin/opcionesMenu");
-			return "error";
-		}
-	}*/
+	*/
 }
