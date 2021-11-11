@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import curso.java.tienda.models.entities.Rol;
 import curso.java.tienda.models.entities.Usuario;
+import curso.java.tienda.service.ConfiguracionService;
+import curso.java.tienda.service.RolService;
 import curso.java.tienda.service.UsuarioService;
 
 @Controller
@@ -25,12 +28,19 @@ public class UsuariosAdmin {
 	
 	@Autowired
 	private UsuarioService us;
+	@Autowired
+	private RolService rs;
+	@Autowired
+	private ConfiguracionService cs;
 	
 	private static Logger logger = LogManager.getLogger(UsuariosAdmin.class);
 	
 	@GetMapping("")
 	public String verTodos(Model model) {
 	    List<Usuario> users = us.getListaUsuarios();
+	    List<Rol> roles = rs.getListaRoles();
+	    
+	    model.addAttribute("roles", roles);
 	    model.addAttribute("usuarios", users);
 	    return "admin/usuarios";
 	}
@@ -38,6 +48,7 @@ public class UsuariosAdmin {
 	@PostMapping("")
 	public String verRol(Model model, @RequestParam String id_rol) {
 		List<Usuario> usuarios = null;
+		List<Rol> roles = rs.getListaRoles();
 		
 		if(id_rol.equals("todos")) {
 			usuarios = us.getListaUsuarios();
@@ -46,7 +57,8 @@ public class UsuariosAdmin {
 			usuarios = us.getListaUsuarioPorRol(id_rol);
 		}
 		
-		model.addAttribute("mensajeOk", "Mostrando los pedidos con el rol' "+id_rol+"'");
+		model.addAttribute("roles", roles);
+		model.addAttribute("mensajeOk", "Mostrando los usuarios con el rol' "+id_rol+"'");
 		model.addAttribute("usuarios", usuarios);
 		
 		return "admin/usuarios";
@@ -56,6 +68,10 @@ public class UsuariosAdmin {
 	public String editar(Model model, @PathVariable("id_usuario") String id_usuario) {
 	    Integer id_producto = Integer.parseInt(id_usuario);
 	    Usuario user = us.getUsuarioXId(id_producto);
+	    
+	    List<Rol> roles = rs.getListaRoles();
+	    
+	    model.addAttribute("roles", roles);
 	    model.addAttribute("usuario", user);
 	    
 	    return "admin/usuarioEditar";
@@ -92,12 +108,16 @@ public class UsuariosAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
+		List<Rol> roles = rs.getListaRoles();
+		model.addAttribute("roles", roles);
 	    return "admin/usuarioNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")
 	public String nuevoGuardar(Model model, @ModelAttribute Usuario user) {
+		user.setClave(cs.getPorClave("contra_por_defecto").getValor());
 	    us.addUsuario(user);
+	    
 	    return "redirect:/admin/usuarios";
 	}
 	

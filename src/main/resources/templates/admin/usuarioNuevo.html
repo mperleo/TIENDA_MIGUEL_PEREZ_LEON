@@ -24,8 +24,15 @@
 
 						<form method="post" th:object="${user}" th:action="@{/admin/usuarios/nuevo/guardar}">
 						  <div class="form-group">
-						    <label for="id_rol">id_rol</label>
-						    <input type="text" class="form-control" id="id_rol" name="id_rol" placeholder="Indica el nombre del rol nuevo" required>
+						  
+						    <label for="id_rol" class="form-label">Rol</label>
+							<select class="form-select" id="id_rol" name="id_rol"
+								aria-label="Default select example">
+								<div th:each="rol : ${roles}">
+									<option th:value="${rol.id}" th:text="${rol.rol}" th:if="${session.usuario.id_rol<rol.id or session.usuario.id_rol == 1}"></option>
+								</div>
+							</select>
+							
 						    <label for="email">Correo</label>
 						    <input type="email" class="form-control" id="email" name="email" placeholder="Indica el correo" required>
 						    <label for="nombre">Nombre</label>

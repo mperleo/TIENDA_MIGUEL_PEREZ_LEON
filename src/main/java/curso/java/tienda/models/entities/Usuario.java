@@ -46,6 +46,21 @@ public class Usuario{
 		this.telefono = telefono;
 		this.dni = dni;
 	}
+	
+	public Usuario(int id_rol, String email, String clave, String nombre, String apellido1,
+			String apellido2, String direccion, String provincia, String localidad, String telefono, String dni) {
+		this.id_rol = id_rol;
+		this.email = email;
+		this.clave = clave;
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.direccion = direccion;
+		this.provincia = provincia;
+		this.localidad = localidad;
+		this.telefono = telefono;
+		this.dni = dni;
+	}
 
 
 

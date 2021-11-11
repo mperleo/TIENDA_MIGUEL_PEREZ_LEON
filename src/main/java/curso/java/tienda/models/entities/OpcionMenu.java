@@ -31,6 +31,18 @@ public class OpcionMenu {
 		this.nombre_opcion = nombre_opcion;
 		this.url_opcion = url_opcion;
 	}
+	
+	/**
+	 * @param id
+	 * @param id_rol
+	 * @param nombre_opcion
+	 * @param url_opcion
+	 */
+	public OpcionMenu(int id_rol, String nombre_opcion, String url_opcion) {
+		this.id_rol = id_rol;
+		this.nombre_opcion = nombre_opcion;
+		this.url_opcion = url_opcion;
+	}
 
 	/**
 	 * @return the id

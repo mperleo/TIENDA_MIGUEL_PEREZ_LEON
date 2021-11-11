@@ -22,12 +22,13 @@
                         
                         
                         <form method="post" th:action="@{/admin/usuarios}" class="mb-3">
+                        
                         	<label for="id_rol" class="form-label">Indica un estado para buscar</label>
                         	<select class="form-select" id="id_rol" name="id_rol" aria-label="Default select example">
                         	  <option selected value="todos" >Todos</option>
-							  <option value="1">Admin</option>
-							  <option value="2">Empleados</option>
-							  <option value="3">Usuarios registrados</option>
+							  <div th:each="rol : ${roles}">
+									<option th:value="${rol.id}" th:text="${rol.rol}"></option>
+								</div>
 							</select>
 							
 							<button type="submit" class="btn btn-primary mt-3">Buscar</button>

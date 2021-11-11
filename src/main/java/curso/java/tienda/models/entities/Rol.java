@@ -23,6 +23,13 @@ public class Rol{
 		this.id = id;
 		this.rol = rol;
 	}
+	
+	/**
+	 * @param rol
+	 */
+	public Rol(String rol) {
+		this.rol = rol;
+	}
 
 	/**
 	 * @return the id

@@ -49,4 +49,9 @@ public class ConfiguracionService {
 			
 	    return mapaFactura;
 	}
+	
+	public Configuracion getPorClave(String clave) {
+		Configuracion c = cr.buscarPorClave(clave);
+		return c;
+	}
 }

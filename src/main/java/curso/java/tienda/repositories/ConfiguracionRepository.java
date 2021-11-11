@@ -12,4 +12,7 @@ public interface ConfiguracionRepository extends JpaRepository<Configuracion, In
 	
 	@Query(value="select * from configuracion where clave like 'factura_%' ", nativeQuery=true)
 	List<Configuracion> buscarDatosFactura();
+	
+	@Query(value="select * from configuracion where clave like ? ", nativeQuery=true)
+	Configuracion buscarPorClave(String clave);
 }

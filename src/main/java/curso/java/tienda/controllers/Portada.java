@@ -13,6 +13,7 @@ import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.service.UsuarioService;
 
 @Controller
 @RequestMapping("")
@@ -24,8 +25,17 @@ public class Portada {
 	@Autowired
 	private CategoriaService cs;
 	
+	@Autowired
+	private UsuarioService us;
+	
 	@GetMapping("")
 	public String portada(Model model) {
+		
+		// si se entra en la aplicacion y no hay datos en la base de datos se crean los datos
+		if(us.getListaUsuarios().isEmpty()) {
+			return "redirect:cargarDatosInicio";
+		}
+		
 		List<Producto> productos = ps.getListaProductos();
 		model.addAttribute("productos", productos);
 		return "index";

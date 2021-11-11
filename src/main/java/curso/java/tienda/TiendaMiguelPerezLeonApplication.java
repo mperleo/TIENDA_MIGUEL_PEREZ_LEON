@@ -15,7 +15,10 @@ public class TiendaMiguelPerezLeonApplication {
 		URL url = loader.getResource("log4j.properties");
 		PropertyConfigurator.configure(url);
 		
+		
 		SpringApplication.run(TiendaMiguelPerezLeonApplication.class, args);
+		
+		
 	}
 
 }

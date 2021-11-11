@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import curso.java.tienda.models.entities.Configuracion;
 import curso.java.tienda.models.entities.Usuario;
+import curso.java.tienda.service.ConfiguracionService;
 import curso.java.tienda.service.UsuarioService;
 
 @Controller
@@ -22,6 +25,8 @@ public class Login {
 	
 	@Autowired
 	private UsuarioService us;
+	@Autowired
+	private ConfiguracionService cs;
 	
 	private static Logger logger = LogManager.getLogger(Login.class);
 	
@@ -33,12 +38,19 @@ public class Login {
 	}
 	
 	@PostMapping("entrar")
-	public String validar(@ModelAttribute Usuario usuario, HttpSession session, Model model) {
+	public String validar(@ModelAttribute Usuario usuario, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
 		Usuario busqueda = us.comprobarLogin(usuario);
+		Configuracion contra_defecto = cs.getPorClave("contra_por_defecto");
 		if(us.comprobarLogin(usuario) != null) {
 			session.setAttribute("usuario", busqueda);
 			logger.info("Usuario: "+usuario.getEmail()+" ha iniciado sesión");
-			if(busqueda.getId_rol()==1 || busqueda.getId_rol()==2) {
+			
+			//si el usuario tiene la contraseña por defecto definida en la configuracion debe cambiarla
+			if(usuario.getClave().equals(contra_defecto.getValor())) {
+				redirectAttributes.addFlashAttribute("mensaje", "Debes cambiar tu contraseña");
+				return "redirect:/miUsuario/modificarPass";
+			}
+			else if(busqueda.getId_rol()==1 || busqueda.getId_rol()==2) {
 				logger.info("Administrador: "+usuario.getEmail()+" ha iniciado sesión");
 				return "redirect:/admin";
 			}
@@ -48,8 +60,9 @@ public class Login {
 		}
 		else {
 			session.setAttribute("mensaje", "Error: Los datos indicados no estan en la base de datos");
+			redirectAttributes.addFlashAttribute("mensaje", "Error: Los datos indicados no estan en la base de datos");
 			logger.error("Fallo de inicio de sesion "+usuario.getClave()+" "+usuario.getEmail());
-			return "login";
+			return "redirect:/login";
 		}
 	}
 	
