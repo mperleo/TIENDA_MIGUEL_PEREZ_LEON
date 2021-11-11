@@ -33,7 +33,7 @@ public class Portada {
 		
 		// si se entra en la aplicacion y no hay datos en la base de datos se crean los datos
 		if(us.getListaUsuarios().isEmpty()) {
-			return "redirect:cargarDatosInicio";
+			return "redirect:/cargarDatosInicio";
 		}
 		
 		List<Producto> productos = ps.getListaProductos();

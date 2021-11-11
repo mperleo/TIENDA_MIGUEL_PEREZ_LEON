@@ -49,7 +49,7 @@ public class CargarDatos {
 			this.addOpcMen(opciones);
 			
 			logger.info("Datos iniciales insertados en la base de datos");
-			return "/";
+			return "redirect:/home";
 		}	
 		else {
 			logger.error("Intento de insertar datos iniciales cuando hay datos en la aplicación");
