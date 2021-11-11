@@ -13,13 +13,10 @@
                             <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
                             <li class="breadcrumb-item active">Opciones menu</li>
                         </ol>
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
+                        
+                        <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
                         
                         <a class="btn btn-primary mb-3" th:href="@{/admin/opcionesMenu/nuevo}" role="button">Nueva opción</a>
 

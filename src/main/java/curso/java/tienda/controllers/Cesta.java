@@ -3,6 +3,7 @@ package curso.java.tienda.controllers;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.DetallePedido;
+import curso.java.tienda.models.entities.MetodoPago;
 import curso.java.tienda.models.entities.Pedido;
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
@@ -26,6 +28,7 @@ import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.PedidoService;
 import curso.java.tienda.service.DetallePedidoService;
+import curso.java.tienda.service.MetodoPagoService;
 
 @Controller
 @RequestMapping("/cesta")
@@ -33,12 +36,12 @@ public class Cesta {
 	
 	@Autowired
 	private ProductoService ps;
-	
 	@Autowired
 	private PedidoService peds;
-	
 	@Autowired
 	private DetallePedidoService dps;
+	@Autowired
+	private MetodoPagoService ms;
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	
@@ -185,7 +188,7 @@ public class Cesta {
 			if(cesta !=null) {
 				// creo el objeto pedido y los objetos para calcular datos
 				Pedido pedido = new Pedido();
-				LocalDate fecha = LocalDate.now(); // Create a date object
+				LocalDate fecha = LocalDate.now();
 				Double total = 0.0;
 				
 				// calculo el total de las lineas de pedido
@@ -204,6 +207,8 @@ public class Cesta {
 				//guardo el pedido en la sesion
 				session.setAttribute("pedido", pedido);
 				
+				List<MetodoPago> metodosPago = ms.getListaMetodosPago();
+				model.addAttribute("metodosPago", metodosPago);
 				// guardo los parametros que se van a mostrar en la vista
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("cesta", cestaLista);

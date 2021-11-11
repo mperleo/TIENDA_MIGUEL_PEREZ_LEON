@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.models.entities.OpcionMenu;
@@ -42,19 +43,21 @@ public class OpcionesMenuAdmin {
 	}
 
 	@PostMapping("editar/{id_op}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_op") String id_op, @ModelAttribute OpcionMenu opmen) {
+	public String editarGuardar(Model model, @PathVariable("id_op") String id_op, @ModelAttribute OpcionMenu opmen, RedirectAttributes redirectAttributes) {
 	    Integer id_opcion = Integer.parseInt(id_op);
 	    opmen.setId(id_opcion);
 	    oms.editOpcionMenu(opmen);
 	    logger.info("opcion menu id: "+id_op+" editada");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Opción de menu editada correctamente");
 	    return "redirect:/admin/opcionesMenu";
 	}
 
 	@GetMapping("borrar/{id_op}")
-	public String borrar(Model model, @PathVariable("id_op") String id_op) {
+	public String borrar(Model model, @PathVariable("id_op") String id_op, RedirectAttributes redirectAttributes) {
 	    Integer id_opcion = Integer.parseInt(id_op);
 	    oms.delOpcionMenu(id_opcion);
 	    logger.info("opcion menu id: "+id_op+" borrada");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Opción de menu borrada correctamente");
 	    return "redirect:/admin/opcionesMenu";
 	}
 
@@ -64,9 +67,10 @@ public class OpcionesMenuAdmin {
 	}
 
 	@PostMapping("nuevo/guardar")
-	public String nuevoGuardar(Model model, @ModelAttribute OpcionMenu opmen) {
+	public String nuevoGuardar(Model model, @ModelAttribute OpcionMenu opmen, RedirectAttributes redirectAttributes) {
 	    oms.addOpcionMenu(opmen);
 	    logger.info("Nueva opción de menu");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Opción de menu creada correctamente");
 	    return "redirect:/admin/opcionesMenu";
 	}
 }

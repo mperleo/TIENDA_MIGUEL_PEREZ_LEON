@@ -44,8 +44,14 @@
 						    <input type="date" class="form-control" id="fecha_alta" name="fecha_alta" placeholder="Indica el nombre del rol nuevo" required>
 						    <label for="fecha_baja">Fecha baja</label>
 						    <input type="date" class="form-control" id="fecha_baja" name="fecha_baja" placeholder="Indica el nombre del rol nuevo" required>
+						    
 						    <label for="impuesto">Impuesto</label>
-						    <input type="text" class="form-control" id="impuesto" name="impuesto" placeholder="Indica el nombre del rol nuevo" required>
+						    <select class="form-select" id="impuesto" name="impuesto" aria-label="Default select example">
+                        	  <div th:each="imp : ${impuestos}" >
+                        	  	<option th:value="${imp.impuesto}" th:text="${imp.impuesto}"></option>
+                        	  </div>
+							</select>
+							
 						    <label for="imagen">Imagen</label>
 						    <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Indica el nombre del rol nuevo" required>
 						  </div>

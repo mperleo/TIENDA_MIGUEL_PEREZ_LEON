@@ -62,17 +62,26 @@ public class UsuarioGest {
 	}
 	
 	@GetMapping("modificarPass")
-	public String modificarContraseña(HttpSession session) {
+	public String modificarContra(HttpSession session) {
 		return "modificarPass";
 	}
 	
+	/** 
+     * Modelo que recoge los datos del formulario de cambio de contraseña
+     * @param session objeto que contiene los datos de la sesión del usuario en el navegador
+     * @param model objeto para mandar parámetros en las vistas
+     * @param contraComp contraseña para hacer la validación de contraseña con dos campos
+     * @param contraNueva nueva contraseña para el usuario
+     * @param contraAct contraseña actual en la base de datos del usuario activo
+     * @return redireccion a la página de veista de perfil o al formulario de contraseña si no se ha modificado con éxito
+     */
 	@PostMapping("modificarPass/guardar")
-	public String modificarContraseñaGuardar(HttpSession session, Model model, @RequestParam String contraComp, @RequestParam String contraNueva, @RequestParam String contraAct) {
+	public String modificarContrGuardar(HttpSession session, Model model, @RequestParam String contraComp, @RequestParam String contraNueva, @RequestParam String contraAct) {
 		Usuario user = (Usuario) session.getAttribute("usuario");
-		// meto los datos que del usuario que no estan en el formulario
-		if(user.getClave().equals(contraAct)) {
+		// compruebo que el dato de contraseña actual que se ha indicado en el formulario es el que tiene el usuario en la base de datos
+		if(user.getClave().equals(us.hashPassword(contraAct))) {
 			if(contraComp.equals(contraNueva)) {
-				user.setClave(contraNueva);
+				user.setClave(us.hashPassword(contraNueva)); // hago el hash de la contraseña nueva y la pongo al usuario
 				us.editUsuario(user);
 				
 				model.addAttribute("mensajeOk", "Contraseña modficada correctamente");

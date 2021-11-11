@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Editar proveedor</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin/proveedores}">Proveedores</a></li>
+                             <li class="breadcrumb-item active">Editar proveedor</li>
+                        </ol>
+                        <!--<div class="card mb-4">
+                            <div class="card-body">
+                                <p class="mb-0">
+                                   Esto queda bien para poner los errores
+                                </p>
+                            </div>
+                        </div>-->
+                        
+
+						<form method="post" th:object="${prov}" th:action="@{/admin/proveedores/editar/{catID}/guardar (provID = ${prov.id}) } " >
+						  <div class="form-group">
+						    <label for="nombre">Nombre</label>
+						    <input type="text" class="form-control" id="nombre" name="nombre" th:value="${prov.nombre}" placeholder="Indica el nombre" required>
+						    <label for="direccion">Direccion</label>
+						    <input type="text" class="form-control" id="direccion" name="direccion" th:value="${prov.direccion}" placeholder="Indica la direccion" required>
+						    <label for="localidad">Localidad</label>
+						    <input type="text" class="form-control" id="localidad" name="localidad" th:value="${prov.localidad}" placeholder="Indica la localidad" required>
+						    <label for="provincia">Provincia</label>
+						    <input type="text" class="form-control" id="provincia" name="provincia" th:value="${prov.provincia}" placeholder="Indica la nombre" required>
+						    <label for="telefono">Telefono</label>
+						    <input type="text" class="form-control" id="telefono" name="telefono" th:value="${prov.telefono}" placeholder="Indica el telefono" required>
+						    <label for="cif">CIF</label>
+						    <input type="text" class="form-control" id="cif" name="cif" th:value="${prov.cif}" placeholder="Indica el cif" required>
+						   	<label for="email">Email</label>
+						    <input type="text" class="form-control" id="email" name="email" th:value="${prov.email}" placeholder="Indica el email" required>
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
+						  
+						</form>
+                        
+                    </div>
+                </main>
+                
+                 <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

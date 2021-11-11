@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                	
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Proveedores</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item active">Proveedores</li>
+                            
+                        </ol>
+                        
+                        <a class="btn btn-primary mb-3" th:href="@{/admin/proveedores/nuevo}" role="button">Nuevo proveedor</a>
+                        
+                        <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark">
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Direccion</th>
+                                <th scope="col">Localidad</th>
+                                <th scope="col">Provincia</th>
+                                <th scope="col">Telefono</th>
+                                <th scope="col">CIF</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+	                              <tr th:each="prov : ${proveedores}">
+	                              	<th th:text="${prov.id}"></th>
+	                                <th th:text="${prov.nombre}"></th>
+	                                <td th:text="${prov.direccion}"></td>
+	                                <td th:text="${prov.localidad}"></td>
+	                                <th th:text="${prov.provincia}"></th>
+	                                <td th:text="${prov.telefono}"></td>
+	                                <td th:text="${prov.cif}"></td>
+	                                <td th:text="${prov.email}"></td>
+	                                <td >
+	                                    <a class="btn btn-danger btn-sm" th:href="@{/admin/proveedores/borrar/{provID}/ (provID = ${prov.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/proveedores/editar/{provID}/ (provID = ${prov.id}) }"><i class="fas fa-pen"></i> Modificar</a>
+	                                </td>
+	                              </tr>
+                              
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-end">
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

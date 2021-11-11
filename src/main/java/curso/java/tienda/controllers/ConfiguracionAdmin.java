@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Configuracion;
 import curso.java.tienda.service.ConfiguracionService;
@@ -42,19 +43,21 @@ public class ConfiguracionAdmin {
 	}
 
 	@PostMapping("editar/{id_configuracion}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_configuracion") String id_config, @ModelAttribute Configuracion config) {
+	public String editarGuardar(Model model, @PathVariable("id_configuracion") String id_config, @ModelAttribute Configuracion config, RedirectAttributes redirectAttributes) {
 	    Integer id_configuracion = Integer.parseInt(id_config);
 	    config.setId(id_configuracion);
 	    cs.editConfiguracion(config);
 	    logger.info("Configuracion editada con exito");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Configuración editada correctamente");
 	    return "redirect:/admin/configuraciones";
 	}
 
 	@GetMapping("borrar/{id_configuracion}")
-	public String borrar(Model model, @PathVariable("id_configuracion") String id_config) {
+	public String borrar(Model model, @PathVariable("id_configuracion") String id_config, RedirectAttributes redirectAttributes) {
 	    Integer id_configuracion = Integer.parseInt(id_config);
 	    cs.delConfiguracion(id_configuracion);
 	    logger.info("Configuracion borrada con exito");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Configuración borrada correctamente");
 	    return "redirect:/admin/configuraciones";
 	}
 
@@ -64,9 +67,10 @@ public class ConfiguracionAdmin {
 	}
 
 	@PostMapping("nuevo/guardar")
-	public String nuevoGuardar(Model model, @ModelAttribute Configuracion config) {
+	public String nuevoGuardar(Model model, @ModelAttribute Configuracion config, RedirectAttributes redirectAttributes) {
 	    cs.addConfiguracion(config);
 	    logger.info("Configuracion guardada con exito");
+	    redirectAttributes.addFlashAttribute("mensajeOk", "Configuración creada correctamente");
 	    return "redirect:/admin/configuraciones";
 	}
 	

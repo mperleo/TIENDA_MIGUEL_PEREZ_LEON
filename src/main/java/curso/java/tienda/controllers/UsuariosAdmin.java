@@ -115,9 +115,12 @@ public class UsuariosAdmin {
 
 	@PostMapping("nuevo/guardar")
 	public String nuevoGuardar(Model model, @ModelAttribute Usuario user) {
-		user.setClave(cs.getPorClave("contra_por_defecto").getValor());
+		//obtengo la contraseña por defecto el altas de la tabla de configuracion y meto el hash para guardarlo en la base de datos
+		String passDefecto = cs.getPorClave("contra_por_defecto").getValor();
+		user.setClave(us.hashPassword(passDefecto));
+		
+		// guardo el usuario en la base de datos
 	    us.addUsuario(user);
-	    
 	    return "redirect:/admin/usuarios";
 	}
 	

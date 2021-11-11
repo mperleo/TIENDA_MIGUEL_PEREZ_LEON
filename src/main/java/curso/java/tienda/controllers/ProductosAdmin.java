@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import curso.java.tienda.models.entities.Categoria;
+import curso.java.tienda.models.entities.Impuesto;
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.service.ImpuestoService;
 import curso.java.tienda.service.ProductoService;
 
 @Controller
@@ -27,6 +29,8 @@ public class ProductosAdmin {
 	private ProductoService ps;
 	@Autowired
 	private CategoriaService cs;
+	@Autowired
+	private ImpuestoService is;
 	
 	private static Logger logger = LogManager.getLogger(ProductosAdmin.class);
 	
@@ -78,6 +82,9 @@ public class ProductosAdmin {
 		List<Categoria> cats = cs.getListaCategorias();
 		model.addAttribute("categorias", cats);
 		
+		List<Impuesto> imps = is.getListaImpuestos();
+		model.addAttribute("impuestos", imps);
+		
 		logger.info("Producto id_prod: "+id_prod+" editado");
 		return "admin/productoEditar";
 	}
@@ -103,6 +110,9 @@ public class ProductosAdmin {
 		
 		List<Categoria> cats = cs.getListaCategorias();
 		model.addAttribute("categorias", cats);
+		
+		List<Impuesto> imps = is.getListaImpuestos();
+		model.addAttribute("impuestos", imps);
 		
 		return "admin/productoNuevo";
 	}

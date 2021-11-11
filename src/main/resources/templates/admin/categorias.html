@@ -18,13 +18,9 @@
                         
                         <a class="btn btn-primary mb-3" th:href="@{/admin/categorias/nuevo}" role="button">Nueva categoria</a>
                         
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
+                        <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">

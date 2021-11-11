@@ -98,18 +98,10 @@
 											<br>
 											<legend>Método de pago</legend>
 
-											<div class="col-lg-6 form-group">
+											<div class="col-lg-6 form-group" th:each="metodo : ${metodosPago}">
 												<div class="form-check">
-													<input class="form-check-input" type="radio"
-														name="metodo_pago" id="tarjeta" value="tarjeta"> <label
-														class="form-check-label" for="flexRadioDefault1">
-														Tarjeta </label>
-												</div>
-												<div class="form-check">
-													<input class="form-check-input" type="radio"
-														name="metodo_pago" id="paypal" value="paypal" checked>
-													<label class="form-check-label" for="flexRadioDefault2">
-														PayPal </label>
+													<input class="form-check-input" type="radio" name="metodo_pago" id="tarjeta" th:value="${metodo.metodo_pago}"> 
+														<label class="form-check-label" for="flexRadioDefault1" th:text="${metodo.metodo_pago}"> </label>
 												</div>
 											</div>
 
