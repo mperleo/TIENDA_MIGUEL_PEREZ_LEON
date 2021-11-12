@@ -1,7 +1,6 @@
 package curso.java.tienda.service;
 
-import java.io.File;
-import java.time.LocalDateTime;
+
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -12,9 +11,6 @@ import org.springframework.data.domain.Sort;
 
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.repositories.ProductoRepository;
-import jxl.Workbook;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
 @Service
 public class ProductoService {
@@ -86,7 +82,7 @@ public class ProductoService {
 		return p;
 	}
 	
-	public void escribirExcell(List<Producto> productos) {
+	/*public void escribirExcell(List<Producto> productos) {
 		LocalDateTime fecha = LocalDateTime.now(); // Create a date object
 	    
 		File fichero = new File("./ficheros/"+fecha.toString()+"Productos.xls");
@@ -137,7 +133,7 @@ public class ProductoService {
 	        	logger.error("Error al escribir datos en el fichero de exportación de productos Error: "+e);
 	        	e.printStackTrace();
 	        }
-	}
+	}*/
 	
 	/*
 	 * 
