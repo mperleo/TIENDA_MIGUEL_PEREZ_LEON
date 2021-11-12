@@ -1,18 +1,28 @@
 package curso.java.tienda.service;
 
+import java.io.File;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Sort;
+
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.repositories.ProductoRepository;
+import jxl.Workbook;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 @Service
 public class ProductoService {
 	
 	@Autowired
 	private ProductoRepository pr;
+	
+	private static Logger logger = LogManager.getLogger(ProductoService.class);
 	
 	public List<Producto> getListaProductos() {
 		return pr.buscarProductosOrdenFecha();
@@ -55,9 +65,6 @@ public class ProductoService {
 			default:
 				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("fecha_alta").descending());
 			}
-			//productos = ps.getListaProductosPorCat(id_cat);
-			//Categoria categoria = cs.getCategoriaXId(Integer.parseInt(id_cat));
-			//model.addAttribute("categoria", categoria);
 		}
 	}
 	
@@ -77,6 +84,59 @@ public class ProductoService {
 	public Producto getProductoXId(int id) {
 		Producto p = pr.getById(id);
 		return p;
+	}
+	
+	public void escribirExcell(List<Producto> productos) {
+		LocalDateTime fecha = LocalDateTime.now(); // Create a date object
+	    
+		File fichero = new File("./ficheros/"+fecha.toString()+"Productos.xls");
+		 
+		 try{
+	        	WritableWorkbook w = Workbook.createWorkbook(fichero);
+	 
+	        	
+	        	//Creo la hoja del documento con el nombre de productos
+	        	WritableSheet sheet = w.createSheet("Productos", 0);
+	        	
+	        	Integer i =0;
+	        	//sheet.addCell( new jxl.write.Label(0, i, "id") );
+	            sheet.addCell( new jxl.write.Label(0, i, "id_categoria") );
+	            sheet.addCell( new jxl.write.Label(1, i, "nombre") );
+	            sheet.addCell( new jxl.write.Label(2, i, "descripcion") );
+	            sheet.addCell( new jxl.write.Label(3, i, "precio") );
+	            sheet.addCell( new jxl.write.Label(4, i, "stock") );
+	            sheet.addCell( new jxl.write.Label(5, i, "fecha_alta") );
+	            sheet.addCell( new jxl.write.Label(6, i, "fecha_baja") );
+	            sheet.addCell( new jxl.write.Label(7, i, "impuesto") );
+	            sheet.addCell( new jxl.write.Label(8, i, "imagen") );
+	            sheet.addCell( new jxl.write.Label(9, i, "precioImpuesto") );
+	            i++;
+	            
+	        	//Hago un recorrido por la lista de productos escribiendo en la linea i los datos del producto p
+	        	for(Producto p: productos) {
+		            //sheet.addCell( new jxl.write.Label(0, i, p.getId().toString()) );
+		            sheet.addCell( new jxl.write.Label(0, i, p.getId_categoria().toString()) );
+		            sheet.addCell( new jxl.write.Label(1, i, p.getNombre()) );
+		            sheet.addCell( new jxl.write.Label(2, i, p.getDescripcion()) );
+		            sheet.addCell( new jxl.write.Label(3, i, p.getPrecio().toString()) );
+		            sheet.addCell( new jxl.write.Label(4, i, p.getStock().toString()) );
+		            sheet.addCell( new jxl.write.Label(5, i, p.getFecha_alta()) );
+		            sheet.addCell( new jxl.write.Label(6, i, p.getFecha_baja()) );
+		            sheet.addCell( new jxl.write.Label(7, i, p.getImpuesto().toString()) );
+		            sheet.addCell( new jxl.write.Label(8, i, p.getImagen()) );
+		            sheet.addCell( new jxl.write.Label(9, i, p.getPrecioImpuesto().toString()) );
+		            i++;
+	        	}
+	        	
+	        	// escribo los datos en el fichero y lo cierro
+	            w.write();
+	            w.close();
+	            logger.info("Fichero con la copia de los productos creado");
+	        	
+	        } catch (Exception e) {
+	        	logger.error("Error al escribir datos en el fichero de exportación de productos Error: "+e);
+	        	e.printStackTrace();
+	        }
 	}
 	
 	/*

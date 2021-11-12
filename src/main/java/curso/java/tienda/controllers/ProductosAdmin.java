@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Impuesto;
@@ -123,13 +124,26 @@ public class ProductosAdmin {
 	}
 	
 	@PostMapping("nuevo/guardar")
-	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod) {
+	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod,RedirectAttributes redirectAttributes) {
 		// calculo del precio con iva y lo guardo en el objeto
 		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
 		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
 				
 		ps.addProducto(prod);
 		logger.info("Nuevo producto dado de alta");
+		redirectAttributes.addFlashAttribute("mensajeOk", "Producto creado correctamente");
 		return "redirect:/admin/productos";
+	}
+	
+	@GetMapping("exportar")
+	public String exportarExcell(RedirectAttributes redirectAttributes) {
+		 List<Producto> prods = ps.getListaProductos();
+		 
+		 ps.escribirExcell(prods);
+		
+		 redirectAttributes.addFlashAttribute("mensajeOk", "Productos exportados correctamente");
+		 logger.info("Productos exportados correctamente");
+		 return "redirect:/admin/productos";
+		 
 	}
 }

@@ -11,7 +11,7 @@ public class Producto {
 
 	@Id @GeneratedValue
 	private Integer id;
-	private int id_categoria;
+	private Integer id_categoria;
 	private String nombre;
 	private String descripcion;
 	private Double precio;
@@ -68,7 +68,7 @@ public class Producto {
 	}
 
 
-	public int getId_categoria() {
+	public Integer getId_categoria() {
 		return id_categoria;
 	}
 
