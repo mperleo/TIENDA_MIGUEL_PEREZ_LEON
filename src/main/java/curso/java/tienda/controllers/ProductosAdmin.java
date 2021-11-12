@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -92,6 +93,10 @@ public class ProductosAdmin {
 	@PostMapping("editar/{id_prod}/guardar")
 	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
+		
+		// calculo del precio con iva y lo guardo en el objeto
+		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
+		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
 		prod.setId(id_producto);
 		ps.editProducto(prod);
 		return "redirect:/admin/productos";
@@ -119,6 +124,10 @@ public class ProductosAdmin {
 	
 	@PostMapping("nuevo/guardar")
 	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod) {
+		// calculo del precio con iva y lo guardo en el objeto
+		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
+		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
+				
 		ps.addProducto(prod);
 		logger.info("Nuevo producto dado de alta");
 		return "redirect:/admin/productos";

@@ -12,4 +12,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 
 	@Query(value="select * from productos where id_categoria=?1 ", nativeQuery=true)
 	List<Producto> buscarProductosPorCat(String id_cat);
+	
+	@Query(value="select * from productos where id_categoria=?1 ORDER BY fecha_alta ASC LIMIT 4 ", nativeQuery=true)
+	List<Producto> buscar4ProductosPorCat(int i);
 }

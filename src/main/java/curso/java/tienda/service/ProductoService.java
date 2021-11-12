@@ -23,6 +23,10 @@ public class ProductoService {
 		return pr.buscarProductosPorCat(id_cat);
 	}
 	
+	public List<Producto> getLista4ProductosPorCat(int i) {
+		return pr.buscar4ProductosPorCat(i);
+	}
+	
 	public void addProducto(Producto p) {
 		pr.save(p);
 	}
