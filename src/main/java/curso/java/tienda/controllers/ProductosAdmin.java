@@ -1,9 +1,13 @@
 package curso.java.tienda.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Impuesto;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ImpuestoService;
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.utils.ProductosUtil;
 
 @Controller
 @RequestMapping("/admin/productos")
@@ -27,6 +34,8 @@ public class ProductosAdmin {
 	
 	@Autowired
 	private ProductoService ps;
+	@Autowired
+	private ProductosUtil pu;
 	@Autowired
 	private CategoriaService cs;
 	@Autowired
@@ -90,18 +99,24 @@ public class ProductosAdmin {
 	}
 	
 	@PostMapping("editar/{id_prod}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod) {
+	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod, RedirectAttributes redirectAttributes) {
 		Integer id_producto = Integer.parseInt(id_prod);
+		
+		// calculo del precio con iva y lo guardo en el objeto
+		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
+		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
 		prod.setId(id_producto);
 		ps.editProducto(prod);
+		redirectAttributes.addFlashAttribute("mensajeOk", "Producto editado correctamente");
 		return "redirect:/admin/productos";
 	}
 	
 	@GetMapping("borrar/{id_prod}")
-	public String borrar(Model model, @PathVariable("id_prod") String id_prod) {
+	public String borrar(Model model, @PathVariable("id_prod") String id_prod, RedirectAttributes redirectAttributes) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		ps.delProducto(id_producto);
 		logger.info("Producto id_prod: "+id_prod+" borrado");
+		redirectAttributes.addFlashAttribute("mensajeOk", "Producto borrado correctamente");
 		return "redirect:/admin/productos";
 	}
 	
@@ -118,9 +133,66 @@ public class ProductosAdmin {
 	}
 	
 	@PostMapping("nuevo/guardar")
-	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod) {
+	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod,RedirectAttributes redirectAttributes) {
+		// calculo del precio con iva y lo guardo en el objeto
+		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
+		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
+				
 		ps.addProducto(prod);
 		logger.info("Nuevo producto dado de alta");
+		redirectAttributes.addFlashAttribute("mensajeOk", "Producto creado correctamente");
 		return "redirect:/admin/productos";
+	}
+	
+	@GetMapping("exportar")
+	public String exportarExcell(RedirectAttributes redirectAttributes) {
+		 List<Producto> prods = ps.getListaProductos();
+		 
+		 pu.escribirExcell(prods);
+		
+		 redirectAttributes.addFlashAttribute("mensajeOk", "Productos exportados correctamente");
+		 logger.info("Productos exportados correctamente");
+		 return "redirect:/admin/productos";
+		 
+	}
+	
+	@GetMapping("recuperarDatos/")
+	public String listaFicheros(Model model, HttpSession session) {
+		Usuario user = (Usuario)session.getAttribute("usuario");
+		if(user != null && user.getId_rol()==1) {
+			List<String> ficheros = pu.ficherosExcellDatos();
+			
+			model.addAttribute("ficheros", ficheros);
+			return "admin/productoListaExcell";
+		}
+		else {
+			model.addAttribute("mensaje", "No tienes permiso para acceder");
+			return "error";
+		}
+	}
+	
+	@PostMapping("recuperarDatos/recuperar")
+	public String recuperarProductos(Model model , HttpSession session, @RequestParam String nomFich, RedirectAttributes redirectAttributes) {
+		Usuario user = (Usuario)session.getAttribute("usuario");
+		// compruebo que el usuario tiene permisos para hacer la operacion
+		if(user != null && user.getId_rol()==1) {
+			
+			// busco los nombres de los ficheros que contienen los datos exportados en xml
+			ArrayList<Producto> prods = pu.leerExcell(nomFich);
+			if(prods != null) {
+				// si se encuentran datos se guardan en la base de datos
+				for(Producto p: prods){
+					ps.addProducto(p);
+				}
+				redirectAttributes.addFlashAttribute("mensajeOk", "Datos del fichero cargados en la base de datos");
+				return "redirect:/admin/productos";
+			}
+			else {
+				redirectAttributes.addFlashAttribute("mensaje", "Error al cargar datos del fichero");
+				return "redirect:/admin/productos/recuperarDatos";
+			}
+		}
+		model.addAttribute("mensaje", "No tienes permiso para acceder");
+		return "error";
 	}
 }

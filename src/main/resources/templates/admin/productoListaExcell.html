@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Importar datos de fichero</h1>  
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
+                             <li class="breadcrumb-item active">Importar datos de fichero</li>
+                        </ol>
+                        
+                        <div class="alert alert-danger" role="alert" th:if="${mensaje != null}">
+							<span th:text="${mensaje}"></span>
+						</div>
+
+						<form method="post" th:action="@{/admin/productos/recuperarDatos/recuperar}">
+						  <div class="form-group">
+						    <label for="nomFich" class="form-label">Fichero</label>
+                        	<select class="form-select" id="nomFich" name="nomFich" aria-label="Default select example">
+                        	  <div th:each="fich : ${ficheros}" >
+                        	  	<option th:value="${fich}" th:text="${fich}"></option>
+                        	  </div>
+							</select>
+						  </div>
+						  
+						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
+						  
+						</form>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+
+    </body>
+</html>

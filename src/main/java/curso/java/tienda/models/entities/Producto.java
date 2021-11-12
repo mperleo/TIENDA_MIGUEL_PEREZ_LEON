@@ -11,10 +11,11 @@ public class Producto {
 
 	@Id @GeneratedValue
 	private Integer id;
-	private int id_categoria;
+	private Integer id_categoria;
 	private String nombre;
 	private String descripcion;
 	private Double precio;
+	private Double precioImpuesto;
 	private Integer stock;
 	private String fecha_alta;
 	private String fecha_baja;
@@ -67,7 +68,7 @@ public class Producto {
 	}
 
 
-	public int getId_categoria() {
+	public Integer getId_categoria() {
 		return id_categoria;
 	}
 
@@ -99,6 +100,15 @@ public class Producto {
 
 	public Double getPrecio() {
 		return precio;
+	}
+	
+	public Double getPrecioImpuesto() {
+		return precioImpuesto;
+	}
+
+
+	public void setPrecioImpuesto(Double precioImpuesto) {
+		this.precioImpuesto = precioImpuesto;
 	}
 
 
