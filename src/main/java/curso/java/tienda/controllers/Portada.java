@@ -49,16 +49,14 @@ public class Portada {
 	}
 	
 	@GetMapping("/tienda")
-	public String verCat(Model model, @RequestParam(required=false, defaultValue="todos") String id_cat) {
+	public String verCat(Model model, @RequestParam(required=false, defaultValue="todos") String id_cat, @RequestParam(required=false, defaultValue="1") String orden) {
 		List<Producto> productos = null;
 		
 		List<Categoria> cats = cs.getListaCategorias();
 		
-		if(id_cat.equals("todos")) {
-			productos = ps.getListaProductos();
-		}
-		else {
-			productos = ps.getListaProductosPorCat(id_cat);
+		productos = ps.getListaProductosFiltro(id_cat, Integer.parseInt(orden));
+		
+		if(!id_cat.equals("todos")) {
 			Categoria categoria = cs.getCategoriaXId(Integer.parseInt(id_cat));
 			model.addAttribute("categoria", categoria);
 		}

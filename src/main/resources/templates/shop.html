@@ -105,18 +105,27 @@
 									<p class="text-small text-muted mb-0">Mostrando <span th:text="${nRes}"></span> resultados</p>
 								</div>
 								<div class="col-lg-6">
-									<ul
-										class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
-										<li class="list-inline-item"><select
-											class="selectpicker ml-auto" name="sorting" data-width="200"
-											data-style="bs-select-form-control"
-											data-title="Default sorting">
-												<option value="default">Default sorting</option>
-												<option value="popularity">Popularity</option>
-												<option value="low-high">Price: Low to High</option>
-												<option value="high-low">Price: High to Low</option>
-										</select></li>
-									</ul>
+									<form th:action="@{/tienda/}" method="get">
+										<ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0 input-group">
+												
+											<input th:if="${categoria != null}" type="text" name="id_cat" th:value="${categoria.id}" hidden>
+											
+											<li class="list-inline-item">
+												<select class="selectpicker ml-auto" data-width="300"  name="orden">
+													<option value="1" selected>Más recientes</option>
+													<option value="2">Más unidades</option>
+													<option value="3">Precio: más bajo a más alto</option>
+													<option value="4">Precio: más alto a más bajo</option>
+												</select>
+											</li>	
+											
+											
+											<li class="list-inline-item">
+												<button class="btn btn-dark btn-block" id="button-addon2" type="submit">Buscar</button>
+											</li>
+										
+										</ul>
+									</form>	
 								</div>
 							</div>
 
@@ -152,7 +161,7 @@
 												th:text="${prod.nombre}"></a>
 										</h6>
 										<p class="small text-muted">
-											<span th:text="${prod.precio}"></span> $
+											<span th:text="${prod.precioImpuesto}"></span> $
 										</p>
 									</div>
 								</div>

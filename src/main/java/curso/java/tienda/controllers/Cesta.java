@@ -87,10 +87,10 @@ public class Cesta {
 			if(nuevo != null) {
 				DetallePedido nuevaLinea = new DetallePedido();
 				nuevaLinea.setProducto(id_producto);
-				nuevaLinea.setPrecioUnidad(nuevo.getPrecio());
+				nuevaLinea.setPrecioUnidad(nuevo.getPrecioImpuesto());
 				nuevaLinea.setImpuesto(nuevo.getImpuesto());
 				nuevaLinea.setUnidades(1);
-				nuevaLinea.setTotal(nuevo.getPrecio()*nuevaLinea.getUnidades());
+				nuevaLinea.setTotal(nuevo.getPrecioImpuesto()*nuevaLinea.getUnidades());
 				nuevaLinea.setProductoNombre(nuevo.getNombre());
 				
 				// si la cesta no tiene elementos

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Sort;
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.repositories.ProductoRepository;
 
@@ -15,7 +15,7 @@ public class ProductoService {
 	private ProductoRepository pr;
 	
 	public List<Producto> getListaProductos() {
-		return pr.findAll();
+		return pr.buscarProductosOrdenFecha();
 		//return listaUsuarios;
 	}
 	
@@ -25,6 +25,40 @@ public class ProductoService {
 	
 	public List<Producto> getLista4ProductosPorCat(int i) {
 		return pr.buscar4ProductosPorCat(i);
+	}
+	
+	public List<Producto> getListaProductosFiltro(String id_cat, Integer orden){
+		if(id_cat.equals("todos")) {
+			switch (orden) {
+			case 1:
+				return pr.buscarProductosOrdenFecha();
+			case 2:
+				return pr.findAll(Sort.by("stock").descending());
+			case 3:
+				return pr.findAll(Sort.by("precio").ascending());
+			case 4:
+				return pr.findAll(Sort.by("precio").descending());
+			default:
+				return pr.buscarProductosOrdenFecha();
+			}
+		}
+		else {
+			switch (orden) {
+			case 1:
+				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("fecha_alta").descending());
+			case 2:
+				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("stock").descending());
+			case 3:
+				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("precio").ascending());
+			case 4:
+				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("precio").descending());
+			default:
+				return pr.findByIdCategoria(Integer.parseInt(id_cat), Sort.by("fecha_alta").descending());
+			}
+			//productos = ps.getListaProductosPorCat(id_cat);
+			//Categoria categoria = cs.getCategoriaXId(Integer.parseInt(id_cat));
+			//model.addAttribute("categoria", categoria);
+		}
 	}
 	
 	public void addProducto(Producto p) {
