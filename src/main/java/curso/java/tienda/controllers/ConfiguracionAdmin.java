@@ -30,7 +30,7 @@ public class ConfiguracionAdmin {
 	public String verTodos(Model model) {
 	    List<Configuracion> configs = cs.getListaConfiguraciones();
 	    model.addAttribute("configuraciones", configs);
-	    return "admin/configuraciones";
+	    return "admin/configuraciones/configuraciones";
 	}
 
 	@GetMapping("editar/{id_configuracion}")
@@ -39,7 +39,7 @@ public class ConfiguracionAdmin {
 	    Configuracion config = cs.getConfiguracionXId(id_configuracion);
 	    model.addAttribute("conf", config);
 	    
-	    return "admin/configuracionEditar";
+	    return "admin/onfiguraciones/configuracionEditar";
 	}
 
 	@PostMapping("editar/{id_configuracion}/guardar")
@@ -63,7 +63,7 @@ public class ConfiguracionAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-	    return "admin/configuracionNuevo";
+	    return "admin/onfiguraciones/configuracionNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")

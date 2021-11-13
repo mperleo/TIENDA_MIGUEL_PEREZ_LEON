@@ -10,27 +10,29 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Importar datos de fichero</h1>  
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
-                            <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
+                            <li class="breadcrumb-item"><a href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="@{/admin/productos}">Productos</a></li>
                              <li class="breadcrumb-item active">Importar datos de fichero</li>
                         </ol>
                         
                         <div class="alert alert-danger" role="alert" th:if="${mensaje != null}">
 							<span th:text="${mensaje}"></span>
 						</div>
+						
+						<div class="alert alert-warning" role="alert" th:if="${ficheros.isEmpty()}">
+							<span>No hay ficheros en la carpeta</span>
+						</div>
 
 						<form method="post" th:action="@{/admin/productos/recuperarDatos/recuperar}">
 						  <div class="form-group">
 						    <label for="nomFich" class="form-label">Fichero</label>
-                        	<select class="form-select" id="nomFich" name="nomFich" aria-label="Default select example">
+                        	<select th:if="${!ficheros.isEmpty()}" class="form-select" id="nomFich" name="nomFich" aria-label="Default select example">
                         	  <div th:each="fich : ${ficheros}" >
                         	  	<option th:value="${fich}" th:text="${fich}"></option>
                         	  </div>
 							</select>
+						  	<button type="submit" class="btn btn-primary my-2">Guardar</button>
 						  </div>
-						  
-						  <button type="submit" class="btn btn-primary my-2">Guardar</button>
-						  
 						</form>
                         
                     </div>

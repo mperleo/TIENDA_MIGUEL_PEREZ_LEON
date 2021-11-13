@@ -72,7 +72,7 @@ public class Cesta {
 		model.addAttribute("cesta", cestaLista);
 		model.addAttribute("total", total);
 		
-		return "cart";
+		return "cesta/cart";
 	}
 	
 	@GetMapping("add/{id_prod}")
@@ -173,7 +173,7 @@ public class Cesta {
 	@GetMapping("vaciarCesta")
 	public String vaciarLista(Model model, HttpSession session) {
 		session.setAttribute("cesta", null);
-		return "cart";
+		return "cesta/cart";
 	}
 	
 	@GetMapping("pedido")
@@ -214,7 +214,7 @@ public class Cesta {
 				model.addAttribute("cesta", cestaLista);
 				
 				logger.info("Pedido con los datos iniciados y guardado en la sesion");
-				return "checkout";
+				return "cesta/checkout";
 			}
 			else{
 				logger.error("Intento de relizar pedido sin productos en la cesta");
@@ -225,7 +225,7 @@ public class Cesta {
 		else {
 			logger.error("Intento de realizar pedido por un usuario no registrado");
 			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
-			return "login";
+			return "login/login";
 		}	
 	
 	}
@@ -273,7 +273,7 @@ public class Cesta {
 		else {
 			logger.error("Intento de guardar un pedido sin estar iniciada la sesión");
 			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
-			return "login";
+			return "login/login";
 		}
 		
 	}

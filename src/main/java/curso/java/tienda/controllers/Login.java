@@ -1,5 +1,7 @@
 package curso.java.tienda.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
@@ -15,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Configuracion;
+import curso.java.tienda.models.entities.OpcionMenu;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.ConfiguracionService;
+import curso.java.tienda.service.OpcionMenuService;
 import curso.java.tienda.service.UsuarioService;
 
 /**
@@ -34,6 +38,8 @@ public class Login {
 	private UsuarioService us;
 	@Autowired
 	private ConfiguracionService cs;
+	@Autowired
+	private OpcionMenuService os;
 	
 	private static Logger logger = LogManager.getLogger(Login.class);
 	
@@ -46,7 +52,7 @@ public class Login {
 	public String login(Model model) {
 		Usuario usuario = new Usuario();
 		model.addAttribute("usuario",usuario);
-		return "login";
+		return "login/login";
 	}
 	
 	/** 
@@ -83,6 +89,8 @@ public class Login {
 			}
 			// si el usuario tiene un rol correspondiente a administradort o empleado se manda al index para los admin del sitio
 			else if(busqueda.getId_rol()==1 || busqueda.getId_rol()==2) {
+				List<OpcionMenu> menu = os.getOpcionesMenuRol(busqueda.getId_rol());
+				session.setAttribute("menu", menu);
 				logger.info("Administrador: "+usuario.getEmail()+" ha iniciado sesión");
 				return "redirect:/admin";
 			}
@@ -116,7 +124,7 @@ public class Login {
      */
 	@GetMapping("registrate")
 	public String crearCuenta(){
-		return "signin";
+		return "login/signin";
 	}
 	
 	/** 

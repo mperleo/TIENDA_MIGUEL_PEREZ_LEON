@@ -40,12 +40,12 @@ public class PedidosUsuario {
 		if(usuario !=null) {
 			List<Pedido> listaPedidos = peds.getPedidosUsuario(usuario.getId());
 			model.addAttribute("pedidos",listaPedidos);
-			return "pedidosUsuario";
+			return "pedidos/pedidosUsuario";
 		}
 		else {
 			model.addAttribute("mensaje", "para ver los pedidos tienes que iniciar sesión");
 			logger.error("Intento de acceder a los listados de pedidos sin sesion iniciada");
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -64,12 +64,12 @@ public class PedidosUsuario {
 			}
 			model.addAttribute("mensajeOk", "Mostrando los pedidos con estado '"+estado+"'");
 			model.addAttribute("pedidos", listaPedidos);
-			return "pedidosUsuario";
+			return "pedidos/pedidosUsuario";
 		}
 		else {
 			model.addAttribute("mensaje", "para ver los pedidos tienes que iniciar sesión");
 			logger.error("Intento de acceder a los listados de pedidos sin sesion iniciada");
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -84,7 +84,7 @@ public class PedidosUsuario {
 				
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("lineas", lineas);
-				return "pedidoUsuario";
+				return "pedidos/pedidoUsuario";
 			}
 			else {
 				model.addAttribute("mensaje", "No tienes permiso para acceder a este pedido");
@@ -96,7 +96,7 @@ public class PedidosUsuario {
 		else {
 			model.addAttribute("mensaje", "Para ver el detalle del pedido tienes que iniciar sesión");
 			logger.error("Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: "+id_pedido);
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -115,7 +115,7 @@ public class PedidosUsuario {
 				List<Pedido> listaPedidos = peds.getPedidosUsuario(usuario.getId());
 				model.addAttribute("pedidos",listaPedidos);
 				model.addAttribute("mensajeOk", "Pedido marcado como pendiente para cancelar, un empleado cancelara el pedido en unos momentos");
-				return "pedidosUsuario";
+				return "pedidos/pedidosUsuario";
 			}
 			else {
 				model.addAttribute("mensaje", "No tienes permiso para acceder a este pedido");
@@ -127,7 +127,7 @@ public class PedidosUsuario {
 		else {
 			model.addAttribute("mensaje", "Para ver el cancelar un pedido tienes que iniciar sesión");
 			logger.error("Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: "+id_pedido);
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -153,7 +153,7 @@ public class PedidosUsuario {
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("lineas", lineas);
 				model.addAttribute("mensajeOk", "Linea de pedido borrada correctamente");
-				return "pedidoUsuario";
+				return "pedidos/pedidoUsuario";
 			}
 			else {
 				model.addAttribute("mensaje", "No tienes permiso para borrar esta linea de pedido");
@@ -163,7 +163,7 @@ public class PedidosUsuario {
 		}
 		else {
 			model.addAttribute("mensaje", "Para ver los pedidos tienes que iniciar sesión");
-			return "login";
+			return "login/login";
 		}
 	}
 	
@@ -180,7 +180,7 @@ public class PedidosUsuario {
 				
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("lineas", lineas);
-				return "pedidoUsuario";
+				return "pedidos/pedidoUsuario";
 			}
 			else {
 				model.addAttribute("mensaje", "No tienes permiso para acceder a este pedido");
@@ -192,7 +192,7 @@ public class PedidosUsuario {
 		else {
 			model.addAttribute("mensaje", "Para ver el detalle del pedido tienes que iniciar sesión");
 			logger.error("Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: "+id_pedido);
-			return "login";
+			return "login/login";
 		}
 	}
 	

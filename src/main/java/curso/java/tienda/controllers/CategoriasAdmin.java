@@ -29,7 +29,7 @@ public class CategoriasAdmin {
 	public String verTodos(Model model) {
 	    List<Categoria> cats = cs.getListaCategorias();
 	    model.addAttribute("categorias", cats);
-	    return "admin/categorias";
+	    return "admin/categorias/categorias";
 	}
 
 	@GetMapping("editar/{id_categoria}")
@@ -38,7 +38,7 @@ public class CategoriasAdmin {
 	    Categoria cat = cs.getCategoriaXId(id_categoria);
 	    model.addAttribute("cat", cat);
 	    
-	    return "admin/categoriasEditar";
+	    return "admin/categorias/categoriasEditar";
 	}
 
 	@PostMapping("editar/{id_categoria}/guardar")
@@ -62,7 +62,7 @@ public class CategoriasAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-	    return "admin/categoriasNuevo";
+	    return "admin/categorias/categoriasNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")

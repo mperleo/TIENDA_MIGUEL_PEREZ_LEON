@@ -11,13 +11,14 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Productos</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="@{/admin}">Administracion</a></li>
                             <li class="breadcrumb-item active">Productos</li>
                         </ol>
                         
                         <a class="btn btn-primary mb-3" th:href="@{/admin/productos/nuevo}" role="button">Nuevo producto</a>
                         <a class="btn btn-success mb-3" th:href="@{/admin/productos/exportar}" role="button">Exportar productos a .xsl</a>
                         <a class="btn btn-outline-success mb-3" th:if="${session.usuario.id_rol == 1}" th:href="@{/admin/productos/recuperarDatos/}" role="button">Importar productos de un .xsl</a>
+
                         
                         <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
 							<span th:text="${mensajeOk}"></span>

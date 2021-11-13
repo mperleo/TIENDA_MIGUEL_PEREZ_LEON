@@ -10,17 +10,10 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Editar producto</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="/admin">Administracion</a></li>
+                            <li class="breadcrumb-item"><a href="@{/admin}">Administracion</a></li>
                             <li class="breadcrumb-item"><a href="/admin/productos">Productos</a></li>
-                             <li class="breadcrumb-item active">Editar producto</li>
+                            <li class="breadcrumb-item active">Editar producto</li>
                         </ol>
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
 
 						<form method="post" th:object="${prod}" th:action="@{/admin/productos/editar/{prodID}/guardar (prodID = ${prod.id}) } " >
 						  <div class="form-group">

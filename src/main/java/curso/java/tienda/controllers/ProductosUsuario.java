@@ -33,6 +33,6 @@ public class ProductosUsuario {
 		model.addAttribute("categoria", cat);
 		model.addAttribute("producto", prod);
 		model.addAttribute("prodsReco", prodsReco);
-		return "detail";
+		return "producto/detail";
 	}
 }

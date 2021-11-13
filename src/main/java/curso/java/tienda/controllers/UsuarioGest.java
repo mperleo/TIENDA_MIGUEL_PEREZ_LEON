@@ -26,12 +26,12 @@ public class UsuarioGest {
 	
 	@GetMapping("ver")
 	public String ver( HttpSession session, Model model) {
-		return "ver";
+		return "usuario/ver";
 	}
 	
 	@GetMapping("modificar/")
 	public String modificarUsuario(HttpSession session) {
-		return "modificar";
+		return "usuario/modificar";
 	}
 	
 	@PostMapping("modificar/guardar")
@@ -53,17 +53,17 @@ public class UsuarioGest {
 			Usuario usuarioSesionModif = us.getUsuarioXId(user.getId());
 			session.setAttribute("usuario", usuarioSesionModif);
 			
-			return "ver";
+			return "usuario/ver";
 		}
 		else {
 			model.addAttribute("mensaje", "Has indicado un correo no valido");
-			return "modificar";
+			return "usuario/modificar";
 		}
 	}
 	
 	@GetMapping("modificarPass")
 	public String modificarContra(HttpSession session) {
-		return "modificarPass";
+		return "usuario/modificarPass";
 	}
 	
 	/** 
@@ -86,16 +86,16 @@ public class UsuarioGest {
 				
 				model.addAttribute("mensajeOk", "Contraseña modficada correctamente");
 				logger.info("Usuario "+user.getId()+" ha modificado su contraseña");
-				return "ver";
+				return "usuario/ver";
 			}
 			else {
 				model.addAttribute("mensaje", "Las contraseñas indicadas no son iguales");
-				return "modificarPass";
+				return "usuario/modificarPass";
 			}
 		}
 		else {
 			model.addAttribute("mensaje", "Tienes que indicar tu contraseña actual");
-			return "modificarPass";
+			return "usuario/modificarPass";
 		}
 
 	}

@@ -14,14 +14,6 @@
                             <li class="breadcrumb-item"><a th:href="@{/admin/categorias}">Categorías</a></li>
                              <li class="breadcrumb-item active">Editar categoría</li>
                         </ol>
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
-                        
 
 						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/editar/{catID}/guardar (catID = ${cat.id}) } " >
 						  <div class="form-group">

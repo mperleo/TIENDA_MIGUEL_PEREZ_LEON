@@ -42,7 +42,7 @@ public class UsuariosAdmin {
 	    
 	    model.addAttribute("roles", roles);
 	    model.addAttribute("usuarios", users);
-	    return "admin/usuarios";
+	    return "admin/usuarios/usuarios";
 	}
 	
 	@PostMapping("")
@@ -61,7 +61,7 @@ public class UsuariosAdmin {
 		model.addAttribute("mensajeOk", "Mostrando los usuarios con el rol' "+id_rol+"'");
 		model.addAttribute("usuarios", usuarios);
 		
-		return "admin/usuarios";
+		return "admin/usuarios/usuarios";
 	}
 
 	@GetMapping("editar/{id_usuario}")
@@ -74,7 +74,7 @@ public class UsuariosAdmin {
 	    model.addAttribute("roles", roles);
 	    model.addAttribute("usuario", user);
 	    
-	    return "admin/usuarioEditar";
+	    return "admin/usuarios/usuarioEditar";
 	}
 
 	@PostMapping("editar/{id_user}/guardar")
@@ -110,7 +110,7 @@ public class UsuariosAdmin {
 	public String nuevo(Model model) {
 		List<Rol> roles = rs.getListaRoles();
 		model.addAttribute("roles", roles);
-	    return "admin/usuarioNuevo";
+	    return "admin/usuarios/usuarioNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")

@@ -44,7 +44,7 @@ public class PedidosAdmin {
 		List<Pedido> pedidos = ps.getListaPedidos();
 		model.addAttribute("pedidos", pedidos);
 		
-		return "admin/pedidos";
+		return "admin/pedidos/pedidos";
 	}	
 	
 	@PostMapping("")
@@ -61,7 +61,7 @@ public class PedidosAdmin {
 		model.addAttribute("mensajeOk", "Mostrando los pedidos con estado' "+estado+"'");
 		model.addAttribute("pedidos", pedidos);
 		
-		return "admin/pedidos";
+		return "admin/pedidos/pedidos";
 	}
 	
 	@GetMapping("ver/{id_pedido}")
@@ -71,7 +71,7 @@ public class PedidosAdmin {
 		
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("lineas", lineas);
-		return "admin/pedidoVer";
+		return "admin/pedidos/pedidoVer";
 	}	
 	
 	@GetMapping("cancelar/{id_pedido}")
@@ -87,7 +87,7 @@ public class PedidosAdmin {
 			
 			List<Pedido> pedidos = ps.getListaPedidos();
 			model.addAttribute("pedidos", pedidos);
-			return "admin/pedidos";
+			return "admin/pedidos/pedidos";
 		}
 		else {
 			model.addAttribute("mensaje", "El estado del pedido id:' "+id_pedido+"' no se puede cambiar a cancelado ");
@@ -95,7 +95,7 @@ public class PedidosAdmin {
 			
 			List<Pedido> pedidos = ps.getListaPedidos();
 			model.addAttribute("pedidos", pedidos);
-			return "admin/pedidos";
+			return "admin/pedidos/pedidos";
 		}
 	}	
 	
@@ -121,7 +121,7 @@ public class PedidosAdmin {
 					
 					List<Pedido> pedidos = ps.getListaPedidos();
 					model.addAttribute("pedidos", pedidos);
-					return "admin/pedidos";
+					return "admin/pedidos/pedidos";
 				}
 			}
 			
@@ -141,7 +141,7 @@ public class PedidosAdmin {
 			
 			List<Pedido> pedidos = ps.getListaPedidos();
 			model.addAttribute("pedidos", pedidos);
-			return "admin/pedidos";
+			return "admin/pedidos/pedidos";
 		}
 		else {
 			model.addAttribute("mensaje", "El estado del pedido id:' "+id_pedido+"' no se puede cambiar a enviado ");
@@ -149,7 +149,7 @@ public class PedidosAdmin {
 			
 			List<Pedido> pedidos = ps.getListaPedidos();
 			model.addAttribute("pedidos", pedidos);
-			return "admin/pedidos";
+			return "admin/pedidos/pedidos";
 		}
 	}	
 		

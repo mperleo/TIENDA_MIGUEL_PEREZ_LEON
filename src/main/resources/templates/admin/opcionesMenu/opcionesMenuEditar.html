@@ -29,8 +29,16 @@
 						    <input type="text" class="form-control" id="nombre_opcion" name="nombre_opcion" th:value="${opcion.nombre_opcion}" placeholder="Indica el nombre" required>
 						    <label for="url_opcion">Url</label>
 						    <input type="text" class="form-control" id="url_opcion" name="url_opcion" th:value="${opcion.url_opcion}" placeholder="Indica el valor" required>
-						    <label for="id_rol">id_rol</label>
-						   	<input type="text" class="form-control" id="id_rol" name="id_rol" th:value="${opcion.id_rol}" placeholder="Indica el valor" required>
+						    <label for="id_rol" class="form-label">Rol</label>
+							<div th:if="${session.usuario.id_rol==1}">
+								<select class="form-select" id="id_rol" name="id_rol"
+									aria-label="Default select example">
+									<option selected th:value="${opcion.id_rol}">No cambiar</option>
+									<div th:each="rol : ${roles}">
+										<option th:value="${rol.id}" th:text="${rol.rol}"></option>
+									</div>
+								</select>
+							</div>
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

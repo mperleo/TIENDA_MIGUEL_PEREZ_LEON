@@ -29,16 +29,16 @@ public class ProveedorAdmin {
 	public String verTodos(Model model) {
 	    List<Proveedor> proveedores = ps.getListaProveedores();
 	    model.addAttribute("proveedores", proveedores);
-	    return "admin/proveedores";
+	    return "admin/proveedores/proveedores";
 	}
 
 	@GetMapping("editar/{id_proveedor}")
 	public String editar(Model model, @PathVariable("id_proveedor") String id_prov) {
 	    Integer id_proveedor = Integer.parseInt(id_prov);
-	    Proveedor cat = ps.getProveedorXId(id_proveedor);
-	    model.addAttribute("cat", cat);
+	    Proveedor prov = ps.getProveedorXId(id_proveedor);
+	    model.addAttribute("cat", prov);
 	    
-	    return "admin/proveedorEditar";
+	    return "admin/proveedores/proveedorEditar";
 	}
 
 	@PostMapping("editar/{id_proveedor}/guardar")
@@ -62,7 +62,7 @@ public class ProveedorAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-	    return "admin/proveedorNuevo";
+	    return "admin/proveedores/proveedorNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")

@@ -51,7 +51,7 @@ public class ProductosAdmin {
 		
 		model.addAttribute("productos", prods);
 		model.addAttribute("categorias", cats);
-		return "admin/productos";
+		return "admin/productos/productos";
 	}
 	
 	@PostMapping("")
@@ -71,15 +71,20 @@ public class ProductosAdmin {
 		model.addAttribute("productos", productos);
 		model.addAttribute("categorias", cats);
 		
-		return "admin/productos";
+		return "admin/productos/productos";
 	}
 	
 	@GetMapping("verCliente/{id_prod}")
 	public String verCliente(Model model, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
+		
+		Categoria cat = cs.getCategoriaXId(prod.getId_categoria());
+		List<Producto> prodsReco = ps.getLista4ProductosPorCat(prod.getId_categoria());
+		model.addAttribute("categoria", cat);
 		model.addAttribute("producto", prod);
-		return "detail";
+		model.addAttribute("prodsReco", prodsReco);
+		return "producto/detail";
 	}
 	
 	@GetMapping("editar/{id_prod}")
@@ -95,7 +100,7 @@ public class ProductosAdmin {
 		model.addAttribute("impuestos", imps);
 		
 		logger.info("Producto id_prod: "+id_prod+" editado");
-		return "admin/productoEditar";
+		return "admin/productos/productoEditar";
 	}
 	
 	@PostMapping("editar/{id_prod}/guardar")
@@ -129,7 +134,7 @@ public class ProductosAdmin {
 		List<Impuesto> imps = is.getListaImpuestos();
 		model.addAttribute("impuestos", imps);
 		
-		return "admin/productoNuevo";
+		return "admin/productos/productoNuevo";
 	}
 	
 	@PostMapping("nuevo/guardar")
@@ -163,7 +168,7 @@ public class ProductosAdmin {
 			List<String> ficheros = pu.ficherosExcellDatos();
 			
 			model.addAttribute("ficheros", ficheros);
-			return "admin/productoListaExcell";
+			return "admin/productos/productoListaExcell";
 		}
 		else {
 			model.addAttribute("mensaje", "No tienes permiso para acceder");
