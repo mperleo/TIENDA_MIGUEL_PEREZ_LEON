@@ -11,11 +11,13 @@ import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import curso.java.tienda.models.entities.Producto;
 import jxl.Sheet;
@@ -23,6 +25,7 @@ import jxl.Workbook;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 
+@Component
 public class ProductosUtil {
 	
 	private static Logger logger = LogManager.getLogger(ProductosUtil.class);
@@ -51,8 +54,9 @@ public class ProductosUtil {
 	
 	public void escribirExcell(List<Producto> productos) {
 		LocalDateTime fecha = LocalDateTime.now(); // Create a date object
+		DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
 	    
-		File fichero = new File("./ficherosExcell/"+fecha.toString()+"Productos.xls");
+		File fichero = new File("./ficherosExcell/"+fecha.format(formatoFecha)+"Productos.xls");
 		 
 		 try{
         	WritableWorkbook w = Workbook.createWorkbook(fichero);
@@ -102,9 +106,9 @@ public class ProductosUtil {
         }
 	}	
 	
-	public List<Producto> leerExcell(String path){
+	public ArrayList<Producto> leerExcell(String path){
 
-		File fichero = new File(path);
+		File fichero = new File("./ficherosExcell/"+path);
 		
 		 try{
 			 Workbook w = Workbook.getWorkbook(fichero);
@@ -113,7 +117,7 @@ public class ProductosUtil {
 	        Sheet sheet = w.getSheet(0);
 	        
 	        //recorro todas las posiciones del fichero leyendo datos
-	        List<Producto> productos = new ArrayList<Producto>();
+	        ArrayList<Producto> productos = new ArrayList<Producto>();
 	        
 	        for (int f=1; f<sheet.getRows(); f++) {
 
@@ -133,6 +137,8 @@ public class ProductosUtil {
 	            p.setImpuesto(Float.parseFloat( sheet.getCell(7,f).getContents()));
 	            p.setImagen(sheet.getCell(8,f).getContents());
 	            p.setPrecioImpuesto(Double.parseDouble( sheet.getCell(9,f).getContents()));
+	            
+	            productos.add(p);
 	    		
 	    		
 	    	}

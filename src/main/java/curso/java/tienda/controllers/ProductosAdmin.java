@@ -1,5 +1,6 @@
 package curso.java.tienda.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -162,27 +163,29 @@ public class ProductosAdmin {
 			List<String> ficheros = pu.ficherosExcellDatos();
 			
 			model.addAttribute("ficheros", ficheros);
-			return "admin/productosListaExcell";
+			return "admin/productoListaExcell";
 		}
-		model.addAttribute("mensaje", "No tienes permiso para acceder");
-		return "error";
+		else {
+			model.addAttribute("mensaje", "No tienes permiso para acceder");
+			return "error";
+		}
 	}
 	
-	@GetMapping("recuperarDatos/recuperar")
+	@PostMapping("recuperarDatos/recuperar")
 	public String recuperarProductos(Model model , HttpSession session, @RequestParam String nomFich, RedirectAttributes redirectAttributes) {
 		Usuario user = (Usuario)session.getAttribute("usuario");
 		// compruebo que el usuario tiene permisos para hacer la operacion
 		if(user != null && user.getId_rol()==1) {
 			
 			// busco los nombres de los ficheros que contienen los datos exportados en xml
-			List<Producto> prods = pu.leerExcell(nomFich);
+			ArrayList<Producto> prods = pu.leerExcell(nomFich);
 			if(prods != null) {
 				// si se encuentran datos se guardan en la base de datos
 				for(Producto p: prods){
 					ps.addProducto(p);
 				}
 				redirectAttributes.addFlashAttribute("mensajeOk", "Datos del fichero cargados en la base de datos");
-				return "admin/productos";
+				return "redirect:/admin/productos";
 			}
 			else {
 				redirectAttributes.addFlashAttribute("mensaje", "Error al cargar datos del fichero");
