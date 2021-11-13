@@ -111,7 +111,8 @@ public class PedidosAdmin {
 				Producto prodEditar = prs.getProductoXId(i.getProducto());
 				Integer unidsPostVenta = prodEditar.getStock()-i.getUnidades();
 				
-				if(unidsPostVenta>=0) {
+				// solo se puede procesar el pedido si hay unidades suficientes
+				if(unidsPostVenta<=prodEditar.getStock()) {
 					prodEditar.setStock(unidsPostVenta);
 					prs.editProducto(prodEditar);
 				}

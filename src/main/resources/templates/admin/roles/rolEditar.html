@@ -12,13 +12,13 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
                             <li class="breadcrumb-item"><a th:href="@{/admin/roles}">Roles</a></li>
-                             <li class="breadcrumb-item active">Nuevo rol</li>
+                             <li class="breadcrumb-item active">Editar rol</li>
                         </ol>
 
-						<form method="post" th:action="@{/admin/roles/nuevo/guardar} " >
+						<form method="post" th:action="@{/admin/roles/editar/{rolID}/guardar (rolID = ${rol.id}) } " >
 						  <div class="form-group">
-						    <label for="rol">Nombre del nuevo rol</label>
-						    <input type="text" class="form-control" id="rol" name="rol" placeholder="Indica el nombre del rol nuevo" required>
+						    <label for="rol">Nombre del rol</label>
+						    <input type="text" class="form-control" id="rol" name="rol" th:value="${rol.rol}" placeholder="Indica el nombre del rol nuevo" required>
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

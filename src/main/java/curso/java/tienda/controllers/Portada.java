@@ -36,14 +36,14 @@ public class Portada {
 			return "redirect:/cargarDatosInicio";
 		}
 		
-		List<Producto> productos = ps.getListaProductos();
+		List<Producto> productos = ps.getListaProductosFiltro("todos", 1);
 		model.addAttribute("productos", productos);
 		return "index";
 	}
 	
 	@GetMapping("/home")
 	public String home(Model model) {
-		List<Producto> productos = ps.getListaProductos();
+		List<Producto> productos = ps.getListaProductosFiltro("todos", 1);
 		model.addAttribute("productos", productos);
 		return "index";
 	}

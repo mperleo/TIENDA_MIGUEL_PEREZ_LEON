@@ -18,16 +18,16 @@ public class RolService {
 	    return rr.findAll();
 	}
 
-	public void addRol(Rol r ) {
+	public void add(Rol r ) {
 	    rr.save(r);
 	}
 
-	public void delRol(int id) {
+	public void del(int id) {
 	    Rol r = rr.getById(id);
 	    rr.delete(r);
 	}
 
-	public void editRol(Rol r) {
+	public void edit(Rol r) {
 	    rr.save(r);
 	}
 

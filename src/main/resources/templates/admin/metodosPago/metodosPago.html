@@ -9,14 +9,14 @@
                 <main>
                 	
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Roles</h1>
+                        <h1 class="mt-4">Métodos de pago</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
-                            <li class="breadcrumb-item active">Roles</li>
+                            <li class="breadcrumb-item active">Métodos de pago</li>
                             
                         </ol>
                         
-                        <a class="btn btn-primary mb-3" th:href="@{/admin/roles/nuevo}" role="button">Nuevo rol</a>
+                        <a class="btn btn-primary mb-3" th:href="@{/admin/metodosPago/nuevo}" role="button">Nuevo método de pago</a>
                         
                         <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
 							<span th:text="${mensajeOk}"></span>
@@ -31,12 +31,12 @@
                               </tr>
                             </thead>
                             <tbody>
-	                              <tr th:each="rol : ${roles}">
-	                                <th scope="row" th:text="${rol.id}"></th>
-	                                <td scope="row" th:text="${rol.rol}"></td>
+	                              <tr th:each="metodo : ${metodos}">
+	                                <th scope="row" th:text="${metodo.id}"></th>
+	                                <td scope="row" th:text="${metodo.metodo_pago}"></td>
 	                                <th>
-	                                    <a class="btn btn-danger btn-sm" th:href="@{/admin/roles/borrar/{rolID}/ (rolID = ${rol.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
-	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/roles/editar/{rolID}/ (rolID = ${rol.id})}"><i class="fas fa-pen"></i> Modificar</a>
+	                                    <a class="btn btn-danger btn-sm" th:href="@{/admin/metodosPago/borrar/{metID}/ (metID = ${metodo.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/metodosPago/editar/{metID}/ (metID = ${metodo.id})}"><i class="fas fa-pen"></i> Modificar</a>
 	                                </th>
 	                              </tr>
                               

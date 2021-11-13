@@ -16,18 +16,18 @@ public class Rol{
 	public Rol(){}
 	
 	/**
+	 * @param rol
+	 */
+	public Rol(String rol) {
+		this.rol = rol;
+	}
+	
+	/**
 	 * @param id
 	 * @param rol
 	 */
 	public Rol(int id, String rol) {
 		this.id = id;
-		this.rol = rol;
-	}
-	
-	/**
-	 * @param rol
-	 */
-	public Rol(String rol) {
 		this.rol = rol;
 	}
 

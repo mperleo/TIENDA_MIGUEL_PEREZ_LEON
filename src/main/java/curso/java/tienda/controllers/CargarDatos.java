@@ -100,7 +100,7 @@ public class CargarDatos {
 	private void addRol(ArrayList<Rol> lista) {
 		System.out.println("Creando los roles de configuracion base");
 		for(Rol i: lista) {
-			rs.addRol(i);
+			rs.add(i);
 		}
 	}
 	
