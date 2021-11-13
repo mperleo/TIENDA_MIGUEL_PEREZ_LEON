@@ -17,8 +17,22 @@
                         <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
 							<span th:text="${mensajeOk}"></span>
 						</div>
+						
+						<a class="btn btn-primary mb-3" th:href="@{/admin/opcionesMenu/nuevo}" role="button">Nueva opción</a>
+						
+						<form method="post" th:action="@{/admin/opcionesMenu}" class="mb-3">
                         
-                        <a class="btn btn-primary mb-3" th:href="@{/admin/opcionesMenu/nuevo}" role="button">Nueva opción</a>
+                        	<label for="id_rol" class="form-label">Indica un rol para buscar</label>
+                        	<select class="form-select" id="id_rol" name="id_rol" aria-label="Default select example">
+                        	  <option selected value="todos" >Todos</option>
+							  <div th:each="rol : ${roles}">
+									<option th:value="${rol.id}" th:text="${rol.rol}"></option>
+								</div>
+							</select>
+							
+							<button type="submit" class="btn btn-primary mt-3">Buscar</button>
+                        </form>
+
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">

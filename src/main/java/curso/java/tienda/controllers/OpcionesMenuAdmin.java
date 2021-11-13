@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.service.OpcionMenuService;
@@ -32,9 +33,32 @@ public class OpcionesMenuAdmin {
 	
 	@GetMapping("")
 	public String verTodos(Model model) {
-	    List<OpcionMenu> configs = oms.getOpcionesMenu();
-	    model.addAttribute("opciones", configs);
+	    List<OpcionMenu> opciones = oms.getOpcionesMenu();
+	    model.addAttribute("opciones", opciones);
+	    
+	    List<Rol> roles = rs.getListaRoles();
+	    model.addAttribute("roles", roles);
+	    
 	    return "admin/opcionesMenu/opcionesMenu";
+	}
+	
+	@PostMapping("")
+	public String verRol(Model model, @RequestParam String id_rol) {
+		List<OpcionMenu> opciones = null;
+		List<Rol> roles = rs.getListaRoles();
+		
+		if(id_rol.equals("todos")) {
+			opciones = oms.getOpcionesMenu();
+		}
+		else {
+			opciones = oms.getOpcionesMenuRolLista(Integer.parseInt(id_rol));
+		}
+		
+		model.addAttribute("roles", roles);
+		model.addAttribute("mensajeOk", "Mostrando las opciones del menú para el rol '"+id_rol+"'");
+		model.addAttribute("opciones", opciones);
+		
+		return "admin/opcionesMenu/opcionesMenu";
 	}
 
 	@GetMapping("editar/{id_op}")

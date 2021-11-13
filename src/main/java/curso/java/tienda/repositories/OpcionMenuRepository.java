@@ -13,4 +13,6 @@ public interface OpcionMenuRepository extends JpaRepository<OpcionMenu, Integer>
 	@Query(value="select * from opciones_menu where id_rol>=? AND id_rol != 3", nativeQuery=true)
 	List<OpcionMenu> buscarOpcionesRol(Integer id_rol);
 	
+	@Query(value="select * from opciones_menu where id_rol=?", nativeQuery=true)
+	List<OpcionMenu> buscarOpcionesTodosRoles(Integer id_rol);
 }

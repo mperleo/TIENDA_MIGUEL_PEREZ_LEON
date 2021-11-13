@@ -8,17 +8,17 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Nuevo método de pago</h1>
+                        <h1 class="mt-4">Nuevo impuesto</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
-                            <li class="breadcrumb-item"><a th:href="@{/admin/roles}">Métodos de pago</a></li>
-                             <li class="breadcrumb-item active">Nuevo método de pago</li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin/impuestos}">Impuestos</a></li>
+                             <li class="breadcrumb-item active">Nuevo impuesto</li>
                         </ol>
 
-						<form method="post" th:object="${metodo}" th:action="@{/admin/metodosPago/nuevo/guardar} " >
+						<form method="post" th:object="${impuesto}" th:action="@{/admin/impuestos/nuevo/guardar} " >
 						  <div class="form-group">
-						    <label for="metodo_pago">Nombre del nuevo método de pago</label>
-						    <input type="text" class="form-control" id="metodo_pago" name="metodo_pago" placeholder="Indica el nombre" required>
+						    <label for="impuesto">Nombre del nuevo método de pago</label>
+						    <input type="text" class="form-control" id="impuesto" name="impuesto" placeholder="Indica el impuesto" required>
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

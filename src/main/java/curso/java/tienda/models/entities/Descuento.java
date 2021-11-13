@@ -3,8 +3,16 @@ package curso.java.tienda.models.entities;
 
 import java.util.Date;
 
-public class Descuento {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="descuentos")
+public class Descuento {
+	
+	@Id @GeneratedValue
 	private Integer id;
 	private String codigo;
 	private Float descuento;

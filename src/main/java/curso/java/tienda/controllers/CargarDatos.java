@@ -121,14 +121,16 @@ public class CargarDatos {
 	private ArrayList<OpcionMenu> defOpcMen(){
 		ArrayList<OpcionMenu> opMens = new ArrayList<OpcionMenu>();
 		opMens.add(new OpcionMenu(1, "Opciones menú","/admin/opcionesMenu/"));
-		opMens.add(new OpcionMenu(1, "Configuraciones","/admin/configuraciones"));
-		opMens.add(new OpcionMenu(1, "Métodos de pago","/admin/metodosPago"));
+		opMens.add(new OpcionMenu(1, "Configuraciones","/admin/configuraciones/"));
+		opMens.add(new OpcionMenu(1, "Métodos de pago","/admin/metodosPago/"));
+		opMens.add(new OpcionMenu(1, "Roles","/admin/roles/"));
+		opMens.add(new OpcionMenu(1, "Descuentos","/admin/descuentos/"));
 		opMens.add(new OpcionMenu(1, "Impuestos","/admin/impuestos"));
 		opMens.add(new OpcionMenu(2, "Categorias","/admin/opcionesMenu/"));
 		opMens.add(new OpcionMenu(2, "Usuarios","/admin/Usuarios/"));
-		opMens.add(new OpcionMenu(2, "Productos","/admin/productos"));
+		opMens.add(new OpcionMenu(2, "Productos","/admin/productos/"));
 		opMens.add(new OpcionMenu(2, "Pedidos","/admin/pedidos/"));
-		opMens.add(new OpcionMenu(2, "Proveedores","/admin/proveedores"));
+		opMens.add(new OpcionMenu(2, "Proveedores","/admin/proveedores/"));
 		opMens.add(new OpcionMenu(3, "Finalizar pedido","/cesta/pedido"));
 		opMens.add(new OpcionMenu(3, "Pedidos","/pedidos/"));
 		opMens.add(new OpcionMenu(3, "Cancelar pedido","/pedidos/ver"));
@@ -137,6 +139,7 @@ public class CargarDatos {
 		opMens.add(new OpcionMenu(3, "Modificar perfil","/miUsuario/modificar"));
 		opMens.add(new OpcionMenu(3, "Modificar contraseña","/miUsuario/modificarPass"));
 		opMens.add(new OpcionMenu(3, "Cerrar sesión","/login/cerrarSesion"));
+		opMens.add(new OpcionMenu(3, "Mis valoraciones","/valoraciones/"));
 		
 		return opMens;
 	}

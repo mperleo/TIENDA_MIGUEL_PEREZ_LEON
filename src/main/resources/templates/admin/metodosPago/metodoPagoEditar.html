@@ -8,17 +8,17 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Nuevo rol</h1>
+                        <h1 class="mt-4">Editar método de pago</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
-                            <li class="breadcrumb-item"><a th:href="@{/admin/roles}">Roles</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin/metodosPago}">Métodos de pago</a></li>
                              <li class="breadcrumb-item active">Editar método de pago</li>
                         </ol>
 
 						<form method="post" th:object="${metod}"  th:action="@{/admin/metodosPago/editar/{metID}/guardar (metID = ${metodo.id}) } " >
 						  <div class="form-group">
 						    <label for="metodo_pago">Nombre del método de pago</label>
-						    <input type="text" class="form-control" id="metodo_pago" name="metodo_pago" th:value="${metodo.metodo_pago}" placeholder="Indica el nombre del rol nuevo" required>
+						    <input type="text" class="form-control" id="metodo_pago" name="metodo_pago" th:value="${metodo.metodo_pago}" placeholder="Indica el nombre" required>
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

@@ -21,6 +21,10 @@ public class OpcionMenuService {
 	public List<OpcionMenu> getOpcionesMenuRol(Integer id_rol) {
 	    return omr.buscarOpcionesRol(id_rol);
 	}
+	
+	public List<OpcionMenu> getOpcionesMenuRolLista(Integer id_rol) {
+	    return omr.buscarOpcionesTodosRoles(id_rol);
+	}
 
 	public void addOpcionMenu(OpcionMenu om) {
 	    omr.save(om);

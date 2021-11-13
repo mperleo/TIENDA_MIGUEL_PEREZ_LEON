@@ -1,6 +1,15 @@
 package curso.java.tienda.models.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="valoraciones")
 public class Valoracion{
+	
+	@Id @GeneratedValue
 	private Integer id;
 	private int id_producto;
 	private int id_usuario;

@@ -23,7 +23,7 @@
                         
                         <form method="post" th:action="@{/admin/usuarios}" class="mb-3">
                         
-                        	<label for="id_rol" class="form-label">Indica un estado para buscar</label>
+                        	<label for="id_rol" class="form-label">Indica un rol para buscar</label>
                         	<select class="form-select" id="id_rol" name="id_rol" aria-label="Default select example">
                         	  <option selected value="todos" >Todos</option>
 							  <div th:each="rol : ${roles}">
