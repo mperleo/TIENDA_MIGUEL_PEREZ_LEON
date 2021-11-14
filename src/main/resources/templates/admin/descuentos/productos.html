@@ -23,36 +23,19 @@
                         <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
 							<span th:text="${mensajeOk}"></span>
 						</div>
-						
-						<div class="row">
-							<div class="col-md-6">
-								<form method="post" th:action="@{/admin/productos}" class="mb-3">
-		                        	<label for="id_cat" class="form-label">Indica una cateogoria para buscar</label>
-		                        	<select class="form-select" id="id_cat" name="id_cat" aria-label="Default select example">
-		                        	  <option selected value="todos" >Todas</option>
-		                        	  <div th:each="cat : ${categorias}" >
-		                        	  	<option th:value="${cat.id}" th:text="${cat.nombre}"></option>
-		                        	  </div>
-									</select>
-									
-									<button type="submit" class="btn btn-primary mt-3">Buscar por categoría</button>
-		                        </form>
-							</div>
+                        
+                        <form method="post" th:action="@{/admin/productos}" class="mb-3">
+                        	<label for="id_cat" class="form-label">Indica una cateogoria para buscar</label>
+                        	<select class="form-select" id="id_cat" name="id_cat" aria-label="Default select example">
+                        	  <option selected value="todos" >Todas</option>
+                        	  <div th:each="cat : ${categorias}" >
+                        	  	<option th:value="${cat.id}" th:text="${cat.nombre}"></option>
+                        	  </div>
+							</select>
 							
-							<div class="col-md-6">
-								<form method="post" th:action="@{/admin/productos}" class="mb-3">
-		                        	<label for="id_prov" class="form-label">Indica un proveedor</label>
-		                        	<select class="form-select" id="id_prov" name="id_prov" aria-label="Default select example">
-		                        	  <option selected value="todos" >Todos</option>
-		                        	  <div th:each="prov : ${proveedores}" >
-		                        	  	<option th:value="${prov.id}" th:text="${prov.nombre}"></option>
-		                        	  </div>
-									</select>
-									
-									<button type="submit" class="btn btn-primary mt-3">Buscar por proveedor</button>
-		                        </form>
-							</div>
-						</div>
+							<button type="submit" class="btn btn-primary mt-3">Buscar</button>
+                        </form>
+                        
 
                         <table class="table table-bordered table-striped table-hover">
                             <thead class="table-dark">

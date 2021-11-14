@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.DetallePedido;
 import curso.java.tienda.models.entities.MetodoPago;
@@ -231,7 +232,7 @@ public class Cesta {
 	}
 	
 	@PostMapping("pedido/guardar")
-	public String pedidoGuardar(Model model, HttpSession session, @RequestParam String metodo_pago) {
+	public String pedidoGuardar(Model model, HttpSession session, @RequestParam String metodo_pago, RedirectAttributes redirectAttributes) {
 		Pedido pedido = (Pedido) session.getAttribute("pedido");
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		@SuppressWarnings("unchecked")
@@ -261,8 +262,8 @@ public class Cesta {
 				session.setAttribute("nProds", 0);
 				
 				logger.info("Pedido guardado en la bbdd con exito");
-				model.addAttribute("mensajeOk", "Pedido creado con exito ");
-				return "index";
+				redirectAttributes.addAttribute("mensajeOk", "Pedido creado con exito ");
+				return "redirect:/home";
 			}
 			else {
 				logger.error("Intento de guardar un pedido sin tener el pedido en sesion");
@@ -272,8 +273,8 @@ public class Cesta {
 		}
 		else {
 			logger.error("Intento de guardar un pedido sin estar iniciada la sesión");
-			model.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
-			return "login/login";
+			redirectAttributes.addAttribute("mensaje", "Tienes que iniciar sesion para hacer un pedido");
+			return "redirect:/login";
 		}
 		
 	}

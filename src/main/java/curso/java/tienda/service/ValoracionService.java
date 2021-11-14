@@ -35,4 +35,18 @@ public class ValoracionService {
 		Valoracion v = vr.getById(id);
 	    return v;
 	}
+	
+	public List<Valoracion> getValoracionesXProd(int id_producto) {
+		List<Valoracion> v = vr.findByProd(id_producto);
+	    return v;
+	}
+	
+	public boolean getPuedeValorarUsuario(Integer id_usuario, Integer id_producto) {
+		String res = vr.puedeValorarUsuario(id_usuario, id_producto);
+		if(res.equals("true")) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

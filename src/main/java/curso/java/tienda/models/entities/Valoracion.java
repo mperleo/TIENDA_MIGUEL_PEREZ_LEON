@@ -3,7 +3,11 @@ package curso.java.tienda.models.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name="valoraciones")
@@ -11,9 +15,14 @@ public class Valoracion{
 	
 	@Id @GeneratedValue
 	private Integer id;
-	private int id_producto;
-	private int id_usuario;
+	@ManyToOne
+	private Producto producto;
+	@ManyToOne
+	private Usuario usuario;
+	
+	@Min(value = 0, message="la nota mínima es 0'") @Max(value=10, message="la nota mínima es 0'")
 	private Integer valoracion;
+	@NotBlank(message="El comentario es obligatorio")
 	private String comentario;
 
 	public Valoracion() {
@@ -26,11 +35,11 @@ public class Valoracion{
 	 * @param valoracion
 	 * @param comentario
 	 */
-	public Valoracion(Integer id, int id_producto, int id_usuario, Integer valoracion, String comentario) {
+	public Valoracion(Integer id, Producto producto, Usuario usuario, Integer valoracion, String comentario) {
 		super();
 		this.id = id;
-		this.id_producto = id_producto;
-		this.id_usuario = id_usuario;
+		this.producto = producto;
+		this.usuario = usuario;
 		this.valoracion = valoracion;
 		this.comentario = comentario;
 	}
@@ -52,29 +61,29 @@ public class Valoracion{
 	/**
 	 * @return the id_producto
 	 */
-	public int getId_producto() {
-		return id_producto;
+	public Producto getProducto() {
+		return producto;
 	}
 
 	/**
 	 * @param id_producto the id_producto to set
 	 */
-	public void setId_producto(int id_producto) {
-		this.id_producto = id_producto;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 
 	/**
 	 * @return the id_usuario
 	 */
-	public int getId_usuario() {
-		return id_usuario;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
 	/**
 	 * @param id_usuario the id_usuario to set
 	 */
-	public void setId_usuario(int id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	/**

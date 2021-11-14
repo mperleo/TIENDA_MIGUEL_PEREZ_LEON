@@ -22,10 +22,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Impuesto;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.models.entities.Proveedor;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ImpuestoService;
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.service.ProveedorService;
 import curso.java.tienda.utils.ProductosUtil;
 
 @Controller
@@ -40,6 +42,8 @@ public class ProductosAdmin {
 	private CategoriaService cs;
 	@Autowired
 	private ImpuestoService is;
+	@Autowired
+	private ProveedorService prs;
 	
 	private static Logger logger = LogManager.getLogger(ProductosAdmin.class);
 	
@@ -49,23 +53,33 @@ public class ProductosAdmin {
 		List<Producto> prods = ps.getListaProductos();
 		List<Categoria> cats = cs.getListaCategorias();
 		
+		List<Proveedor> provs = prs.getListaProveedores();
+		model.addAttribute("proveedores", provs);
+		
 		model.addAttribute("productos", prods);
 		model.addAttribute("categorias", cats);
 		return "admin/productos/productos";
 	}
 	
 	@PostMapping("")
-	public String verCat(Model model, @RequestParam String id_cat) {
+	public String verFiltro(Model model, @RequestParam(required=false, defaultValue="todos") String id_cat,@RequestParam(required=false, defaultValue="todos") String id_prov) {
 		List<Producto> productos = null;
 		
 		List<Categoria> cats = cs.getListaCategorias();
 		
-		if(id_cat.equals("todos")) {
-			productos = ps.getListaProductos();
-		}
-		else {
+		if(!id_cat.equals("todos")) {
 			productos = ps.getListaProductosPorCat(id_cat);
 		}
+		if(!id_prov.equals("todos")) {
+			productos = ps.getListaProductosPorProv(id_prov);
+		}
+		else if(id_cat.equals("todos") || id_prov.equals("todos")) {
+			productos = ps.getListaProductos();
+		}
+		
+		
+		List<Proveedor> provs = prs.getListaProveedores();
+		model.addAttribute("proveedores", provs);
 		
 		model.addAttribute("mensajeOk", "Mostrando los productos con la categoria' "+id_cat+"'");
 		model.addAttribute("productos", productos);
@@ -99,6 +113,9 @@ public class ProductosAdmin {
 		List<Impuesto> imps = is.getListaImpuestos();
 		model.addAttribute("impuestos", imps);
 		
+		List<Proveedor> provs = prs.getListaProveedores();
+		model.addAttribute("proveedores", provs);
+		
 		logger.info("Producto id_prod: "+id_prod+" editado");
 		return "admin/productos/productoEditar";
 	}
@@ -110,7 +127,7 @@ public class ProductosAdmin {
 		// calculo del precio con iva y lo guardo en el objeto
 		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
 		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
-		prod.setId(id_producto);
+		prod.setId(id_producto); 
 		ps.editProducto(prod);
 		redirectAttributes.addFlashAttribute("mensajeOk", "Producto editado correctamente");
 		return "redirect:/admin/productos";
@@ -133,6 +150,9 @@ public class ProductosAdmin {
 		
 		List<Impuesto> imps = is.getListaImpuestos();
 		model.addAttribute("impuestos", imps);
+		
+		List<Proveedor> provs = prs.getListaProveedores();
+		model.addAttribute("proveedores", provs);
 		
 		return "admin/productos/productoNuevo";
 	}

@@ -3,6 +3,7 @@ package curso.java.tienda.models.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +22,8 @@ public class Producto {
 	private String fecha_baja;
 	private Float impuesto;
 	private String imagen;
+	@ManyToOne
+	private Proveedor proveedor;
 
 
 	public Producto() {
@@ -55,6 +58,40 @@ public class Producto {
 		this.fecha_baja = fecha_baja;
 		this.impuesto = impuesto;
 		this.imagen = imagen;
+	}
+	
+	
+
+
+	/**
+	 * @param id
+	 * @param id_categoria
+	 * @param nombre
+	 * @param descripcion
+	 * @param precio
+	 * @param precioImpuesto
+	 * @param stock
+	 * @param fecha_alta
+	 * @param fecha_baja
+	 * @param impuesto
+	 * @param imagen
+	 * @param proveedor
+	 */
+	public Producto(Integer id, Integer id_categoria, String nombre, String descripcion, Double precio,
+			Double precioImpuesto, Integer stock, String fecha_alta, String fecha_baja, Float impuesto, String imagen,
+			Proveedor proveedor) {
+		this.id = id;
+		this.id_categoria = id_categoria;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.precio = precio;
+		this.precioImpuesto = precioImpuesto;
+		this.stock = stock;
+		this.fecha_alta = fecha_alta;
+		this.fecha_baja = fecha_baja;
+		this.impuesto = impuesto;
+		this.imagen = imagen;
+		this.proveedor = proveedor;
 	}
 
 
@@ -164,6 +201,22 @@ public class Producto {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+
+	/**
+	 * @return the proveedor
+	 */
+	public Proveedor getProveedor() {
+		return proveedor;
+	}
+
+
+	/**
+	 * @param proveedor the proveedor to set
+	 */
+	public void setProveedor(Proveedor proveedor) {
+		this.proveedor = proveedor;
 	}
 	
 	

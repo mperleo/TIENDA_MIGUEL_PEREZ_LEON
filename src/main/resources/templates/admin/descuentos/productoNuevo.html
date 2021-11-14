@@ -47,15 +47,6 @@
 							
 						    <label for="imagen">Imagen</label>
 						    <input type="text" class="form-control" id="imagen" name="imagen" placeholder="Indica el nombre del rol nuevo" required>
-						    
-						    <label for="proveedor">Proveedores</label>
-						    <select class="form-select" id="id_prov" name="proveedor" aria-label="Default select example">
-		                       	  <div th:each="prov : ${proveedores}" >
-		                       	  		<option th:value="${prov}" th:text="${prov.nombre}"></option>
-		                       	  </div>
-							</select>
-							
-						    
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

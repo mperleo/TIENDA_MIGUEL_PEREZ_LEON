@@ -2,11 +2,15 @@ package curso.java.tienda.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.models.entities.Valoracion;
+import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.ValoracionService;
 
 @Controller
@@ -22,6 +29,8 @@ import curso.java.tienda.service.ValoracionService;
 public class ValoracionesUsuario {
 	@Autowired
 	private ValoracionService vs;
+	@Autowired
+	private ProductoService ps;
 	
 	private static Logger logger = LogManager.getLogger(ValoracionesUsuario.class);
 	
@@ -38,17 +47,26 @@ public class ValoracionesUsuario {
 	    Valoracion valoracion = vs.getValoracionXId(id_valoracion);
 	    model.addAttribute("valoracion", valoracion);
 	    
-	    return "valoraciones/valoracionesEditar";
+	    return "valoraciones/valoracionEditar";
 	}
 
 	@PostMapping("editar/{id_valoracion}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_valoracion") String id_valor, @ModelAttribute Valoracion valoracion, RedirectAttributes redirectAttributes) {
-	    Integer id_valoracion = Integer.parseInt(id_valor);
-	    valoracion.setId(id_valoracion);
-	    vs.edit(valoracion);
-	    logger.info("Valoracion id: "+id_valor+" eidtado");
-	    redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion editado correctamente");
-	    return "redirect:valoraciones";
+	public String editarGuardar(Model model, @PathVariable("id_valoracion") String id_valor, @Valid @ModelAttribute("valoracion") Valoracion valoracion, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			 return "valoraciones/valoracionEditar";
+		 }else {  
+			Integer id_valoracion = Integer.parseInt(id_valor);
+		    Valoracion valSinEditar = vs.getValoracionXId(id_valoracion);
+		    
+		    valoracion.setId(id_valoracion);
+		    valoracion.setProducto(valSinEditar.getProducto());
+		    valoracion.setUsuario(valSinEditar.getUsuario());
+		    
+		    vs.edit(valoracion);
+		    logger.info("Valoracion id: "+id_valor+" editado");
+		    redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion editado correctamente");
+		    return "redirect:/valoraciones";
+		 }   
 	}
 
 	@GetMapping("borrar/{id_valoracion}")
@@ -60,16 +78,22 @@ public class ValoracionesUsuario {
 	    return "redirect:valoraciones";
 	}
 
-	@GetMapping("nuevo")
-	public String nuevo(Model model) {
-	    return "valoraciones/valoracionesNuevo";
-	}
+	@PostMapping("nuevo/{id_producto}/guardar")
+	public String nuevoGuardar(Model model, @PathVariable("id_producto") String id_producto, @Valid @ModelAttribute("valoracion") Valoracion valoracion, RedirectAttributes redirectAttributes, HttpSession session, BindingResult bindingResult) {
+		 if(bindingResult.hasErrors()) {
+			 return "redirect:/producto/"+id_producto+"/";
+		 }else {
+			 Usuario usuario = (Usuario) session.getAttribute("usuario");
+			 Producto producto = ps.getProductoXId(Integer.parseInt(id_producto));
+			 valoracion.setUsuario(usuario);
+			 valoracion.setProducto(producto);
+			
+			 vs.add(valoracion);
+			
+			 logger.info("Nueva valoracion guardado");
+			 redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion creado correctamente");
+			 return "redirect:valoraciones";
+		 }
 
-	@PostMapping("nuevo/guardar")
-	public String nuevoGuardar(Model model, @ModelAttribute Valoracion valoracion, RedirectAttributes redirectAttributes) {
-	    vs.add(valoracion);
-	    logger.info("Nueva valoracion guardado");
-	    redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion creado correctamente");
-	    return "redirect:valoraciones";
 	}
 }

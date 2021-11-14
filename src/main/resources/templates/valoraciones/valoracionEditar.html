@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="fragments/head :: head"></div>
+<body>
+	<div class="page-holder">
+		<div th:replace="fragments/header :: header"></div>
+		<div class="container-fluid">
+
+			<div class="text-lg-right mb-3">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb mb-0 px-0">
+						<li class="breadcrumb-item"><a href="/home">Home</a></li>
+						<li class="breadcrumb-item"><a href="/home">Valoraciones</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Editar valoracion</li>
+					</ol>
+				</nav>
+			</div>
+
+			<form method="post" th:object="${valoracion}" th:action="@{/valoraciones/editar/{valID}/guardar (valID = ${valoracion.id}) }" class="mb-3">
+				<h4 class="mb-2 text-uppercase">valora el producto</h4>
+				<label for="valoracion" class="form-label">Puntua el producto</label> <span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></span>
+				<input type="number" class="form-control" id="valoracion" name="valoracion" th:field="*{valoracion}" placeholder="Indica una nota de 0 al 10"/>
+				<label for="comentario" class="form-label">Pon un cometario</label> <span th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></span>
+				<textarea  class="form-control" id="comentario" name="comentario" th:field="*{comentario}" ></textarea>
+				<button type="submit" class="btn btn-primary mt-3">Valorar</button>
+			</form>
+		</div>
+
+		<div th:replace="fragments/footer :: footer"></div>
+		<div th:replace="fragments/importScripts :: scripts"></div>
+	</div>
+</body>
+</html>

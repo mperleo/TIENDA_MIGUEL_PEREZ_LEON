@@ -27,6 +27,10 @@ public class ProductoService {
 		return pr.buscarProductosPorCat(id_cat);
 	}
 	
+	public List<Producto> getListaProductosPorProv(String id_prov) {
+		return pr.buscarProductosPorProv(id_prov);
+	}
+	
 	public List<Producto> getLista4ProductosPorCat(int i) {
 		return pr.buscar4ProductosPorCat(i);
 	}
