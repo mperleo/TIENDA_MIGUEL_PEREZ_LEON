@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.models.entities.Valoracion;
-import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.ValoracionService;
 
@@ -26,16 +24,13 @@ public class ProductosUsuario {
 	@Autowired
 	private ProductoService ps;
 	@Autowired
-	private CategoriaService cs;
-	@Autowired
 	private ValoracionService vs;
 	
 	@GetMapping("ver/{id_prod}")
 	public String producto(Model model, @PathVariable("id_prod") String id_prod, HttpSession session) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
-		Categoria cat = cs.getCategoriaXId(prod.getId_categoria());
-		List<Producto> prodsReco = ps.getLista4ProductosPorCat(prod.getId_categoria());
+		List<Producto> prodsReco = ps.getLista4ProductosPorCat(prod.getCategoria().getId());
 		List<Valoracion> valoraciones = vs.getValoracionesXProd(id_producto);
 		
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
@@ -46,7 +41,6 @@ public class ProductosUsuario {
 		
 	
 		model.addAttribute("valoraciones", valoraciones);
-		model.addAttribute("categoria", cat);
 		model.addAttribute("producto", prod);
 		model.addAttribute("prodsReco", prodsReco);
 		

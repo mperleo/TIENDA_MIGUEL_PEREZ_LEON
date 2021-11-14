@@ -38,7 +38,7 @@ public class DescuentosAdmin {
 	    Descuento descuento = ds.getDescuentoXId(id_descuento);
 	    model.addAttribute("descuento", descuento);
 	    
-	    return "admin/descuentos/descuentosEditar";
+	    return "admin/descuentos/descuentoEditar";
 	}
 
 	@PostMapping("editar/{id_descuento}/guardar")
@@ -62,7 +62,7 @@ public class DescuentosAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-	    return "admin/descuentos/descuentosNuevo";
+	    return "admin/descuentos/descuentoNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")

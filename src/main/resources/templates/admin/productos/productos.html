@@ -11,7 +11,7 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Productos</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
                             <li class="breadcrumb-item active">Productos</li>
                         </ol>
                         
@@ -58,7 +58,7 @@
                             <thead class="table-dark">
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">id_categoria</th>
+                                <th scope="col">Categoria</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Descripcion</th>
                                 <th scope="col">Precio</th>
@@ -72,7 +72,7 @@
                             <tbody>
 	                              <tr th:each="prod : ${productos}">
 	                                <th th:text="${prod.id}"></th>
-	                                <td th:text="${prod.id_categoria}"></td>
+	                                <td th:text="${prod.categoria.nombre}"></td>
 	                                <td th:text="${prod.nombre}"></td>
 	                                <td th:text="${prod.descripcion}"></td>
 	                                <td th:text="${prod.precio}"></td>

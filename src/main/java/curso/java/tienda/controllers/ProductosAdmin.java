@@ -92,10 +92,8 @@ public class ProductosAdmin {
 	public String verCliente(Model model, @PathVariable("id_prod") String id_prod) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
-		
-		Categoria cat = cs.getCategoriaXId(prod.getId_categoria());
-		List<Producto> prodsReco = ps.getLista4ProductosPorCat(prod.getId_categoria());
-		model.addAttribute("categoria", cat);
+
+		List<Producto> prodsReco = ps.getLista4ProductosPorCat(prod.getCategoria().getId());
 		model.addAttribute("producto", prod);
 		model.addAttribute("prodsReco", prodsReco);
 		return "producto/detail";

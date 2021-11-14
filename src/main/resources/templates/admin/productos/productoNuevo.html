@@ -10,18 +10,18 @@
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">Nuevo producto</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="@{/admin}">Administracion</a></li>
-                            <li class="breadcrumb-item"><a href="@{/admin/productos}">Productos</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item"><a th:href="@{/admin/productos}">Productos</a></li>
                              <li class="breadcrumb-item active">Nuevo producto</li>
                         </ol>
 
 						<form method="post" th:object="${prod}" th:action="@{/admin/productos/nuevo/guardar}">
 						  <div class="form-group">
 						  
-						    <label for="id_categoria" class="form-label">Categoria</label>
-                        	<select class="form-select" id="id_categoria" name="id_categoria" aria-label="Default select example">
+						    <label for="categoria" class="form-label">Categoria</label>
+                        	<select class="form-select" id="categoria" name="categoria" aria-label="Default select example">
                         	  <div th:each="cat : ${categorias}" >
-                        	  	<option th:value="${cat.id}" th:text="${cat.nombre}"></option>
+                        	  	<option th:value="${cat}" th:text="${cat.nombre}"></option>
                         	  </div>
 							</select>
 							

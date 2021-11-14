@@ -30,6 +30,8 @@
                                 <th scope="col">Número Factura</th>
                                 <th scope="col">Método pago</th>
                                 <th scope="col">Estado</th>
+                                <th scope="col">Codigo de descuento</th>
+					            <th scope="col">Descuento</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -45,6 +47,9 @@
 		                            <td th:if="${pedido.estado == 'pendiente cancelación'}" class="text-warning" th:text="${pedido.estado}"></td>
 		                            <td th:if="${pedido.estado == 'cancelado'}" class="text-danger" th:text="${pedido.estado}"></td>
 		                            <td th:if="${pedido.estado == 'enviado'}" class="text-info" th:text="${pedido.estado}"></td>
+		                            
+		                            <td th:text="${pedido.codigoDescuento}"></td>
+	                                <td th:text="${pedido.descuento}"></td>
 	                              </tr>
 	                            
                             </tbody>

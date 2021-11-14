@@ -12,7 +12,8 @@ public class Producto {
 
 	@Id @GeneratedValue
 	private Integer id;
-	private Integer id_categoria;
+	@ManyToOne
+	private Categoria categoria;
 	private String nombre;
 	private String descripcion;
 	private Double precio;
@@ -30,11 +31,11 @@ public class Producto {
 	}
 
 
-	public Producto(Integer id,int id_categoria, String nombre, String descripcion, Double precio, Integer stock, String fecha_alta,
+	public Producto(Integer id,Categoria categoria, String nombre, String descripcion, Double precio, Integer stock, String fecha_alta,
 			String fecha_baja, Float impuesto, String imagen) {
 		
 		this.id = id;
-		this.id_categoria = id_categoria;
+		this.categoria = categoria;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -46,10 +47,10 @@ public class Producto {
 	}
 
 
-	public Producto(int id_categoria, String nombre, String descripcion, Double precio, Integer stock, String fecha_alta,
+	public Producto(Categoria categoria, String nombre, String descripcion, Double precio, Integer stock, String fecha_alta,
 			String fecha_baja, Float impuesto, String imagen) {
 		
-		this.id_categoria = id_categoria;
+		this.categoria = categoria;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -77,11 +78,11 @@ public class Producto {
 	 * @param imagen
 	 * @param proveedor
 	 */
-	public Producto(Integer id, Integer id_categoria, String nombre, String descripcion, Double precio,
+	public Producto(Integer id, Categoria categoria, String nombre, String descripcion, Double precio,
 			Double precioImpuesto, Integer stock, String fecha_alta, String fecha_baja, Float impuesto, String imagen,
 			Proveedor proveedor) {
 		this.id = id;
-		this.id_categoria = id_categoria;
+		this.categoria = categoria;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -105,13 +106,13 @@ public class Producto {
 	}
 
 
-	public Integer getId_categoria() {
-		return id_categoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
 
-	public void setId_categoria(int id_categoria) {
-		this.id_categoria = id_categoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 

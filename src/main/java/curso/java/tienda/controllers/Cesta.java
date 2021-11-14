@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import curso.java.tienda.models.entities.Descuento;
 import curso.java.tienda.models.entities.DetallePedido;
 import curso.java.tienda.models.entities.MetodoPago;
 import curso.java.tienda.models.entities.Pedido;
@@ -27,7 +29,9 @@ import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
 
 import curso.java.tienda.service.ProductoService;
+import curso.java.tienda.utils.EstadisticasUtil;
 import curso.java.tienda.service.PedidoService;
+import curso.java.tienda.service.DescuentoService;
 import curso.java.tienda.service.DetallePedidoService;
 import curso.java.tienda.service.MetodoPagoService;
 
@@ -43,6 +47,11 @@ public class Cesta {
 	private DetallePedidoService dps;
 	@Autowired
 	private MetodoPagoService ms;
+	@Autowired
+	private DescuentoService ds;
+	
+	@Autowired
+	private EstadisticasUtil eu;
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	
@@ -70,9 +79,18 @@ public class Cesta {
 			session.setAttribute("nProds", 0);
 		}
 		
+		Double subtotal = total;
+		
+		// si hay descuento en la sesion guardo hago el descuento al mostrar el precio final
+		Descuento descuento = (Descuento)session.getAttribute("descuento");
+		if(descuento != null) {
+			total = total * (1- (descuento.getDescuento()/100));
+			total = DoubleRounder.round(total, 3);
+		}
+		
 		model.addAttribute("cesta", cestaLista);
 		model.addAttribute("total", total);
-		
+		model.addAttribute("subtotal", subtotal);
 		return "cesta/cart";
 	}
 	
@@ -177,6 +195,13 @@ public class Cesta {
 		return "cesta/cart";
 	}
 	
+	@PostMapping("aplicarDescuento")
+	public String aplicarDescuento(@RequestParam String codigo, HttpSession session) {
+		Descuento descuento = ds.getDescuentoPorCodigo(eu.fechaFormato("yyyy-MM-dd"), codigo);
+		session.setAttribute("descuento", descuento);
+		return "redirect:/cesta";
+	}
+	
 	@GetMapping("pedido")
 	public String pedido(Model model, HttpSession session) {
 		@SuppressWarnings("unchecked")
@@ -198,7 +223,14 @@ public class Cesta {
 					cestaLista.add(cesta.get(key));
 					total+=cesta.get(key).getTotal();
 				}
-				
+				// si hay descuento en la sesion guardo hago el descuento al mostrar el precio final
+				Descuento descuento = (Descuento)session.getAttribute("descuento");
+				if(descuento != null) {
+					total = total * (1- (descuento.getDescuento()/100));
+					total = DoubleRounder.round(total, 3);
+					pedido.setDescuento(descuento.getDescuento());
+					pedido.setCodigoDescuento(descuento.getCodigo());
+				}
 				// meto los datos del pedido
 				pedido.setIdUsuario(usuario.getId());
 				pedido.setEstado("pendiente");

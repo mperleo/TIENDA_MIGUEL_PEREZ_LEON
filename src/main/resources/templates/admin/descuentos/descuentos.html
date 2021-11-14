@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <div th:replace="admin/fragments/head :: head"></div>
+    <body>
+    	<div th:replace="admin/fragments/header :: header"></div>
+    	<div id="layoutSidenav">
+         	<div th:replace="admin/fragments/nav :: nav"></div>
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Descuentos</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a th:href="@{/admin}">Administracion</a></li>
+                            <li class="breadcrumb-item active">Descuentos</li>
+                        </ol>
+                        
+                        <a class="btn btn-primary mb-3" th:href="@{/admin/descuentos/nuevo}" role="button">Nuevo descuento</a>
+           
+                        <div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
+							<span th:text="${mensajeOk}"></span>
+						</div>
+                        
+
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead class="table-dark">
+                              <tr>
+                                <th scope="col">#</th>
+
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descuento</th>
+                                <th scope="col">Fecha Inicio</th>
+                                <th scope="col">Fecha Fin</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+	                              <tr th:each="desc : ${descuentos}">
+	                              	<td th:text="${desc.id}"></td>
+	                                <td th:text="${desc.codigo}"></td>
+	                                <td th:text="${desc.descuento}"></td>
+	                                <td th:text="${desc.fechaInicio}"></td>
+	                                <td th:text="${desc.fechaFin}"></td>
+	                                <td>
+	                                    <a class="btn btn-danger btn-sm" th:href="@{/admin/descuentos/borrar/{descID}/ (descID = ${desc.id})}"><i class="fas fa-trash-alt"></i> Eliminar</a>
+	                                    <a class="btn btn-primary btn-sm" th:href="@{/admin/descuentos/editar/{descID}/ (descID = ${desc.id})}"><i class="fas fa-pen"></i> Modificar</a>
+	                                </td>
+	                              </tr>
+	                            
+                            </tbody>
+                        </table>
+                        
+                    </div>
+                </main>
+                
+                <div th:replace="admin/fragments/footerYscripts :: footer"></div>
+                 
+            </div>  
+        </div>  <!-- cierre del contenido que se importa del archivo js/piezas/headerYnac.html -->
+    </body>
+</html>

@@ -17,6 +17,14 @@ public class DescuentoService {
 	public List<Descuento> getListaDescuentos() {
 	    return dr.findAll();
 	}
+	
+	public Descuento getDescuentoAct(String fecha) {
+		return dr.getDescActivo(fecha);
+	}
+	
+	public Descuento getDescuentoPorCodigo(String fecha, String codigo) {
+		return dr.getDescPorCodigo(fecha, codigo);
+	}
 
 	public void add(Descuento d) {
 	    dr.save(d);

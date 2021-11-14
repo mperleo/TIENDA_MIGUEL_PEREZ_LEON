@@ -12,8 +12,8 @@
 						<li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
 						<li class="breadcrumb-item"><a th:href="@{/tienda}">Tienda</a></li>
 						<li class="breadcrumb-item active" aria-current="page"><a
-							th:href="@{/tienda/(id_cat = ${categoria.id})}"
-							th:text="${categoria.nombre}"></a></li>
+							th:href="@{/tienda/(id_cat = ${producto.categoria.id})}"
+							th:text="${producto.categoria.nombre}"></a></li>
 					</ol>
 				</nav>
 			</div>
@@ -85,9 +85,9 @@
 									th:text="${producto.precioImpuesto}"></span>€
 								con impuestos
 							</p>
-							<a th:href="@{/tienda/(id_cat = ${categoria.id})}"><p
+							<a th:href="@{/tienda/(id_cat = ${producto.categoria.id})}"><p
 									class="text-small mb-4 text-primary"
-									th:text="${categoria.nombre}"></p></a>
+									th:text="${producto.categoria.nombre}"></p></a>
 							<div class="row align-items-stretch mb-4">
 								<div class="col-sm-5 pr-sm-0">
 									<div
@@ -113,8 +113,8 @@
 									class="ml-2 text-muted" th:text="${producto.id}"></span></li>
 								<li class="px-3 py-2 mb-1 bg-white text-muted"><strong
 									class="text-uppercase text-dark">Categoria:</strong> <a
-									class="reset-anchor ml-2" href="#"><span
-										th:text="${categoria.nombre}"></span></a></li>
+									class="reset-anchor ml-2" th:href="@{/tienda/(id_cat = ${producto.categoria.id})}"><span
+										th:text="${producto.categoria.nombre}"></span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -175,7 +175,7 @@
 				<!-- RELATED PRODUCTS-->
 				<h2 class="h5 text-uppercase mb-4">
 					Otros productos de la categoria: <span
-						th:text="${categoria.nombre}"></span>
+						th:text="${producto.categoria.nombre}"></span>
 				</h2>
 				<div class="row">
 					<!-- PRODUCT-->

@@ -1,8 +1,6 @@
 package curso.java.tienda.models.entities;
 // Generated 4 nov 2021 19:04:44 by Hibernate Tools 4.3.5.Final
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,8 +14,8 @@ public class Descuento {
 	private Integer id;
 	private String codigo;
 	private Float descuento;
-	private Date fechaInicio;
-	private Date fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	
 	/**
 	 * @param id
@@ -26,7 +24,7 @@ public class Descuento {
 	 * @param fechaInicio
 	 * @param fechaFin
 	 */
-	public Descuento(Integer id, String codigo, Float descuento, Date fechaInicio, Date fechaFin) {
+	public Descuento(Integer id, String codigo, Float descuento, String fechaInicio, String fechaFin) {
 		this.id = id;
 		this.codigo = codigo;
 		this.descuento = descuento;
@@ -62,19 +60,19 @@ public class Descuento {
 		this.descuento = descuento;
 	}
 
-	public Date getFechaInicio() {
+	public String getFechaInicio() {
 		return fechaInicio;
 	}
 
-	public void setFechaInicio(Date fechaInicio) {
+	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
 
-	public Date getFechaFin() {
+	public String getFechaFin() {
 		return fechaFin;
 	}
 
-	public void setFechaFin(Date fechaFin) {
+	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 }

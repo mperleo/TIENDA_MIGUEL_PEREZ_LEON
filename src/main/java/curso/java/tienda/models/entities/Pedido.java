@@ -19,6 +19,8 @@ public class Pedido {
 	private String estado;
 	private String num_factura;
 	private Double total;
+	private Float descuento;
+	private String codigoDescuento;
 	
 	/**
 	 * @param id
@@ -88,5 +90,22 @@ public class Pedido {
 	public void setTotal(Double total) {
 		this.total = total;
 	}
+
+	public Float getDescuento() {
+		return descuento;
+	}
+
+	public void setDescuento(Float descuento) {
+		this.descuento = descuento;
+	}
+
+	public String getCodigoDescuento() {
+		return codigoDescuento;
+	}
+
+	public void setCodigoDescuento(String codigoDescuento) {
+		this.codigoDescuento = codigoDescuento;
+	}
+	
 
 }

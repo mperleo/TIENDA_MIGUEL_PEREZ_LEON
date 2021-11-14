@@ -21,6 +21,7 @@
 							<p class="text-muted small text-uppercase mb-2">Temporada 2021-2022</p>
 							<h1 class="h2 text-uppercase mb-3">La mejor seleccion</h1>
 							<a class="btn btn-dark" th:href="@{/tienda}">Ver todos los prodcutos</a>
+							<p class="text-muted small text-uppercase mt-3 mb-2" th:text="${descuentoAct.descuento} +${'% de descuento con el código: '}+${descuentoAct.codigo}" ></p>
 						</div>
 					</div>
 				</div>
@@ -86,8 +87,9 @@
 								</div>
 							</div>
 							<h6>
-								<a class="reset-anchor" href="detail.html" th:text="${prod.nombre}"></a>
+								<a class="reset-anchor" th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}" th:text="${prod.nombre}"></a>
 							</h6>
+							<p class="small text-muted"><span th:text="${prod.categoria.nombre}"></span></p>
 							<p class="small text-muted"><span th:text="${prod.precioImpuesto}"></span> €</p>
 						</div>
 					</div>

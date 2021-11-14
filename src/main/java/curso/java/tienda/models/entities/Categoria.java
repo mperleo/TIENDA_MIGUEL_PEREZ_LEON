@@ -12,12 +12,21 @@ import javax.persistence.Table;
 public class Categoria {
 	
 	@Id @GeneratedValue
-	private int id;
+	private Integer id;
 	private String nombre;
 	private String descripcion;
 	
 	public Categoria() {
 
+	}
+	
+	/**
+	 * @param id
+	 * @param nombre
+	 * @param descripcion
+	 */
+	public Categoria(Integer id) {
+		this.id = id;
 	}
 	
 	
@@ -42,13 +51,13 @@ public class Categoria {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**

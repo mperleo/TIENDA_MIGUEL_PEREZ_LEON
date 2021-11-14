@@ -16,6 +16,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
 import jxl.Sheet;
 import jxl.Workbook;
@@ -79,7 +80,7 @@ public class ProductosUtil {
         	//Hago un recorrido por la lista de productos escribiendo en la linea i los datos del producto p
         	for(Producto p: productos) {
 	            //sheet.addCell( new jxl.write.Label(0, i, p.getId().toString()) );
-	            sheet.addCell( new jxl.write.Label(0, i, p.getId_categoria().toString()) );
+	            sheet.addCell( new jxl.write.Label(0, i, p.getCategoria().getId().toString()) );
 	            sheet.addCell( new jxl.write.Label(1, i, p.getNombre()) );
 	            sheet.addCell( new jxl.write.Label(2, i, p.getDescripcion()) );
 	            sheet.addCell( new jxl.write.Label(3, i, p.getPrecio().toString()) );
@@ -124,7 +125,7 @@ public class ProductosUtil {
 	    			contenido += sheet.getCell(c,f).getContents() + "\t";// + sheet.getCell(c, f).getContents();
 	    		}*/
 	    		
-	    		p.setId_categoria(Integer.parseInt( sheet.getCell(0,f).getContents()));
+	    		p.setCategoria(new Categoria(Integer.parseInt( sheet.getCell(0,f).getContents())));
 	            p.setNombre(sheet.getCell(1,f).getContents());
 	            p.setDescripcion(sheet.getCell(2,f).getContents());
 	            p.setPrecio(Double.parseDouble(sheet.getCell(3,f).getContents()));

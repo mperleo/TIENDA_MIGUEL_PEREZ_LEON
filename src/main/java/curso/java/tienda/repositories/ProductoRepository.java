@@ -14,17 +14,17 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 	@Query(value="select * from productos ORDER BY fecha_alta DESC", nativeQuery=true)
 	List<Producto> buscarProductosOrdenFecha();
 
-	@Query(value="select * from productos where id_categoria=?1 ORDER BY fecha_alta DESC", nativeQuery=true)
+	@Query(value="select * from productos where categoria_id=?1 ORDER BY fecha_alta DESC", nativeQuery=true)
 	List<Producto> buscarProductosPorCat(String id_cat);
 	
 	@Query(value="select * from productos where proveedor_id=?1 ", nativeQuery=true)
 	List<Producto> buscarProductosPorProv(String id_prov);
 	
-	@Query(value="select * from productos where id_categoria=?1 ORDER BY fecha_alta DESC LIMIT 4 ", nativeQuery=true)
+	@Query(value="select * from productos where categoria_id=?1 ORDER BY fecha_alta DESC LIMIT 4 ", nativeQuery=true)
 	List<Producto> buscar4ProductosPorCat(int i);
 	
 	// consulta usando la sintaxis de hibernate
-	@Query(value="select p from Producto p where p.id_categoria=?1")
+	@Query(value="select p from Producto p where p.categoria.id=?1")
 	List<Producto> findByIdCategoria(Integer id_categoria, Sort sort);
 	
 	@Query(value="select COUNT(*) from productos", nativeQuery=true)
