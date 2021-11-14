@@ -31,6 +31,10 @@ public class ProductoService {
 		return pr.buscar4ProductosPorCat(i);
 	}
 	
+	public List<Producto> getListaProductosPocoStock() {
+		return pr.buscarProductosPocoStock();
+	}
+	
 	public List<Producto> getListaProductosFiltro(String id_cat, Integer orden){
 		if(id_cat.equals("todos")) {
 			switch (orden) {
@@ -78,5 +82,13 @@ public class ProductoService {
 	public Producto getProductoXId(int id) {
 		Producto p = pr.getById(id);
 		return p;
+	}
+	
+	/**
+	 * Función que devuelve el número de productos que hay almacenados en la base de datos
+	 * @return numero de usuarios productos en la base de datos
+	 */
+	public Integer count() {
+		return pr.numProds();
 	}
 }

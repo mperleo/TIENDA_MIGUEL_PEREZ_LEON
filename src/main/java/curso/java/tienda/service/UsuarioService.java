@@ -35,6 +35,14 @@ public class UsuarioService {
 		ur.save(u);
 	}
 	
+	/**
+	 * Función que devuelve el número de usuarios que hay registrados en la base de datos
+	 * @return numero de usuarios registrados en la base de datos
+	 */
+	public Integer count() {
+		return ur.numUsuarios();
+	}
+	
 	/** 
      * Busca un usaurio en la base de datos con los datos obtenidos del formulario de login
      * 

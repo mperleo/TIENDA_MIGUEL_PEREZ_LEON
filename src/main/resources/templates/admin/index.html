@@ -2,33 +2,105 @@
 <html lang="en">
     <div th:replace="admin/fragments/head :: head"></div>
     <body>
-    
     	<div th:replace="admin/fragments/header :: header"></div>
-    	
     	<div id="layoutSidenav">
-    	
          	<div th:replace="admin/fragments/nav :: nav"></div>
-
-            <div>
+            <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Static Navigation</h1>
+                        <h1 class="mt-4">Bienvenido, <span th:text="${session.usuario.nombre}"></span></h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Static Navigation</li>
+                            <li class="breadcrumb-item"><a href="index.html">Admininstración</a></li>
                         </ol>
+                        
+                        <div class="card text-white bg-danger mb-4" th:if="${!prodsPocoSotck.isEmpty()}">
+						  <div class="card-header">Aviso productos con stock bajo</div>
+						  <div class="card-body" th:each="prod : ${prodsPocoSotck}">
+
+						    <p class="card-text" th:text="${'ProductoID: '}+${prod.id}+${' '}+${prod.nombre}+${' solo quedan '}+${prod.stock}+${' unidades.'}"></p>
+						  </div>
+						</div>
+
                         <div class="card mb-4">
                             <div class="card-body">
-                                <p class="mb-0">
-                                    This page is an example of using static navigation. By removing the
-                                    <code>.sb-nav-fixed</code>
-                                    class from the
-                                    <code>body</code>
-                                    , the top navigation and side navigation will become static on scroll. Scroll down this page to see an example.
-                                </p>
+                                <div class="row g-2 d-flex item-box">
+						            <div class="col-md-4 ">
+						                <h5 class="text-primary"> Total de los pedidos de este més </h5>
+						                <p class="display-2" th:text="${totalPeds} + ${' €'}"></p>
+						            </div>
+						
+						            <div class="col-md-4 ">
+						                <h5 class="text-primary"> Total de productos en la tienda: </h5>
+						                <p class="display-2" th:text="${numUs}"></p>
+						            </div>
+						
+						            <div class="col-md-4 ">
+						                <h5 class="text-primary"> Total de usuarios registrados: </h5>
+						                <p class="display-2" th:text="${numProds}"></p>
+						            </div>
+						        </div>
                             </div>
                         </div>
                         
+
+                   		<div class="row">
+                          	<div class="col-md-6">
+                           		<div class="card mb-4">
+                            		<div class="card-body">
+		                           		<h5 class="text-primary text-center"> Ventas por més: </h5>
+				                        <canvas id="bar" width="100" height="75"></canvas>
+				                    </div>
+                       			</div>   	
+                          	</div>
+		                            	
+		                    <div class="col-md-6">
+		                        <div class="card mb-4">
+                            		<div class="card-body text-center">
+		                           		<h5 class="text-primary d-inline" > Ventas este año por categoria: </h5>
+			                        		<span th:each="cat : ${nombresCat}">
+			                        			<span th:text="${cat}"></span> 
+			                        		</span>
+		                        			<canvas id="YearChart" width="100" height="75"></canvas>
+						                </div>
+		                       		</div>   
+		                       </div>
+                       	</div>
+                        	
+		                <script>
+		                	var CoolorsPaletteWidget = ["#61F4DE","#62E9E1","#63DDE4","#65D2E7","#66C7EA","#67BCED","#68B0F0","#69A5F3","#6A9AF6","#6C8FF9","#6D83FC","#6E78FF"]; 
+							var dataList = [[${totalPdsY}]] ;
+							var labelList = [[${mesesPdsY}]];
+		                    var ctx = document.getElementById('bar').getContext('2d');
+		                    
+		                    var bar = new Chart(ctx, {
+		                        type: 'bar',
+		                        data: {
+		                            labels: labelList,
+		                            datasets: [{
+		                                label: '€',
+		                                data: dataList,
+		                                backgroundColor: CoolorsPaletteWidget,
+		                            }]
+		                        },
+		                       options: {}
+		                    });
+		                	
+		                	var CoolorsPaletteWidget = ["#61F4DE","#63DDE4","#67BCED","#6D83FC"]; 
+		                	var dataList = [[${totalPorCat}]] ;
+	                        var ctx = document.getElementById('YearChart').getContext('2d');
+	                        var YearChart = new Chart(ctx, {
+	                            type: 'doughnut',
+	                            data: {
+	                                labels: [1,2,3,4],
+	                                datasets: [{
+	                                    label: '€',
+	                                    data: dataList,
+	                                    backgroundColor: CoolorsPaletteWidget,
+	                                }]
+	                            },
+	                            options: {}
+	                        });
+                    </script>
                     </div>
                 </main>
                 

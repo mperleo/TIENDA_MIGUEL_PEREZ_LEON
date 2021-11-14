@@ -51,12 +51,30 @@ public class PedidoService {
 	}
 	
 	public List<Pedido> getPedidosUsuario(Integer id_usuario) {
-		
 		return pr.buscarPedidosUsuario(id_usuario.toString());
 	}
 	
 	public List<Pedido> getPedidosUsuarioEstado(Integer id_usuario, String estado) {
-		
 		return pr.buscarPedidosUsuarioEstado(id_usuario.toString(), estado);
+	}
+	
+	public Double getTotalPedidosEsteMes(String fecha) {
+		return pr.totalPedididosMes(fecha);
+	}
+	
+	public List<String> getTotalPedidosMeses(String fecha){
+		return pr.totalPedididosMeses(fecha);
+	}
+	
+	public List<String> getMesesPedidos	(String fecha){	    
+		return pr.mesesPedididos(fecha);
+	}
+	
+	public List<String> getTotalPedidosPorCategoria	(String fecha){	    
+		return pr.totalPedidosPorCategoria(fecha);
+	}
+	
+	public List<String> getTotalPedidosPorCategoriaNombreCategoria(String fecha){	    
+		return pr.totalPedidosPorCategoriaNombreCategoria(fecha);
 	}
 }

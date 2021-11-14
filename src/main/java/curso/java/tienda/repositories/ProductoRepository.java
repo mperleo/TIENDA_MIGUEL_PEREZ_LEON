@@ -23,4 +23,10 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 	// consulta usando la sintaxis de hibernate
 	@Query(value="select p from Producto p where p.id_categoria=?1")
 	List<Producto> findByIdCategoria(Integer id_categoria, Sort sort);
+	
+	@Query(value="select COUNT(*) from productos", nativeQuery=true)
+	Integer numProds();
+	
+	@Query(value="select * from productos where stock<6 ORDER BY stock ASC", nativeQuery=true)
+	List<Producto> buscarProductosPocoStock();
 }
