@@ -16,7 +16,7 @@ import curso.java.tienda.service.CategoriaService;
 import curso.java.tienda.service.DescuentoService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.UsuarioService;
-import curso.java.tienda.utils.EstadisticasUtil;
+import curso.java.tienda.utils.FechasUtil;
 
 @Controller
 @RequestMapping("")
@@ -32,7 +32,7 @@ public class Portada {
 	private DescuentoService ds;
 	
 	@Autowired
-	private EstadisticasUtil eu;
+	private FechasUtil eu;
 	
 	@GetMapping("")
 	public String portada(Model model) {

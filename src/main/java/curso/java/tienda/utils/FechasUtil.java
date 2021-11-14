@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EstadisticasUtil {
+public class FechasUtil {
 	public String fechaFormato(String formato) {
 		LocalDateTime fecha = LocalDateTime.now();
 	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern(formato);

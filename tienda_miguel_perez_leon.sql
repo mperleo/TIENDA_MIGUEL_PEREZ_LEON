@@ -2,8 +2,8 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 11-11-2021 a las 12:54:36
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 15-11-2021 a las 00:04:55
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -29,6 +29,7 @@ USE `tienda_miguel_perez_leon`;
 -- Estructura de tabla para la tabla `categorias`
 --
 
+DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -51,6 +52,7 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`) VALUES
 -- Estructura de tabla para la tabla `configuracion`
 --
 
+DROP TABLE IF EXISTS `configuracion`;
 CREATE TABLE `configuracion` (
   `id` int(11) NOT NULL,
   `clave` varchar(255) DEFAULT NULL,
@@ -63,7 +65,7 @@ CREATE TABLE `configuracion` (
 --
 
 INSERT INTO `configuracion` (`id`, `clave`, `valor`, `tipo`) VALUES
-(1, 'factura_num', '4', 'numero'),
+(1, 'factura_num', '10', 'numero'),
 (2, 'contra_por_defecto', '12345Password', 'texto'),
 (3, 'img_folder_prods', '/img/products', 'texto'),
 (4, 'factura_nombre_empresa', 'BikëMeisters', 'texto'),
@@ -76,13 +78,21 @@ INSERT INTO `configuracion` (`id`, `clave`, `valor`, `tipo`) VALUES
 -- Estructura de tabla para la tabla `descuentos`
 --
 
+DROP TABLE IF EXISTS `descuentos`;
 CREATE TABLE `descuentos` (
   `id` int(11) NOT NULL,
   `codigo` varchar(255) DEFAULT NULL,
   `descuento` float DEFAULT NULL,
-  `fecha_inicio` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fecha_fin` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `descuentos`
+--
+
+INSERT INTO `descuentos` (`id`, `codigo`, `descuento`, `fecha_inicio`, `fecha_fin`) VALUES
+(1, 'BLKFRIDAY20', 21, '2021-11-11', '2021-11-25');
 
 -- --------------------------------------------------------
 
@@ -90,6 +100,7 @@ CREATE TABLE `descuentos` (
 -- Estructura de tabla para la tabla `detalles_pedidos`
 --
 
+DROP TABLE IF EXISTS `detalles_pedidos`;
 CREATE TABLE `detalles_pedidos` (
   `id` int(11) NOT NULL,
   `id_pedido` int(11) NOT NULL,
@@ -120,7 +131,12 @@ INSERT INTO `detalles_pedidos` (`id`, `id_pedido`, `impuesto`, `precio_unidad`, 
 (13, 8, 21, 6000, 12, 6000, 1, 'Polygon Strattos'),
 (14, 8, 21, 6000, 13, 6000, 1, 'Santa Cruz TallBoy 4'),
 (15, 9, 21, 6000, 4, 6000, 1, 'Cube aim ex'),
-(16, 9, 21, 6000, 10, 24000, 4, 'Orbea orca aero');
+(16, 9, 21, 6000, 10, 24000, 4, 'Orbea orca aero'),
+(17, 10, 21, 968, 7, 968, 1, 'Johni-Loco viena'),
+(18, 11, 21, 7260, 4, 7260, 1, 'Cube aim ex'),
+(19, 13, 21, 7260, 4, 7260, 1, 'Cube aim ex'),
+(20, 14, 21, 7260, 4, 7260, 1, 'Cube aim ex'),
+(21, 15, 21, 968, 5, 968, 1, 'Excelsior Touring 3 speed');
 
 -- --------------------------------------------------------
 
@@ -128,10 +144,20 @@ INSERT INTO `detalles_pedidos` (`id`, `id_pedido`, `impuesto`, `precio_unidad`, 
 -- Estructura de tabla para la tabla `impuestos`
 --
 
+DROP TABLE IF EXISTS `impuestos`;
 CREATE TABLE `impuestos` (
   `id` int(11) NOT NULL,
   `impuesto` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `impuestos`
+--
+
+INSERT INTO `impuestos` (`id`, `impuesto`) VALUES
+(1, 21),
+(2, 10),
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -139,10 +165,21 @@ CREATE TABLE `impuestos` (
 -- Estructura de tabla para la tabla `metodos_pago`
 --
 
+DROP TABLE IF EXISTS `metodos_pago`;
 CREATE TABLE `metodos_pago` (
   `id` int(11) NOT NULL,
   `metodo_pago` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `metodos_pago`
+--
+
+INSERT INTO `metodos_pago` (`id`, `metodo_pago`) VALUES
+(1, 'ApplePay'),
+(2, 'Tarjeta'),
+(3, 'PayPal'),
+(8, 'Google Pay');
 
 -- --------------------------------------------------------
 
@@ -150,6 +187,7 @@ CREATE TABLE `metodos_pago` (
 -- Estructura de tabla para la tabla `opciones_menu`
 --
 
+DROP TABLE IF EXISTS `opciones_menu`;
 CREATE TABLE `opciones_menu` (
   `id` int(11) NOT NULL,
   `id_rol` int(11) DEFAULT NULL,
@@ -162,7 +200,25 @@ CREATE TABLE `opciones_menu` (
 --
 
 INSERT INTO `opciones_menu` (`id`, `id_rol`, `nombre_opcion`, `url_opcion`) VALUES
-(1, 1, 'Opciones menú', '/admin/opcionesMenu/');
+(1, 1, 'Opciones menú', '/admin/opcionesMenu/'),
+(2, 2, 'Categorias', '/admin/categorias/'),
+(3, 2, 'Usuarios', '/admin/usuarios/'),
+(4, 1, 'Configuraciones', '/admin/configuraciones'),
+(5, 2, 'Productos', '/admin/productos'),
+(6, 2, 'Pedidos', '/admin/pedidos/'),
+(7, 3, 'Finalizar pedido', '/cesta/pedido'),
+(8, 3, 'Pedidos', '/pedidos/'),
+(9, 3, 'Cancelar pedido', '/pedidos/ver'),
+(10, 3, 'Ver pedido', '/pedidos/cancelar'),
+(11, 3, 'Ver perfil', '/miUsuario/ver'),
+(12, 3, 'Modificar perfil', '/miUsuario/modificar'),
+(13, 3, 'Modificar contraseña', '/miUsuario/modificarPass'),
+(14, 3, 'Cerrar sesión', '/login/cerrarSesion'),
+(15, 2, 'Proveedores', '/admin/proveedores/'),
+(16, 1, 'Métodos de pago', '/admin/metodosPago/'),
+(17, 1, 'Roles', '/admin/roles/'),
+(18, 1, 'Impuestos', '/admin/impuestos/'),
+(19, 1, 'Descuentos', '/admin/descuentos/');
 
 -- --------------------------------------------------------
 
@@ -170,6 +226,7 @@ INSERT INTO `opciones_menu` (`id`, `id_rol`, `nombre_opcion`, `url_opcion`) VALU
 -- Estructura de tabla para la tabla `pedidos`
 --
 
+DROP TABLE IF EXISTS `pedidos`;
 CREATE TABLE `pedidos` (
   `id` int(11) NOT NULL,
   `id_usuario` int(11) DEFAULT NULL,
@@ -177,23 +234,30 @@ CREATE TABLE `pedidos` (
   `metodo_pago` varchar(255) DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
   `num_factura` varchar(255) DEFAULT NULL,
-  `total` double DEFAULT NULL
+  `total` double DEFAULT NULL,
+  `codigo_descuento` varchar(255) DEFAULT NULL,
+  `descuento` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`id`, `id_usuario`, `fecha`, `metodo_pago`, `estado`, `num_factura`, `total`) VALUES
-(1, 1, '2021-11-08 23:00:00', 'tarjeta', 'cancelado', NULL, 49600),
-(2, 1, '2021-11-08 23:00:00', 'paypal', 'enviado', '2', 6800),
-(3, 1, '2021-11-08 23:00:00', 'paypal', 'enviado', '3', 6000),
-(4, 1, '2021-11-08 23:00:00', 'paypal', 'pendiente', NULL, 18000),
-(5, 1, '2021-11-09 23:00:00', 'paypal', 'pendiente cancelación', NULL, 6000),
-(6, 2, '2021-11-09 23:00:00', 'paypal', 'enviado', '4', 800),
-(7, 2, '2021-11-09 23:00:00', 'paypal', 'cancelado', NULL, 6000),
-(8, 2, '2021-11-09 23:00:00', 'paypal', 'pendiente', NULL, 18000),
-(9, 2, '2021-11-09 23:00:00', 'paypal', 'pendiente cancelación', NULL, 30000);
+INSERT INTO `pedidos` (`id`, `id_usuario`, `fecha`, `metodo_pago`, `estado`, `num_factura`, `total`, `codigo_descuento`, `descuento`) VALUES
+(1, 1, '2021-11-08 23:00:00', 'tarjeta', 'cancelado', NULL, 49600, NULL, NULL),
+(2, 1, '2021-09-13 22:00:00', 'paypal', 'enviado', '2', 6800, NULL, NULL),
+(3, 1, '2021-08-15 22:00:00', 'paypal', 'enviado', '3', 6000, NULL, NULL),
+(4, 1, '2021-10-12 22:00:00', 'paypal', 'enviado', '5', 18000, NULL, NULL),
+(5, 1, '2021-11-09 23:00:00', 'paypal', 'pendiente cancelación', NULL, 6000, NULL, NULL),
+(6, 2, '2021-11-09 23:00:00', 'paypal', 'enviado', '4', 800, NULL, NULL),
+(7, 2, '2021-11-09 23:00:00', 'paypal', 'cancelado', NULL, 6000, NULL, NULL),
+(8, 2, '2021-07-12 22:00:00', 'paypal', 'enviado', '6', 18000, NULL, NULL),
+(9, 2, '2021-11-09 23:00:00', 'paypal', 'pendiente cancelación', NULL, 30000, NULL, NULL),
+(10, 1, '2021-11-11 23:00:00', 'PayPal', 'enviado', '7', 968, NULL, NULL),
+(12, 1, '2021-11-13 23:00:00', 'PayPal', 'enviado', '8', 7260, NULL, NULL),
+(13, 1, '2021-11-13 23:00:00', 'Tarjeta', 'enviado', '9', 7260, NULL, NULL),
+(14, 1, '2021-11-13 23:00:00', 'PayPal', 'enviado', '10', 7260, NULL, NULL),
+(15, 1, '2021-11-13 23:00:00', 'Google Pay', 'pendiente', NULL, 764.72, 'BLKFRIDAY20', 21);
 
 -- --------------------------------------------------------
 
@@ -201,38 +265,40 @@ INSERT INTO `pedidos` (`id`, `id_usuario`, `fecha`, `metodo_pago`, `estado`, `nu
 -- Estructura de tabla para la tabla `productos`
 --
 
+DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
-  `id_categoria` int(11) DEFAULT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
-  `fecha_alta` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `fecha_baja` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fecha_alta` date NOT NULL,
+  `fecha_baja` date NOT NULL,
   `impuesto` float DEFAULT NULL,
-  `imagen` varchar(255) DEFAULT NULL
+  `imagen` varchar(255) DEFAULT NULL,
+  `precio_impuesto` double DEFAULT NULL,
+  `proveedor_id` int(11) DEFAULT NULL,
+  `categoria_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `id_categoria`, `nombre`, `descripcion`, `precio`, `stock`, `fecha_alta`, `fecha_baja`, `impuesto`, `imagen`) VALUES
-(1, 2, 'Cannondale TopStone carbon 4', 'muy bonita', 800, 12, '2021-11-08 23:00:00', '2021-10-31 23:00:00', 21, 'cannondale-topstone-carbon-4-champagne-1.jpg'),
-(2, 3, 'Cannondale TopStone carbon 6', 'muy cara', 6000, 12, '2021-11-25 23:00:00', '2021-12-23 23:00:00', 21, 'cannondale-topstone-carbon-6-beetle-green-1.jpg'),
-(3, 4, 'Cube access ws', 'muy bonita', 800, 7, '2021-11-09 23:00:00', '2022-06-16 22:00:00', 21, 'cube-access-ws-exc-women-stonegreynfern-1.jpg'),
-(4, 4, 'Cube aim ex', 'muy cara', 6000, 12, '2021-11-09 23:00:00', '2022-11-22 23:00:00', 21, 'cube-aim-ex-bluenred-1.jpg'),
-(5, 1, 'Excelsior Touring 3 speed', 'muy bonita', 800, 12, '2020-01-11 23:00:00', '2020-01-11 23:00:00', 21, 'excelsior-touring-3-speed-tsp-opal-blue-boss-blue-1.jpg'),
-(6, 1, 'Fixie blackheath', 'muy cara', 6000, 12, '2020-01-11 23:00:00', '2020-01-11 23:00:00', 21, 'fixie-inc-blackheath-petrol-red-1.jpg'),
-(7, 1, 'Johni-Loco viena', 'muy bonita', 800, 12, '2020-01-11 23:00:00', '2020-01-11 23:00:00', 21, 'johnny-loco-vienna-urban-cruiser-step-over-piano-black-1.jpg'),
-(8, 4, 'Kona operator', 'muy cara', 6000, 12, '2021-11-09 23:00:00', '2023-11-07 23:00:00', 21, 'kona-operator-cr-gloss-dark-green-metallic-green-2.jpg'),
-(9, 3, 'Marin Headlands 2', 'muy cara', 6000, 12, '2021-11-09 23:00:00', '2021-11-25 23:00:00', 21, 'marin-headlands-2-gloss-teal-carbon-magenta-1.jpg'),
-(10, 2, 'Orbea orca aero', 'muy cara', 6000, 8, '2021-11-09 23:00:00', '2021-11-23 23:00:00', 21, 'orbea-orca-aero-m20i-team-black-1.jpg'),
-(11, 1, 'Ortler Van Dyck wave', 'muy cara', 6000, 12, '2020-01-11 23:00:00', '2020-01-11 23:00:00', 21, 'ortler-van-dyck-wave-red-1.jpg'),
-(12, 2, 'Polygon Strattos', 'muy cara', 6000, 12, '2021-11-09 23:00:00', '2021-11-23 23:00:00', 21, 'polygon-strattos-s3-white-1.jpg'),
-(13, 4, 'Santa Cruz TallBoy 4', 'muy cara', 6000, 12, '2021-11-09 23:00:00', '2021-11-23 23:00:00', 21, 'santa-cruz-tallboy-4-cc-29-x01-reserve-gloss-black-1.jpg'),
-(14, 2, 'Willier GTR team rim', 'muy cara', 6000, 10, '2021-11-09 23:00:00', '2021-11-23 23:00:00', 21, 'wilier-gtr-team-rim-105-black-red-glossy-finish-1.jpg');
+INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `fecha_alta`, `fecha_baja`, `impuesto`, `imagen`, `precio_impuesto`, `proveedor_id`, `categoria_id`) VALUES
+(1, 'Cannondale TopStone carbon 4', 'muy bonita', 800, 12, '2021-10-12', '2021-11-17', 21, 'cannondale-topstone-carbon-4-champagne-1.jpg', 968, 1, 2),
+(3, 'Cube access ws', 'muy bonita', 800, 2, '2021-11-12', '2022-06-17', 21, 'cube-access-ws-exc-women-stonegreynfern-1.jpg', 968, 1, 4),
+(4, 'Cube aim ex', 'muy cara', 6000, 10, '2021-11-12', '2022-11-23', 21, 'cube-aim-ex-bluenred-1.jpg', 7260, 1, 4),
+(5, 'Excelsior Touring 3 speed', 'muy bonita', 800, 12, '2021-11-12', '2020-01-12', 21, 'excelsior-touring-3-speed-tsp-opal-blue-boss-blue-1.jpg', 968, 1, 1),
+(6, 'Fixie blackheath', 'muy cara', 6000, 12, '2021-11-12', '2020-01-12', 21, 'fixie-inc-blackheath-petrol-red-1.jpg', 7260, 1, 1),
+(7, 'Johni-Loco viena', 'muy bonita', 800, 11, '2021-11-12', '2020-01-12', 21, 'johnny-loco-vienna-urban-cruiser-step-over-piano-black-1.jpg', 968, 1, 1),
+(8, 'Kona operator', 'muy cara', 6000, 12, '2021-11-12', '2023-11-08', 21, 'kona-operator-cr-gloss-dark-green-metallic-green-2.jpg', 7260, 1, 4),
+(9, 'Marin Headlands 2', 'muy cara', 6000, 5, '2021-11-12', '2021-11-26', 21, 'marin-headlands-2-gloss-teal-carbon-magenta-1.jpg', 7260, 1, 3),
+(10, 'Orbea orca aero', 'muy cara', 6000, 8, '2021-11-12', '2021-11-24', 21, 'orbea-orca-aero-m20i-team-black-1.jpg', 7260, 1, 2),
+(11, 'Ortler Van Dyck wave', 'muy cara', 6000, 11, '2021-11-12', '2020-01-12', 21, 'ortler-van-dyck-wave-red-1.jpg', 7260, 1, 1),
+(12, 'Polygon Strattos', 'muy cara', 6000, 11, '2021-11-12', '2021-11-24', 21, 'polygon-strattos-s3-white-1.jpg', 7260, 1, 2),
+(13, 'Santa Cruz TallBoy 4', 'muy cara', 6000, 11, '2021-11-12', '2021-11-24', 21, 'santa-cruz-tallboy-4-cc-29-x01-reserve-gloss-black-1.jpg', 7260, 1, 4),
+(14, 'Willier GTR team rim', 'muy cara', 6000, 10, '2021-11-12', '2021-11-24', 21, 'wilier-gtr-team-rim-105-black-red-glossy-finish-1.jpg', 7260, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -240,6 +306,7 @@ INSERT INTO `productos` (`id`, `id_categoria`, `nombre`, `descripcion`, `precio`
 -- Estructura de tabla para la tabla `proveedores`
 --
 
+DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE `proveedores` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
@@ -251,12 +318,20 @@ CREATE TABLE `proveedores` (
   `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `proveedores`
+--
+
+INSERT INTO `proveedores` (`id`, `nombre`, `direccion`, `localidad`, `provincia`, `telefono`, `cif`, `email`) VALUES
+(1, 'Manolo (CUBE)', 'Calle falsa 123', 'Localidad', 'Provincia', '66666666', '234424D', 'manolo@contactoCube.com');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `roles`
 --
 
+DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL,
   `rol` varchar(255) DEFAULT NULL
@@ -277,6 +352,7 @@ INSERT INTO `roles` (`id`, `rol`) VALUES
 -- Estructura de tabla para la tabla `usuarios`
 --
 
+DROP TABLE IF EXISTS `usuarios`;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
   `id_rol` int(11) DEFAULT NULL,
@@ -297,11 +373,9 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `id_rol`, `email`, `clave`, `nombre`, `apellido1`, `apellido2`, `direccion`, `provincia`, `localidad`, `telefono`, `dni`) VALUES
-(1, 3, 'perezleon.miguel@gmail.com', '1234', 'Miguel', 'Pérez', 'León', 'Calle Abajo número 6', 'Zamora', 'Bercianos de Aliste', '666666666', '71111111e'),
-(2, 1, 'admin@admin.com', 'admin1', 'admin12', 'admin', 'admin', 'admin', 'admin', 'admn', 'admin', 'admin'),
-(4, 2, 'empleado@empleado.com', '1234', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', '312312313123', '123123123123'),
-(5, 3, '12@12.12', '12', '12', '12', '12', '12', '12', '12', '12', '12'),
-(6, 3, 'correo@12.212', '12345Password', '1232', '312312', '313212', '123131', '3131', '131', '1313', '13123');
+(1, 3, 'perezleon.miguel@gmail.com', 'YWRtaW4=', 'Miguel', 'Pérez', 'León', 'Calle Abajo número 6', 'Zamora', 'Bercianos de Aliste', '666666666', '71111111e'),
+(2, 1, 'admin@admin.com', 'YWRtaW4=', 'admin12', 'admin', 'admin', 'admin', 'admin', 'admn', 'admin', 'admin'),
+(4, 2, 'empleado@empleado.com', 'YWRtaW4=', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', '312312313123', '123123123123');
 
 -- --------------------------------------------------------
 
@@ -309,13 +383,21 @@ INSERT INTO `usuarios` (`id`, `id_rol`, `email`, `clave`, `nombre`, `apellido1`,
 -- Estructura de tabla para la tabla `valoraciones`
 --
 
+DROP TABLE IF EXISTS `valoraciones`;
 CREATE TABLE `valoraciones` (
   `id` int(11) NOT NULL,
-  `id_producto` int(11) DEFAULT NULL,
-  `id_usuario` int(11) DEFAULT NULL,
   `valoracion` int(11) DEFAULT NULL,
-  `comentario` varchar(255) DEFAULT NULL
+  `comentario` varchar(255) DEFAULT NULL,
+  `usuario_id` int(11) DEFAULT NULL,
+  `producto_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `valoraciones`
+--
+
+INSERT INTO `valoraciones` (`id`, `valoracion`, `comentario`, `usuario_id`, `producto_id`) VALUES
+(1, 6, 'muy weno pero no e pa tanto', 1, 4);
 
 --
 -- Índices para tablas volcadas
@@ -373,7 +455,9 @@ ALTER TABLE `pedidos`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK4s80lxlx2fkci25fcx4r0nbex` (`proveedor_id`),
+  ADD KEY `FK2fwq10nwymfv7fumctxt9vpgb` (`categoria_id`);
 
 --
 -- Indices de la tabla `proveedores`
@@ -397,7 +481,9 @@ ALTER TABLE `usuarios`
 -- Indices de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKmtbedrv2q0wjdsrvnb57g8whw` (`usuario_id`),
+  ADD KEY `FKn14xyxjg57ghtqjjnc20innfh` (`producto_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -407,7 +493,7 @@ ALTER TABLE `valoraciones`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `configuracion`
@@ -419,67 +505,85 @@ ALTER TABLE `configuracion`
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_pedidos`
 --
 ALTER TABLE `detalles_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `impuestos`
 --
 ALTER TABLE `impuestos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `metodos_pago`
 --
 ALTER TABLE `metodos_pago`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `opciones_menu`
 --
 ALTER TABLE `opciones_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedores`
 --
 ALTER TABLE `proveedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `productos`
+--
+ALTER TABLE `productos`
+  ADD CONSTRAINT `FK2fwq10nwymfv7fumctxt9vpgb` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `FK4s80lxlx2fkci25fcx4r0nbex` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedores` (`id`);
+
+--
+-- Filtros para la tabla `valoraciones`
+--
+ALTER TABLE `valoraciones`
+  ADD CONSTRAINT `FKmtbedrv2q0wjdsrvnb57g8whw` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `FKn14xyxjg57ghtqjjnc20innfh` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

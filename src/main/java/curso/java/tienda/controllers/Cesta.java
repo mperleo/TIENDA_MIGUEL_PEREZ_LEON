@@ -29,7 +29,7 @@ import curso.java.tienda.models.entities.Producto;
 import curso.java.tienda.models.entities.Usuario;
 
 import curso.java.tienda.service.ProductoService;
-import curso.java.tienda.utils.EstadisticasUtil;
+import curso.java.tienda.utils.FechasUtil;
 import curso.java.tienda.service.PedidoService;
 import curso.java.tienda.service.DescuentoService;
 import curso.java.tienda.service.DetallePedidoService;
@@ -51,7 +51,7 @@ public class Cesta {
 	private DescuentoService ds;
 	
 	@Autowired
-	private EstadisticasUtil eu;
+	private FechasUtil eu;
 	
 	private static Logger logger = LogManager.getLogger(Cesta.class);
 	

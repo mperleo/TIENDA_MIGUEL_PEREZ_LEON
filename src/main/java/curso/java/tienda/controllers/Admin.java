@@ -18,7 +18,7 @@ import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.PedidoService;
 import curso.java.tienda.service.ProductoService;
 import curso.java.tienda.service.UsuarioService;
-import curso.java.tienda.utils.EstadisticasUtil;
+import curso.java.tienda.utils.FechasUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,7 +33,7 @@ public class Admin {
 	@Autowired
 	private PedidoService pds;
 	@Autowired
-	private EstadisticasUtil eu;
+	private FechasUtil eu;
 	
 	@GetMapping("")
 	public String portada(Model model, HttpSession session) {
