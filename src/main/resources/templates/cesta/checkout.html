@@ -100,7 +100,8 @@
 
 											<div class="col-lg-6 form-group" th:each="metodo : ${metodosPago}">
 												<div class="form-check">
-													<input class="form-check-input" type="radio" name="metodo_pago" id="tarjeta" th:value="${metodo.metodo_pago}"> 
+													<input th:if="${metodo.metodo_pago != 'Tarjeta'}" class="form-check-input" type="radio" name="metodo_pago" id="tarjeta" th:value="${metodo.metodo_pago}">
+													<input th:if="${metodo.metodo_pago == 'Tarjeta'}" class="form-check-input" type="radio" name="metodo_pago" id="tarjeta" th:value="${metodo.metodo_pago}" checked> 
 														<label class="form-check-label" for="flexRadioDefault1" th:text="${metodo.metodo_pago}"> </label>
 												</div>
 											</div>

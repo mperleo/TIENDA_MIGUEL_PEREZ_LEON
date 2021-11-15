@@ -87,7 +87,7 @@ public class UsuarioService {
      * @return hash de la contraseña indicada en una cadena
      */
 	public String hashPassword(String clave) {
-		Base64 laJessy = new Base64();
-		return new String(laJessy.encode(clave.getBytes()));
+		Base64 hasher = new Base64();
+		return new String(hasher.encode(clave.getBytes()));
 	}
 }

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,9 +141,20 @@ public class PedidosUsuario {
 			Pedido pedido = peds.getPedidoXId(lineaBorrar.getId_pedido());
 			if(usuario.getId() == pedido.getIdUsuario()) {
 				// vuelvo a calcular el total del pedido y lo guardo en la base de datos
-				Double pedidoNuevoTotal = pedido.getTotal() - lineaBorrar.getTotal();
-				pedido.setTotal(pedidoNuevoTotal); 
-				peds.addPedido(pedido);
+				// si el pedido tiene aplicado un descuento hay que calcular el precio del ariculo con el descuento antes de hacer la resta
+				if(pedido.getDescuento()!= null) {
+					Double pedidoNuevoTotal = pedido.getTotal() - (lineaBorrar.getTotal()* (1- (pedido.getDescuento()/100)));
+					pedidoNuevoTotal = DoubleRounder.round(pedidoNuevoTotal, 3);
+					pedido.setTotal(pedidoNuevoTotal); 
+					peds.addPedido(pedido);
+				}
+				// si no hay un descuento aplicado lo resto directamente
+				else {
+					Double pedidoNuevoTotal = pedido.getTotal() - lineaBorrar.getTotal();
+					pedido.setTotal(pedidoNuevoTotal); 
+					peds.addPedido(pedido);
+				}
+				
 				
 				// borro la linea del pedido
 				dps.delDetallePedido(Integer.parseInt(id_linea));

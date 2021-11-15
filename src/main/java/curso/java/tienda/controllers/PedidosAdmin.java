@@ -137,6 +137,9 @@ public class PedidosAdmin {
 			// guardo el pedido modificado en la bbdd, con el nuevo estado y el número de la factura
 			ps.editPedido(pedido);
 			
+			// guardao los datos de la factura actuazliados
+			cs.editConfiguracion(datos_factura.get("factura_num"));
+			
 			model.addAttribute("mensajeOk", "El estado del pedido id:' "+id_pedido+"' se ha cambiado a enviado ");
 			logger.info("El estado del pedido id:' "+id_pedido+"' se ha cambiado a cancelado ");
 			
