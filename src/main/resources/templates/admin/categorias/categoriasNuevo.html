@@ -14,21 +14,15 @@
                             <li class="breadcrumb-item"><a th:href="@{/admin/categorias}">Categorías</a></li>
                              <li class="breadcrumb-item active">Nueva categoría</li>
                         </ol>
-                        <!--<div class="card mb-4">
-                            <div class="card-body">
-                                <p class="mb-0">
-                                   Esto queda bien para poner los errores
-                                </p>
-                            </div>
-                        </div>-->
                         
-
-						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/nuevo/guardar} " >
+						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/nuevo/guardar} " enctype="multipart/form-data">
 						  <div class="form-group">
 						    <label for="nombre">Nombre</label>
 						    <input type="text" class="form-control" id="nombre_opcion" name="nombre" placeholder="Indica el nombre" required>
 						    <label for="descripcion">Descripcion</label>
 						    <input type="text" class="form-control" id="url_opcion" name="descripcion" placeholder="Indica la descripción" required>
+						    <label for="archivo">Imagen</label>
+						    <input type="file" class="form-control" name="archivo" id="archivo">
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

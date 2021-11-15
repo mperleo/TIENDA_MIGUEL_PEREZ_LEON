@@ -15,12 +15,14 @@
                              <li class="breadcrumb-item active">Editar categoría</li>
                         </ol>
 
-						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/editar/{catID}/guardar (catID = ${cat.id}) } " >
+						<form method="post" th:object="${cat}" th:action="@{/admin/categorias/editar/{catID}/guardar (catID = ${cat.id}) } " enctype="multipart/form-data" >
 						  <div class="form-group">
 						    <label for="nombre">Nombre</label>
 						    <input type="text" class="form-control" id="nombre_opcion" name="nombre" th:value="${cat.nombre}" placeholder="Indica el nombre" required>
 						    <label for="descripcion">Descripcion</label>
 						    <input type="text" class="form-control" id="url_opcion" name="descripcion" th:value="${cat.descripcion}" placeholder="Indica la descripción" required>
+						    <label for="archivo">Imagen</label>
+						    <input type="file" class="form-control" name="archivo" id="archivo">
 						  </div>
 						  
 						  <button type="submit" class="btn btn-primary my-2">Guardar</button>

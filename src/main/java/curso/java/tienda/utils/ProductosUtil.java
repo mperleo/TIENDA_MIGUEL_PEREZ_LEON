@@ -2,6 +2,7 @@ package curso.java.tienda.utils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -15,6 +16,7 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
@@ -49,6 +51,27 @@ public class ProductosUtil {
 		}
 	}
 
+	public String subirImagen(String id_prod, MultipartFile file) {
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
+	    URL appResourceURL = loader.getResource("static");
+	    String dbConfigFileRoute = appResourceURL.getPath();
+	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
+	    int separador = dbConfigFileRoute.lastIndexOf("/");
+	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
+	    String ruta = dbConfigFileRoute + "/static/img/prods/" + file.getOriginalFilename();
+	    
+	    //ruta = "C:\\" + file.getOriginalFilename();
+	    
+	    //guardar en el fichero
+	    try {
+			Files.copy(file.getInputStream(), Paths.get(ruta));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+	    return ruta;
+	}
 	
 	public void escribirExcell(List<Producto> productos) {
 		LocalDateTime fecha = LocalDateTime.now(); // Create a date object
