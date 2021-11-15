@@ -19,14 +19,11 @@ public class CategoriasUtil {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 	    URL appResourceURL = loader.getResource("static");
 	    String dbConfigFileRoute = appResourceURL.getPath();
-	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
 	    String ruta = "/"+dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
 	    String rutaRetorno = "cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
-	    
-	    //ruta = "C:\\" + file.getOriginalFilename();
-	    
+
 	    //guardar en el fichero
 	    try {
 			Files.copy(file.getInputStream(), Paths.get(ruta));

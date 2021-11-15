@@ -56,6 +56,10 @@ public class Proveedor {
 		this.email = email;
 	}
 
+	public Proveedor(int id) {
+		this.id= id;
+	}
+
 	public Integer getId() {
 		return this.id;
 	}

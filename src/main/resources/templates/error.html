@@ -9,7 +9,7 @@
 
 			<div class="alert alert-danger" role="alert">
 				<h1>Error!</h1>
-				<p th:text="${mensaje}"></p>
+				<p th:if="${mensaje == null}">No tienes permiso para acceder</p>
 				<p> Hay un problema con la direccion indicada ( <span th:if="${path != null}" th:text="${path}" /> ). </p>
 				<p th:if="${exception != null}" th:text="${'Details: ' + message}" />
 				<p th:if="${error != null}" th:text="${'Error type : ' + error }" />
@@ -17,7 +17,7 @@
 				
 				<p th:if="${timestamp != null}" th:text="${'Timestamp: ' + timestamp}" />
 				<p th:if="${status != null}" th:text="${'Status: ' + status}" />
-				<p>Trace</p> <pre th:text="${trace}"/>
+				<!-- <p>Trace</p> <pre th:text="${trace}"/> -->
 
 	
 				<hr>

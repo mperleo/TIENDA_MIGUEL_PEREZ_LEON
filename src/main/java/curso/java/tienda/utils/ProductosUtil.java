@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.models.entities.Producto;
+import curso.java.tienda.models.entities.Proveedor;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.write.WritableSheet;
@@ -55,14 +56,11 @@ public class ProductosUtil {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 	    URL appResourceURL = loader.getResource("static");
 	    String dbConfigFileRoute = appResourceURL.getPath();
-	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
 	    String ruta = "/"+dbConfigFileRoute + "/static/img/products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
 	    String rutaRetorno = "products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
-	    
-	    //ruta = "C:\\" + file.getOriginalFilename();
-	    
+
 	    //guardar en el fichero
 	    try {
 			Files.copy(file.getInputStream(), Paths.get(ruta));
@@ -111,7 +109,7 @@ public class ProductosUtil {
         	
         	Integer i =0;
         	//sheet.addCell( new jxl.write.Label(0, i, "id") );
-            sheet.addCell( new jxl.write.Label(0, i, "id_categoria") );
+            sheet.addCell( new jxl.write.Label(0, i, "categoria_id") );
             sheet.addCell( new jxl.write.Label(1, i, "nombre") );
             sheet.addCell( new jxl.write.Label(2, i, "descripcion") );
             sheet.addCell( new jxl.write.Label(3, i, "precio") );
@@ -121,6 +119,7 @@ public class ProductosUtil {
             sheet.addCell( new jxl.write.Label(7, i, "impuesto") );
             sheet.addCell( new jxl.write.Label(8, i, "imagen") );
             sheet.addCell( new jxl.write.Label(9, i, "precioImpuesto") );
+            sheet.addCell( new jxl.write.Label(10, i, "proveedor_id") );
             i++;
             
         	//Hago un recorrido por la lista de productos escribiendo en la linea i los datos del producto p
@@ -136,6 +135,7 @@ public class ProductosUtil {
 	            sheet.addCell( new jxl.write.Label(7, i, p.getImpuesto().toString()) );
 	            sheet.addCell( new jxl.write.Label(8, i, p.getImagen()) );
 	            sheet.addCell( new jxl.write.Label(9, i, p.getPrecioImpuesto().toString()) );
+	            sheet.addCell( new jxl.write.Label(10, i, p.getProveedor().getId().toString()) );
 	            i++;
         	}
         	
@@ -166,10 +166,6 @@ public class ProductosUtil {
 	        for (int f=1; f<sheet.getRows(); f++) {
 
 	        	Producto p = new Producto();
-	        	
-	    		/*for(int c=0;c<sheet.getColumns();c++) {
-	    			contenido += sheet.getCell(c,f).getContents() + "\t";// + sheet.getCell(c, f).getContents();
-	    		}*/
 	    		
 	    		p.setCategoria(new Categoria(Integer.parseInt( sheet.getCell(0,f).getContents())));
 	            p.setNombre(sheet.getCell(1,f).getContents());
@@ -181,7 +177,7 @@ public class ProductosUtil {
 	            p.setImpuesto(Float.parseFloat( sheet.getCell(7,f).getContents()));
 	            p.setImagen(sheet.getCell(8,f).getContents());
 	            p.setPrecioImpuesto(Double.parseDouble( sheet.getCell(9,f).getContents()));
-	            
+	            p.setProveedor(new Proveedor(Integer.parseInt( sheet.getCell(10,f).getContents())));
 	            productos.add(p);
 	    		
 	    		
