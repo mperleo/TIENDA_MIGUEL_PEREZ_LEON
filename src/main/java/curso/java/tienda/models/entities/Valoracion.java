@@ -20,9 +20,9 @@ public class Valoracion{
 	@ManyToOne
 	private Usuario usuario;
 	
-	@Min(value = 0, message="la nota mínima es 0'") @Max(value=10, message="la nota mínima es 0'")
+	@Min(value = 0, message=" La nota mínima es 0'") @Max(value=10, message=" La nota mínima es 0'")
 	private Integer valoracion;
-	@NotBlank(message="El comentario es obligatorio")
+	@NotBlank(message=" El comentario es obligatorio")
 	private String comentario;
 
 	public Valoracion() {

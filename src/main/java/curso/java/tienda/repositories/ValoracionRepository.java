@@ -13,6 +13,9 @@ public interface ValoracionRepository extends JpaRepository<Valoracion, Integer>
 	@Query(value="SELECT * FROM valoraciones WHERE producto_id=?", nativeQuery=true)
 	List<Valoracion> findByProd(Integer id_producto);
 	
+	@Query(value="SELECT * FROM valoraciones WHERE producto_id=?1 and usuario_id=?2", nativeQuery=true)
+	Valoracion findByProdAndUser(Integer id_producto, Integer id_usuario);
+	
 	@Query(value="SELECT CASE WHEN EXISTS ( "
 					+ "SELECT detalles_pedidos.producto from pedidos "
 					+ "INNER JOIN detalles_pedidos ON detalles_pedidos.id_pedido = pedidos.id "

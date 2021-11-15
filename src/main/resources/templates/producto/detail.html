@@ -91,19 +91,7 @@
 						<div class="p-4 p-lg-5 bg-white">
 						
 							<div th:if="${puedeValorar}">
-								<form method="post" th:object="${valoracion}" th:action="@{/valoraciones/nuevo/{prodID}/guardar (prodID = ${producto.id})}" class="mb-3">
-									<h4 class="mb-2 text-uppercase">valora el producto</h4>
-									
-									<label for="valoracion" class="form-label">Puntua el producto</label>
-									<span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></span>
-									<input type="number" class="form-control" id="valoracion" name="valoracion" th:field="*{valoracion}" placeholder="Indica una nota de 0 al 10"/>
-									
-									<label for="comentario" class="form-label">Pon un cometario</label>
-									<span th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></span>
-									<textarea  class="form-control" id="comentario" name="comentario" th:field="*{comentario}" ></textarea>
-									
-									<button type="submit" class="btn btn-primary mt-3">Valorar</button>
-								</form>
+								<a type="submit" th:href="@{/valoraciones/nuevo/{prodID}/ (prodID = ${producto.id}) }" class="btn btn-primary mt-3 mb-3">Valorar</a>
 							</div>
 							
 							
@@ -116,6 +104,7 @@
 											<p class="small text-muted mb-0 text-uppercase" th:text="${valo.valoracion} + ' /10'"></p>
 											<p class="text-small mb-0 text-muted" th:text="${valo.comentario}"></p>
 										</div>
+										<hr>
 									</div>
 								</div>
 							</div>

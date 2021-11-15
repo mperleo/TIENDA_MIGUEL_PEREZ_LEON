@@ -51,8 +51,10 @@ public class ValoracionesUsuario {
 	}
 
 	@PostMapping("editar/{id_valoracion}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_valoracion") String id_valor, @Valid @ModelAttribute("valoracion") Valoracion valoracion, RedirectAttributes redirectAttributes, BindingResult bindingResult) {
+	public String editarGuardar(Model model, @PathVariable("id_valoracion") String id_valor, @Valid @ModelAttribute("valoracion") Valoracion valoracion , BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		if(bindingResult.hasErrors()) {
+			valoracion.setId(Integer.parseInt(id_valor));
+			 model.addAttribute(valoracion);
 			 return "valoraciones/valoracionEditar";
 		 }else {  
 			Integer id_valoracion = Integer.parseInt(id_valor);
@@ -75,13 +77,34 @@ public class ValoracionesUsuario {
 	    vs.del(id_valoracion);
 	    logger.info("Valoracion id: "+id_valor+" eliminado");
 	    redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion borrado correctamente");
-	    return "redirect:valoraciones";
+	    return "redirect:/valoraciones";
+	}
+	
+	@GetMapping("nuevo/{id_prod}/")
+	public String nuevo(Model model, @PathVariable("id_prod") String id_prod, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+		
+		//Busco si el usuario ha valorado el producto antes
+		Valoracion valoracion = vs.getValoracionByProdAndUser(Integer.parseInt(id_prod), usuario.getId());
+		
+		// si hay una valoracion lo mando a la funcion de editar una valoracion
+		if(valoracion != null) {
+			return "redirect:/valoraciones/editar/"+valoracion.getId()+"/";
+		}
+		else {
+			valoracion = new Valoracion();
+		}
+	    model.addAttribute("valoracion", valoracion);
+	    model.addAttribute("id_prod", id_prod);
+	    return "valoraciones/valoracionNuevo";
 	}
 
+
 	@PostMapping("nuevo/{id_producto}/guardar")
-	public String nuevoGuardar(Model model, @PathVariable("id_producto") String id_producto, @Valid @ModelAttribute("valoracion") Valoracion valoracion, RedirectAttributes redirectAttributes, HttpSession session, BindingResult bindingResult) {
+	public String nuevoGuardar(Model model, @PathVariable("id_producto") String id_producto, @Valid @ModelAttribute("valoracion") Valoracion valoracion , BindingResult bindingResult, RedirectAttributes redirectAttributes, HttpSession session) {
 		 if(bindingResult.hasErrors()) {
-			 return "redirect:/producto/"+id_producto+"/";
+			 model.addAttribute("valoracion", valoracion);
+			 return "valoraciones/valoracionNuevo";
 		 }else {
 			 Usuario usuario = (Usuario) session.getAttribute("usuario");
 			 Producto producto = ps.getProductoXId(Integer.parseInt(id_producto));
@@ -92,7 +115,7 @@ public class ValoracionesUsuario {
 			
 			 logger.info("Nueva valoracion guardado");
 			 redirectAttributes.addFlashAttribute("mensajeOk", "Valoracion creado correctamente");
-			 return "redirect:valoraciones";
+			 return "redirect:/valoraciones";
 		 }
 
 	}

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,7 +25,7 @@ public class ProductosUsuario {
 	@Autowired
 	private ValoracionService vs;
 	
-	@GetMapping("ver/{id_prod}")
+	@RequestMapping("ver/{id_prod}")
 	public String producto(Model model, @PathVariable("id_prod") String id_prod, HttpSession session) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		Producto prod = ps.getProductoXId(id_producto);
@@ -37,8 +36,7 @@ public class ProductosUsuario {
 		if(usuario != null) {
 			boolean puedeValorar = vs.getPuedeValorarUsuario(usuario.getId(), prod.getId());
 			model.addAttribute("puedeValorar",puedeValorar);
-		}
-		
+		}		
 	
 		model.addAttribute("valoraciones", valoraciones);
 		model.addAttribute("producto", prod);
