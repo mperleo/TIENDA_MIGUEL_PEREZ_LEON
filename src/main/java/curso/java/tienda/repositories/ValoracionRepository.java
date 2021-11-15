@@ -22,4 +22,7 @@ public interface ValoracionRepository extends JpaRepository<Valoracion, Integer>
 					+ "WHERE pedidos.estado='enviado' AND pedidos.id_usuario=?1 AND detalles_pedidos.producto=?2 "
 				+ ")  THEN 'true' ELSE 'false' END", nativeQuery=true)
 	String puedeValorarUsuario(Integer id_usuario, Integer id_producto);
+
+	@Query(value="SELECT * FROM valoraciones WHERE usuario_id=?1", nativeQuery=true)
+	List<Valoracion> getValoracionesUsuario(Integer id);
 }

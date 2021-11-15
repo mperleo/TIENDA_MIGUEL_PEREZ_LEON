@@ -57,8 +57,9 @@ public class ProductosUtil {
 	    URL appResourceURL = loader.getResource("static");
 	    String dbConfigFileRoute = appResourceURL.getPath();
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
-	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
-	    String ruta = "/"+dbConfigFileRoute + "/static/img/products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
+	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador); 
+	    //String ruta = "/"+dbConfigFileRoute + "/static/img/products/"+id_prod+ this.extensionFichero(file.getOriginalFilename()); // comentar para windows
+	    String ruta = dbConfigFileRoute + "/static/img/products/"+id_prod+ this.extensionFichero(file.getOriginalFilename()); // comentar para linux
 	    String rutaRetorno = "products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
 
 	    //guardar en el fichero

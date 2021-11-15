@@ -56,7 +56,7 @@ public class AccessFilter implements Filter {
 			// si se pide un recurso que no esta ni en la carpta administrador ni es una
 			// pagina jsp se manda la peticion
 			else {
-				if (path.contains("/login") || path.contains("/cesta") || path.contains("error") || path.contains("/home") || path.contains("/producto") || path.contains("/tienda") || path.contains("/about") ) {
+				if (path.contains("/login") || path.contains("/cesta") || path.contains("error") || path.contains("/home") || path.contains("/producto") || path.contains("/tienda") || path.contains("/about") || path.equals("/")) {
 					chain.doFilter(request, response);	
 				}
 				// si intenta acceder a las partes de la web para usuarios registrados se manda

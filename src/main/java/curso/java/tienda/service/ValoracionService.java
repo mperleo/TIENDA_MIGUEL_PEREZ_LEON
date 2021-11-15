@@ -54,4 +54,8 @@ public class ValoracionService {
 			return false;
 		}
 	}
+
+	public List<Valoracion> getListaValoracionesIdUsuario(Integer id) {
+		return vr.getValoracionesUsuario(id);
+	}
 }

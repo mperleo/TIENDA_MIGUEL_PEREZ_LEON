@@ -8,6 +8,6 @@ import curso.java.tienda.models.entities.Categoria;
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
 	Categoria findById(String id);
 	
-	@Query(value="select id from categorias ORDER BY id ASC LIMIT 1", nativeQuery=true)
+	@Query(value="select id from categorias ORDER BY id DESC LIMIT 1", nativeQuery=true)
 	Integer buscarIdUltimaCat();
 }

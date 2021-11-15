@@ -21,7 +21,8 @@ public class CategoriasUtil {
 	    String dbConfigFileRoute = appResourceURL.getPath();
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
-	    String ruta = "/"+dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
+	    //String ruta = "/"+dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename()); // comentar para windows
+	    String ruta = dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());// comentar para linux
 	    String rutaRetorno = "cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
 
 	    //guardar en el fichero

@@ -35,8 +35,9 @@ public class ValoracionesUsuario {
 	private static Logger logger = LogManager.getLogger(ValoracionesUsuario.class);
 	
 	@GetMapping("")
-	public String verTodos(Model model) {
-	    List<Valoracion> valoraciones = vs.getListaValoracions();
+	public String verTodos(Model model, HttpSession session) {
+		Usuario usuario = (Usuario) session.getAttribute("usuario");
+	    List<Valoracion> valoraciones = vs.getListaValoracionesIdUsuario(usuario.getId());
 	    model.addAttribute("valoraciones", valoraciones);
 	    return "valoraciones/valoraciones";
 	}

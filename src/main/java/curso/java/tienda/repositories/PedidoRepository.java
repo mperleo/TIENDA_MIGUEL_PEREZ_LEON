@@ -44,4 +44,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Integer>{
 	@Query(value="select categorias.id, categorias.nombre from pedidos INNER JOIN detalles_pedidos ON detalles_pedidos.id_pedido = pedidos.id INNER JOIN productos ON productos.id = detalles_pedidos.producto INNER JOIN categorias ON categorias.id = productos.categoria_id WHERE pedidos.estado='enviado' AND pedidos.fecha LIKE ?% GROUP BY(productos.categoria_id)", nativeQuery=true)
 	List<String> totalPedidosPorCategoriaNombreCategoria(String fecha);
 	
+	@Query(value="select id from pedidos ORDER BY id DESC LIMIT 1", nativeQuery=true)
+	Integer buscarIdUltimoPedido();
 }

@@ -274,10 +274,11 @@ public class Cesta {
 			if(pedido !=null) {
 				// completo los datos que faltan
 				pedido.setMetodo_pago(metodo_pago);
-				pedido.setId(peds.getPedidoIdMax());
 				
 				// guardo en la base de datos el pedido
 				peds.addPedido(pedido);
+				
+				pedido.setId(peds.getIdUltimoProd());
 				
 				// completo los datos que faltan a las lineas y las guardo en la base de datos
 				Set<Integer> i = cesta.keySet();

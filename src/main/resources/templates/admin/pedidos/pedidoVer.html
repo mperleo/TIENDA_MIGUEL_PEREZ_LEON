@@ -16,8 +16,6 @@
                             <li class="breadcrumb-item active">Ver pedido</li>
                         </ol>
                         
-                        <a th:if="${pedido.estado == 'enviado'}" class="btn btn-outline-primary btn-large" target="blank" th:href="@{/pedidos/generarFactura/{pedidoID}/ (pedidoID = ${pedido.id})}">Generar factura en pdf »</a>
-                        
                         <h3>Datos del pedido</h3>
 					
                         <table class="table table-bordered table-striped table-hover">

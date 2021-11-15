@@ -22,6 +22,10 @@ public class PedidoService {
 		return pr.buscarPedidosEstado(estado);
 	}
 	
+	public Integer getIdUltimoProd() {
+		return pr.buscarIdUltimoPedido();
+	}
+	
 	public void addPedido(Pedido p) {
 		pr.save(p);
 	}
@@ -38,16 +42,6 @@ public class PedidoService {
 	public Pedido getPedidoXId(int id) {
 		Pedido p = pr.getById(id);
 		return p;
-	}
-	
-	public Integer getPedidoIdMax() {
-		Integer idNueva= pr.buscarMaxId();
-		if(idNueva== null) {
-			return 1;
-		}
-		else {
-			return idNueva +1;
-		}
 	}
 	
 	public List<Pedido> getPedidosUsuario(Integer id_usuario) {
