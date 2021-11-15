@@ -36,7 +36,7 @@ public class ProveedorAdmin {
 	public String editar(Model model, @PathVariable("id_proveedor") String id_prov) {
 	    Integer id_proveedor = Integer.parseInt(id_prov);
 	    Proveedor prov = ps.getProveedorXId(id_proveedor);
-	    model.addAttribute("cat", prov);
+	    model.addAttribute("prov", prov);
 	    
 	    return "admin/proveedores/proveedorEditar";
 	}

@@ -58,7 +58,8 @@ public class ProductosUtil {
 	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
-	    String ruta = dbConfigFileRoute + "/static/img/prods/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
+	    String ruta = "/"+dbConfigFileRoute + "/static/img/products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
+	    String rutaRetorno = "products/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
 	    
 	    //ruta = "C:\\" + file.getOriginalFilename();
 	    

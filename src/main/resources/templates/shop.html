@@ -88,7 +88,7 @@
 											<div class="badge text-white badge-"></div>
 											<a class="d-block" th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}"><img
 												class="img-fluid w-100"
-												th:src="@{/img/products/{name}/ (name = ${prod.imagen})}"
+												th:src="@{/img/{name}/ (name = ${prod.imagen})}"
 												th:alt="${prod.imagen}"></a>
 											<div class="product-overlay">
 												<ul class="mb-0 list-inline">
@@ -117,19 +117,7 @@
 
 							</div>
 
-							<!-- PAGINATION
-							<nav aria-label="Page navigation example">
-								<ul
-									class="pagination justify-content-center justify-content-lg-end">
-									<li class="page-item"><a class="page-link" href="#"
-										aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-									<li class="page-item active"><a class="page-link" href="#">1</a></li>
-									<li class="page-item"><a class="page-link" href="#">2</a></li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item"><a class="page-link" href="#"
-										aria-label="Next"><span aria-hidden="true">»</span></a></li>
-								</ul>
-							</nav>-->
+						
 							
 						</div>
 					</div>

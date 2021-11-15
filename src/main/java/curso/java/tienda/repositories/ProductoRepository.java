@@ -32,4 +32,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer>{
 	
 	@Query(value="select * from productos where stock<6 ORDER BY stock ASC", nativeQuery=true)
 	List<Producto> buscarProductosPocoStock();
+	
+	@Query(value="select id from productos ORDER BY id ASC LIMIT 1", nativeQuery=true)
+	Integer buscarIdUltimoProdcuto();
 }

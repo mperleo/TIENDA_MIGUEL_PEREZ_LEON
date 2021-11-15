@@ -18,11 +18,11 @@
 						<form method="post" th:object="${prod}" th:action="@{/admin/productos/editar/{prodID}/guardar (prodID = ${prod.id}) } " enctype="multipart/form-data">
 						  <div class="form-group">
 						  
-						    <label for="categoria" class="form-label">Categoria</label>
-                        	<select class="form-select" id="categoria" name="categoria" aria-label="Default select example">
-                        	  <option selected th:value="${prod.categoria}"  th:text="${prod.categoria.nombre}"></option>
+						    <label for="categoria.id" class="form-label">Categoria</label>
+                        	<select class="form-select" id="categoria.id" name="categoria.id" aria-label="Default select example">
+                        	  <option selected th:value="${prod.categoria.id}"  th:text="${prod.categoria.nombre}"></option>
                         	  <div th:each="cat : ${categorias}" >
-                        	  	<option th:value="${cat}" th:text="${cat.nombre}"></option>
+                        	  	<option th:value="${cat.id}" th:text="${cat.nombre}"></option>
                         	  </div>
 							</select>
 							
@@ -50,11 +50,11 @@
 						    <label for="archivo">Imagen</label>
 						    <input type="file" class="form-control" name="archivo" id="archivo">
 						    
-						    <label for="proveedor">Proveedores</label>
-						    <select class="form-select" id="id_prov" name="proveedor" aria-label="Default select example">
-		                       	  <option selected th:value="${prod.proveedor}" th:text="${prod.proveedor.nombre}"></option>
+						    <label for="proveedor.id">Proveedores</label>
+						    <select class="form-select" id="proveedor.id" name="proveedor.id" aria-label="Default select example">
+		                       	  <option selected th:value="${prod.proveedor.id}" th:text="${prod.proveedor.nombre}"></option>
 		                       	  <div th:each="prov : ${proveedores}" >
-		                       	  		<option th:value="${prov}" th:text="${prov.nombre}"></option>
+		                       	  		<option th:value="${prov.id}" th:text="${prov.nombre}"></option>
 		                       	  </div>
 							</select>
 									

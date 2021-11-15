@@ -1,7 +1,5 @@
 package curso.java.tienda.models.entities;
 
-import java.util.ArrayList;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +13,7 @@ public class Categoria {
 	private Integer id;
 	private String nombre;
 	private String descripcion;
+	private String imagen;
 	
 	public Categoria() {
 
@@ -85,10 +84,12 @@ public class Categoria {
 		this.descripcion = descripcion;
 	}
 	
-	public ArrayList<String> getAtributosModelo(){
-		ArrayList<String> atributos = new ArrayList<String>();
-		atributos.add("nombre");
-		atributos.add("descripción");
-		return atributos;
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 }

@@ -18,6 +18,10 @@ public class CategoriaService {
 	    return cr.findAll();
 	    //return listaUsuarios;
 	}
+	
+	public Integer getIdUltimaCat() {
+		return cr.buscarIdUltimaCat();
+	}
 
 	public void add(Categoria c) {
 	    cr.save(c);

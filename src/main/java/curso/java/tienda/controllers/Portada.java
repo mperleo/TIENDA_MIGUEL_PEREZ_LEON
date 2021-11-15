@@ -42,6 +42,9 @@ public class Portada {
 			return "redirect:/cargarDatosInicio";
 		}
 		
+		List<Categoria> cats = cs.getListaCategorias();
+		model.addAttribute("categorias", cats);
+		
 		Descuento descuentoAct = ds.getDescuentoAct(eu.fechaFormato("yyyy-MM-dd"));
 		model.addAttribute("descuentoAct", descuentoAct);
 		
@@ -56,6 +59,8 @@ public class Portada {
 		model.addAttribute("descuentoAct", descuentoAct);
 		List<Producto> productos = ps.getListaProductosFiltro("todos", 1);
 		model.addAttribute("productos", productos);
+		List<Categoria> cats = cs.getListaCategorias();
+		model.addAttribute("categorias", cats);
 		return "index";
 	}
 	

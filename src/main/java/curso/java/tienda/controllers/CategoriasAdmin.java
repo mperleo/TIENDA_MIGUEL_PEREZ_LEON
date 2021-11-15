@@ -12,16 +12,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Categoria;
 import curso.java.tienda.service.CategoriaService;
+import curso.java.tienda.utils.CategoriasUtil;
 
 @Controller
 @RequestMapping("/admin/categorias")
 public class CategoriasAdmin {
 	@Autowired
 	private CategoriaService cs;
+	@Autowired
+	private CategoriasUtil cu;
 	
 	private static Logger logger = LogManager.getLogger(CategoriasAdmin.class);
 	
@@ -42,10 +47,14 @@ public class CategoriasAdmin {
 	}
 
 	@PostMapping("editar/{id_categoria}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_categoria") String id_cat, @ModelAttribute Categoria cat, RedirectAttributes redirectAttributes) {
+	public String editarGuardar(Model model, @PathVariable("id_categoria") String id_cat, @ModelAttribute Categoria cat, RedirectAttributes redirectAttributes, @RequestParam(required=false,name="archivo") MultipartFile file) {
 	    Integer id_categoria = Integer.parseInt(id_cat);
 	    cat.setId(id_categoria);
+	    if(!file.isEmpty()) {
+			cat.setImagen(cu.subirImagen(id_cat, file));
+		}
 	    cs.edit(cat);
+	    
 	    logger.info("Categoria id: "+id_cat+" eidtada");
 	    redirectAttributes.addFlashAttribute("mensajeOk", "Categoría editada correctamente");
 	    return "redirect:/admin/categorias";
@@ -66,8 +75,13 @@ public class CategoriasAdmin {
 	}
 
 	@PostMapping("nuevo/guardar")
-	public String nuevoGuardar(Model model, @ModelAttribute Categoria cat, RedirectAttributes redirectAttributes) {
+	public String nuevoGuardar(Model model, @ModelAttribute Categoria cat, RedirectAttributes redirectAttributes, @RequestParam(required=false,name="archivo") MultipartFile file) {
 	    cs.add(cat);
+	    if(!file.isEmpty()) {
+			Integer id_ultimo = cs.getIdUltimaCat();
+			cat.setImagen(cu.subirImagen(id_ultimo.toString(), file));
+			cs.add(cat);
+		}
 	    logger.info("Nueva categoria guardada");
 	    redirectAttributes.addFlashAttribute("mensajeOk", "Categoría creada correctamente");
 	    return "redirect:/admin/categorias";

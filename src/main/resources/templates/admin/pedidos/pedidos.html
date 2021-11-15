@@ -10,9 +10,8 @@
                 <main>
                     <div class="container-fluid px-4">
                     
-                    	<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+                    	<div class="alert alert-danger" role="alert" th:if="${mensaje != null}">
 							<span th:text="${mensaje}"></span>
-							<span th:text="${session.mensaje}"></span>
 						</div>
 						
 						<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">

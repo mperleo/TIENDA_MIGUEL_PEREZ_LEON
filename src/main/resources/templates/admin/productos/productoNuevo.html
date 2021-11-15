@@ -18,10 +18,10 @@
 						<form method="post" th:object="${prod}" th:action="@{/admin/productos/nuevo/guardar}" enctype="multipart/form-data">
 						  <div class="form-group">
 						  
-						    <label for="categoria" class="form-label">Categoria</label>
-                        	<select class="form-select" id="categoria" name="categoria" aria-label="Default select example">
+						    <label for="categoria.id" class="form-label">Categoria</label>
+                        	<select class="form-select" id="categoria.id" name="categoria.id" aria-label="Default select example">
                         	  <div th:each="cat : ${categorias}" >
-                        	  	<option th:value="${cat}" th:text="${cat.nombre}"></option>
+                        	  	<option th:value="${cat.id}" th:text="${cat.nombre}"></option>
                         	  </div>
 							</select>
 							
@@ -48,10 +48,10 @@
 						    <label for="archivo">Imagen</label>
 						    <input type="file" class="form-control" name="archivo" id="archivo">
 						    
-						    <label for="proveedor">Proveedores</label>
-						    <select class="form-select" id="id_prov" name="proveedor" aria-label="Default select example">
+						    <label for="proveedor.id">Proveedores</label>
+						    <select class="form-select" id="proveedor.id" name="proveedor.id" aria-label="Default select example">
 		                       	  <div th:each="prov : ${proveedores}" >
-		                       	  		<option th:value="${prov}" th:text="${prov.nombre}"></option>
+		                       	  		<option th:value="${prov.id}" th:text="${prov.nombre}"></option>
 		                       	  </div>
 							</select>
 							

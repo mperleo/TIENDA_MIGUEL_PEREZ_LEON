@@ -29,22 +29,22 @@
 										data-slider-id="1">
 										<div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0">
 											<img class="w-100"
-												th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+												th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 												th:alt="${producto.imagen}">
 										</div>
 										<div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0">
 											<img class="w-100"
-												th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+												th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 												th:alt="${producto.imagen}">
 										</div>
 										<div class="owl-thumb-item flex-fill mb-2 mr-2 mr-sm-0">
 											<img class="w-100"
-												th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+												th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 												th:alt="${producto.imagen}">
 										</div>
 										<div class="owl-thumb-item flex-fill mb-2">
 											<img class="w-100"
-												th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+												th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 												th:alt="${producto.imagen}">
 										</div>
 									</div>
@@ -54,22 +54,22 @@
 										<a class="d-block" href="img/product-detail-1.jpg"
 											data-lightbox="product" title="Product item 1"> <img
 											class="img-fluid"
-											th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+											th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 											th:alt="${producto.imagen}">
 										</a> <a class="d-block" href="img/product-detail-2.jpg"
 											data-lightbox="product" title="Product item 2"> <img
 											class="img-fluid"
-											th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+											th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 											th:alt="${producto.imagen}">
 										</a> <a class="d-block" href="img/product-detail-3.jpg"
 											data-lightbox="product" title="Product item 3"> <img
 											class="img-fluid"
-											th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+											th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 											th:alt="${producto.imagen}">
 										</a> <a class="d-block" href="img/product-detail-4.jpg"
 											data-lightbox="product" title="Product item 4"> <img
 											class="img-fluid"
-											th:src="@{/img/products/{name}/ (name = ${producto.imagen})}"
+											th:src="@{/img/{name}/ (name = ${producto.imagen})}"
 											th:alt="${producto.imagen}">
 										</a>
 									</div>
@@ -142,9 +142,11 @@
 					<div class="tab-pane fade" id="reviews" role="tabpanel"
 						aria-labelledby="reviews-tab">
 						<div class="p-4 p-lg-5 bg-white">
+						
 							<div th:if="${puedeValorar}">
 								<form method="post" th:object="${valoracion}" th:action="@{/valoraciones/nuevo/{prodID}/guardar (prodID = ${producto.id})}" class="mb-3">
 									<h4 class="mb-2 text-uppercase">valora el producto</h4>
+									
 									<label for="valoracion" class="form-label">Puntua el producto</label>
 									<span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></span>
 									<input type="number" class="form-control" id="valoracion" name="valoracion" th:field="*{valoracion}" placeholder="Indica una nota de 0 al 10"/>
@@ -152,7 +154,8 @@
 									<label for="comentario" class="form-label">Pon un cometario</label>
 									<span th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></span>
 									<textarea  class="form-control" id="comentario" name="comentario" th:field="*{comentario}" ></textarea>
-								<button type="submit" class="btn btn-primary mt-3">Valorar</button>
+									
+									<button type="submit" class="btn btn-primary mt-3">Valorar</button>
 								</form>
 							</div>
 							
@@ -185,7 +188,7 @@
 								<a class="d-block"
 									th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}">
 									<img class="img-fluid w-100"
-									th:src="@{/img/products/{name}/ (name = ${prod.imagen})}"
+									th:src="@{/img/{name}/ (name = ${prod.imagen})}"
 									th:alt="${prod.imagen}">
 								</a>
 								<div class="product-overlay">

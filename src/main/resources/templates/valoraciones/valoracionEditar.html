@@ -18,10 +18,15 @@
 
 			<form method="post" th:object="${valoracion}" th:action="@{/valoraciones/editar/{valID}/guardar (valID = ${valoracion.id}) }" class="mb-3">
 				<h4 class="mb-2 text-uppercase">valora el producto</h4>
-				<label for="valoracion" class="form-label">Puntua el producto</label> <span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></span>
+				
+				<label for="valoracion" class="form-label">Puntua el producto</label> 
+				<span th:if="${#fields.hasErrors('valoracion')}" th:errors="*{valoracion}"></span>
 				<input type="number" class="form-control" id="valoracion" name="valoracion" th:field="*{valoracion}" placeholder="Indica una nota de 0 al 10"/>
-				<label for="comentario" class="form-label">Pon un cometario</label> <span th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></span>
+				
+				<label for="comentario" class="form-label">Pon un cometario</label> 
+				<span th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></span>
 				<textarea  class="form-control" id="comentario" name="comentario" th:field="*{comentario}" ></textarea>
+				
 				<button type="submit" class="btn btn-primary mt-3">Valorar</button>
 			</form>
 		</div>

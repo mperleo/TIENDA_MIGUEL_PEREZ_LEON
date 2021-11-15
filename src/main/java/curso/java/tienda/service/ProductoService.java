@@ -39,6 +39,10 @@ public class ProductoService {
 		return pr.buscarProductosPocoStock();
 	}
 	
+	public Integer getIdUltimoProducto() {
+		return pr.buscarIdUltimoProdcuto();
+	}
+	
 	public List<Producto> getListaProductosFiltro(String id_cat, Integer orden){
 		if(id_cat.equals("todos")) {
 			switch (orden) {

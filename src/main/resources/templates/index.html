@@ -32,30 +32,17 @@
 					<p class="small text-muted small text-uppercase mb-1">Como los profesionales</p>
 					<h2 class="h5 text-uppercase mb-4">Categorias</h2>
 				</header>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
-							<a class="category-item" href="tienda?id_cat=1"><img
-								class="img-fluid" src="/img/bici-city.png" alt="cat city"><strong
-								class="category-item-title">Bicicletas urbanas</strong></a>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
-							<a class="category-item" href="tienda?id_cat=2"><img
-								class="img-fluid" src="/img/bici-gravel.png" alt="cat city"><strong
-								class="category-item-title">Bicicletas de gravel</strong></a>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
-							<a class="category-item" href="tienda?id_cat=3"><img
-								class="img-fluid" src="/img/bici-mountain.png" alt="cat city"><strong
-								class="category-item-title">Bicicletas de montaña</strong></a>
-						</div>
-						<div class="col-xl-3 col-lg-4 col-sm-6 border-category">
-							<a class="category-item" href="tienda?id_cat=4"><img
-								class="img-fluid" src="/img/bici-road.png" alt="cat city"><strong
-								class="category-item-title">Bicicletas de carretera</strong></a>
-						</div>
+				
+					<div class="row" >
+
+							<div class="col-xl-3 col-lg-4 col-sm-6 border-category" th:each="cat : ${categorias}">
+								<a class="category-item" th:href="@{/tienda/(id_cat = ${cat.id})}"><img
+									class="img-fluid" th:src="@{/img/{name}/ (name = ${cat.imagen})}" th:alt="${cat.imagen}">
+									<strong class="category-item-title">Bicicletas <span th:text="${cat.nombre}"></span> </strong></a>
+							</div>
+
 					</div>
-				</div>
+				
 
 			</section>
 			<!-- TRENDING PRODUCTS-->
@@ -72,7 +59,7 @@
 							<div class="position-relative mb-3">
 								<div class="badge text-white badge-"></div>
 								<a class="d-block" th:href="@{/producto/ver/{prodID}/ (prodID = ${prod.id})}">
-									<img class="img-fluid w-100" th:src="@{/img/products/{name}/ (name = ${prod.imagen})}" th:alt="${prod.imagen}">
+									<img class="img-fluid w-100" th:src="@{/img/{name}/ (name = ${prod.imagen})}" th:alt="${prod.imagen}">
 								</a>
 								<div class="product-overlay">
 									<ul class="mb-0 list-inline">

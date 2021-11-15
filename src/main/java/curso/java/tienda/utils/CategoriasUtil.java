@@ -17,7 +17,8 @@ public class CategoriasUtil {
 	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
-	    String ruta = dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
+	    String ruta = "/"+dbConfigFileRoute + "/static/img/cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
+	    String rutaRetorno = "cats/"+id_cat+ this.extensionFichero(file.getOriginalFilename());
 	    
 	    //ruta = "C:\\" + file.getOriginalFilename();
 	    
@@ -29,7 +30,7 @@ public class CategoriasUtil {
 			e.printStackTrace();
 		}
 	    
-	    return ruta;
+	    return rutaRetorno;
 	} 
 	
 	/**

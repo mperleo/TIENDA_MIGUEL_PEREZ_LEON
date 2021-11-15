@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import curso.java.tienda.models.entities.Categoria;
@@ -119,13 +120,16 @@ public class ProductosAdmin {
 	}
 	
 	@PostMapping("editar/{id_prod}/guardar")
-	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod, RedirectAttributes redirectAttributes) {
+	public String editarGuardar(Model model, @PathVariable("id_prod") String id_prod, @ModelAttribute Producto prod, RedirectAttributes redirectAttributes,  @RequestParam(required=false,name="archivo") MultipartFile file) {
 		Integer id_producto = Integer.parseInt(id_prod);
 		
 		// calculo del precio con iva y lo guardo en el objeto
 		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
 		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
 		prod.setId(id_producto); 
+		if(!file.isEmpty()) {
+			prod.setImagen(pu.subirImagen(id_prod, file));
+		}
 		ps.editProducto(prod);
 		redirectAttributes.addFlashAttribute("mensajeOk", "Producto editado correctamente");
 		return "redirect:/admin/productos";
@@ -156,12 +160,18 @@ public class ProductosAdmin {
 	}
 	
 	@PostMapping("nuevo/guardar")
-	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod,RedirectAttributes redirectAttributes) {
+	public String pnuevoGuardar(Model model, @ModelAttribute Producto prod,RedirectAttributes redirectAttributes, @RequestParam(required=false,name="archivo") MultipartFile file) {
 		// calculo del precio con iva y lo guardo en el objeto
 		Float precioIVA = (float) (prod.getPrecio() * ( 1 + (prod.getImpuesto()/100)));
 		prod.setPrecioImpuesto(DoubleRounder.round(precioIVA, 3));
 				
 		ps.addProducto(prod);
+		
+		if(!file.isEmpty()) {
+			Integer id_ultimo = ps.getIdUltimoProducto();
+			prod.setImagen(pu.subirImagen(id_ultimo.toString(), file));
+			ps.addProducto(prod);
+		}
 		logger.info("Nuevo producto dado de alta");
 		redirectAttributes.addFlashAttribute("mensajeOk", "Producto creado correctamente");
 		return "redirect:/admin/productos";
