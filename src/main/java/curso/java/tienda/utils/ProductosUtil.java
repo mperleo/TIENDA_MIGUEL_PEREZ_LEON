@@ -58,7 +58,7 @@ public class ProductosUtil {
 	    //dbConfigFileRoute = dbConfigFileRoute.substring(1, dbConfigFileRoute.length());
 	    int separador = dbConfigFileRoute.lastIndexOf("/");
 	    dbConfigFileRoute = dbConfigFileRoute.substring(1, separador);
-	    String ruta = dbConfigFileRoute + "/static/img/prods/" + file.getOriginalFilename();
+	    String ruta = dbConfigFileRoute + "/static/img/prods/"+id_prod+ this.extensionFichero(file.getOriginalFilename());
 	    
 	    //ruta = "C:\\" + file.getOriginalFilename();
 	    
@@ -71,6 +71,26 @@ public class ProductosUtil {
 		}
 	    
 	    return ruta;
+	}
+	
+	/**
+	 * Funcion que obtiene la extension de un fichero a partir de su nombre
+	 * Para los ficheros que tienen la extension de 3 caractreres con substring de -4 se obtendra . + extension
+	 * Si la extension es de más de 3 caracteres no se obtendra el . por eso se hace el substring con los 5 ultimos
+	 * @param nombreFichero nombre del fichero del que se quiere obtener la extensión
+	 * @return extension del fichero indicado como parámetro
+	 */
+	public String extensionFichero(String nombrefichero) {
+		String extension = nombrefichero.substring(nombrefichero.length() - 4);
+		// si la extension es ej: '.png' con los 4 últimos caracteres del nombre tenemos la extension completa
+		if(extension.contains(".")) {
+			return extension;
+		}
+		// si la extension es ej: '.jpeg' con los 5 últimos caracteres del nombre tenemos la extension completa
+		else {
+			extension = nombrefichero.substring(nombrefichero.length() - 5);
+			return extension;
+		}
 	}
 	
 	public void escribirExcell(List<Producto> productos) {
