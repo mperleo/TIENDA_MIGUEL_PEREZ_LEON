@@ -68,10 +68,12 @@ public class ProductosUtil {
 			Files.copy(file.getInputStream(), Paths.get(ruta));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			logger.error("Error al subir una imagen de producto al servidor Error: "+e);
 			e.printStackTrace();
 		}
 	    
-	    return ruta;
+	    return rutaRetorno;
+	 
 	}
 	
 	/**

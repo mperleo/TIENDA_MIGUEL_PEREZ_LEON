@@ -5,11 +5,16 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 @Component
 public class CategoriasUtil {
+	
+	private static Logger logger = LogManager.getLogger(CategoriasUtil.class);
+	
 	public String subirImagen(String id_cat, MultipartFile file) {
 		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 	    URL appResourceURL = loader.getResource("static");
@@ -27,6 +32,7 @@ public class CategoriasUtil {
 			Files.copy(file.getInputStream(), Paths.get(ruta));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			logger.error("Error al subir una imagen de categoría al servidor Error: "+e);
 			e.printStackTrace();
 		}
 	    
