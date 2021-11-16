@@ -29,7 +29,7 @@ public class UsuarioGest {
 		return "usuario/ver";
 	}
 	
-	@GetMapping("modificar/")
+	@GetMapping("modificar")
 	public String modificarUsuario(HttpSession session) {
 		return "usuario/modificar";
 	}

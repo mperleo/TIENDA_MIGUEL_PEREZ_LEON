@@ -39,7 +39,7 @@ public class ConfiguracionAdmin {
 	    Configuracion config = cs.getConfiguracionXId(id_configuracion);
 	    model.addAttribute("conf", config);
 	    
-	    return "admin/onfiguraciones/configuracionEditar";
+	    return "admin/configuraciones/configuracionEditar";
 	}
 
 	@PostMapping("editar/{id_configuracion}/guardar")
@@ -63,7 +63,7 @@ public class ConfiguracionAdmin {
 
 	@GetMapping("nuevo")
 	public String nuevo(Model model) {
-	    return "admin/onfiguraciones/configuracionNuevo";
+	    return "admin/configuraciones/configuracionNuevo";
 	}
 
 	@PostMapping("nuevo/guardar")
