@@ -13,10 +13,14 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import curso.java.tienda.models.entities.Configuracion;
 import curso.java.tienda.models.entities.Usuario;
+import curso.java.tienda.service.ConfiguracionService;
+import curso.java.tienda.service.UsuarioService;
 
 /**
  * Filtro de acceso para controlar que solo los usuarios con permisos accedan a las partes que les corresponde de la web
@@ -28,6 +32,11 @@ import curso.java.tienda.models.entities.Usuario;
 @Order(1)
 public class AccessFilter implements Filter {
 
+	@Autowired 
+	ConfiguracionService cs;
+	@Autowired
+	UsuarioService us;
+	
 	private static Logger logger = LogManager.getLogger(AccessFilter.class);
 
 	@Override
@@ -70,9 +79,17 @@ public class AccessFilter implements Filter {
 
 		} else {
 			Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-
+			Configuracion contra_defecto = cs.getPorClave("contra_por_defecto");
+			String contraDefectoHash = us.hashPassword(contra_defecto.getValor());
 			// administrador tiene acceso a todas las partes
-			if (usuario.getId_rol() == 1 || usuario.getId_rol() == 2) {
+			if(path.equals("/miUsuario/modificarPass/") || path.equals("/login/cerrarSesion")  || path.contains("/vendor") ||path.contains("/img") || path.contains("/css")  || path.contains("/js")) {
+				chain.doFilter(request, response);
+			}
+			else if(usuario.getClave().equals(contraDefectoHash)) {
+				logger.warn("Usuario tiene la contraseña por defecto");
+				res.sendRedirect("/miUsuario/modificarPass/");
+			}
+			else if (usuario.getId_rol() == 1 || usuario.getId_rol() == 2) {
 				chain.doFilter(request, response);
 			} else if (usuario.getId_rol() == 3) {
 				// si intenta acceder a la parte de paginas de administrador se deniega la
