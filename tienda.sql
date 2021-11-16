@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-11-2021 a las 10:06:26
+-- Tiempo de generación: 16-11-2021 a las 11:02:58
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -270,7 +270,7 @@ INSERT INTO `pedidos` (`id`, `id_usuario`, `fecha`, `metodo_pago`, `estado`, `nu
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
+  `descripcion` varchar(1000) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `fecha_alta` date NOT NULL,
@@ -287,19 +287,19 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `nombre`, `descripcion`, `precio`, `stock`, `fecha_alta`, `fecha_baja`, `impuesto`, `imagen`, `precio_impuesto`, `proveedor_id`, `categoria_id`) VALUES
-(1, 'Cannondale TopStone carbon 4', 'muy bonita', 800, 12, '2021-10-12', '2021-11-17', 21, 'products/1.jpg', 968, 2, 2),
-(3, 'Cube access ws', 'muy bonita', 800, 2, '2021-11-12', '2022-06-17', 21, 'products/cube-access-ws-exc-women-stonegreynfern-1.jpg', 968, 1, 4),
-(4, 'Cube aim ex', 'muy cara', 6000, 10, '2021-11-12', '2022-11-23', 21, 'products/cube-aim-ex-bluenred-1.jpg', 7260, 1, 4),
-(5, 'Excelsior Touring 3 speed', 'muy bonita', 800, 12, '2021-11-12', '2020-01-12', 21, 'products/excelsior-touring-3-speed-tsp-opal-blue-boss-blue-1.jpg', 968, 1, 1),
-(6, 'Fixie blackheath', 'muy cara', 6000, 12, '2021-11-12', '2020-01-12', 21, 'products/fixie-inc-blackheath-petrol-red-1.jpg', 7260, 1, 1),
-(7, 'Johni-Loco viena', 'muy bonita', 800, 11, '2021-11-12', '2020-01-12', 21, 'products/johnny-loco-vienna-urban-cruiser-step-over-piano-black-1.jpg', 968, 1, 1),
-(8, 'Kona operator', 'muy cara', 6000, 12, '2021-11-12', '2023-11-08', 21, 'products/kona-operator-cr-gloss-dark-green-metallic-green-2.jpg', 7260, 1, 4),
-(9, 'Marin Headlands 2', 'muy cara', 6000, 5, '2021-11-12', '2021-11-26', 21, 'products/marin-headlands-2-gloss-teal-carbon-magenta-1.jpg', 7260, 1, 3),
-(10, 'Orbea orca aero', 'muy cara', 6000, 8, '2021-11-12', '2021-11-24', 21, 'products/orbea-orca-aero-m20i-team-black-1.jpg', 7260, 1, 2),
-(11, 'Ortler Van Dyck wave', 'muy cara', 6000, 11, '2021-11-12', '2020-01-12', 21, 'products/ortler-van-dyck-wave-red-1.jpg', 7260, 1, 1),
-(12, 'Polygon Strattos', 'muy cara', 6000, 11, '2021-11-12', '2021-11-24', 21, 'products/polygon-strattos-s3-white-2.jpg', 7260, 1, 2),
-(13, 'Santa Cruz TallBoy 4', 'muy cara', 6000, 11, '2021-11-12', '2021-11-24', 21, 'products/santa-cruz-tallboy-4-cc-29-x01-reserve-gloss-black-1.jpg', 7260, 1, 4),
-(14, 'Willier GTR team rim', 'muy cara', 6000, 10, '2021-11-12', '2021-11-24', 21, 'products/wilier-gtr-team-rim-105-black-red-glossy-finish-1.jpg', 7260, 1, 2);
+(1, 'Cannondale TopStone carbon 4', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 800, 12, '2021-10-12', '2021-11-17', 21, 'products/1.jpg', 968, 2, 2),
+(3, 'Cube access ws', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 800, 2, '2021-11-12', '2022-06-17', 21, 'products/cube-access-ws-exc-women-stonegreynfern-1.jpg', 968, 1, 4),
+(4, 'Cube aim ex', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 10, '2021-11-12', '2022-11-23', 21, 'products/cube-aim-ex-bluenred-1.jpg', 7260, 1, 4),
+(5, 'Excelsior Touring 3 speed', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 800, 12, '2021-11-12', '2020-01-12', 21, 'products/excelsior-touring-3-speed-tsp-opal-blue-boss-blue-1.jpg', 968, 1, 1),
+(6, 'Fixie blackheath', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 12, '2021-11-12', '2020-01-12', 21, 'products/fixie-inc-blackheath-petrol-red-1.jpg', 7260, 1, 1),
+(7, 'Johni-Loco viena', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 800, 11, '2021-11-12', '2020-01-12', 21, 'products/johnny-loco-vienna-urban-cruiser-step-over-piano-black-1.jpg', 968, 1, 1),
+(8, 'Kona operator', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 12, '2021-11-12', '2023-11-08', 21, 'products/kona-operator-cr-gloss-dark-green-metallic-green-2.jpg', 7260, 1, 4),
+(9, 'Marin Headlands 2', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 5, '2021-11-12', '2021-11-26', 21, 'products/marin-headlands-2-gloss-teal-carbon-magenta-1.jpg', 7260, 1, 3),
+(10, 'Orbea orca aero', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 8, '2021-11-12', '2021-11-24', 21, 'products/orbea-orca-aero-m20i-team-black-1.jpg', 7260, 1, 2),
+(11, 'Ortler Van Dyck wave', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 11, '2021-11-12', '2020-01-12', 21, 'products/ortler-van-dyck-wave-red-1.jpg', 7260, 1, 1),
+(12, 'Polygon Strattos', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 11, '2021-11-12', '2021-11-24', 21, 'products/polygon-strattos-s3-white-2.jpg', 7260, 1, 2),
+(13, 'Santa Cruz TallBoy 4', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 11, '2021-11-12', '2021-11-24', 21, 'products/santa-cruz-tallboy-4-cc-29-x01-reserve-gloss-black-1.jpg', 7260, 1, 4),
+(14, 'Willier GTR team rim', 'una bicicleta de trekking cómoda y deportiva para un poco más de libertad y comodidad en las excursiones o tours diarios. El cuadro de aluminio se entrega con una cómoda horquilla de suspensión. El sistema de desviadores Shimano, ampliamente clasificado, ofrece reservas suficientes para excursiones en la cordillera baja. El equipamiento apto para circular, la dinamo de buje, las cubiertas Schwalbe con protección contra pinchazos y los frenos V-brake de mordida garantizan una seguridad fiable en el tráfico rodado. Con la potencia regulable en altura, la posición de asiento deseada se puede ajustar de forma ergonómica de forma óptima - en resumen, una buena bicicleta para paseos en bicicleta relajados por carreteras, campos y prados de su elección. ', 6000, 10, '2021-11-12', '2021-11-24', 21, 'products/wilier-gtr-team-rim-105-black-red-glossy-finish-1.jpg', 7260, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -374,7 +374,9 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `id_rol`, `email`, `clave`, `nombre`, `apellido1`, `apellido2`, `direccion`, `provincia`, `localidad`, `telefono`, `dni`) VALUES
 (1, 3, 'perezleon.miguel@gmail.com', 'YWRtaW4=', 'Miguel', 'Pérez', 'León', 'Calle Abajo número 6', 'Zamora', 'Bercianos de Aliste', '666666666', '71111111e'),
 (2, 1, 'admin@admin.com', 'YWRtaW4=', 'admin12', 'admin', 'admin', 'admin', 'admin', 'admn', 'admin', 'admin'),
-(4, 2, 'empleado@empleado.com', 'YWRtaW4=', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', '312312313123', '123123123123');
+(4, 2, 'empleado@empleado.com', 'YWRtaW4=', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', 'empleado', '312312313123', '123123123123'),
+(9, 3, 'paco@correo.com', 'YWRtaW4=', 'Paco', 'Pérez', 'Pérez', 'Calle falsa 123,4', 'Zamora', 'Zamora', '666666666', '32345343F'),
+(10, 3, 'ejemplo@contraDefecto.com', 'MTIzNDVQYXNzd29yZA==', 'ejemplo', 'ejemplo', 'ejemplo', 'Calle falsa 123,4', 'Ciudad Real', 'Un sitio', '666666666', '234234234Q');
 
 -- --------------------------------------------------------
 
@@ -396,7 +398,14 @@ CREATE TABLE `valoraciones` (
 
 INSERT INTO `valoraciones` (`id`, `valoracion`, `comentario`, `usuario_id`, `producto_id`) VALUES
 (1, 6, 'muy buena pero muy cara', 1, 4),
-(3, 7, 'Muy buena calidad precio', 1, 3);
+(3, 7, 'Muy buena calidad precio', 1, 3),
+(4, 6, 'Buen material algo caro', 9, 1),
+(6, 9, 'Ejemplo de valoracion', 4, 7),
+(7, 7, 'Ejemplo de valoracion', 4, 1),
+(8, 9, 'Ejemplo de valoracion', 4, 5),
+(9, 7, 'Ejemplo de valoracion', 4, 6),
+(10, 9, 'Buena pero algo subida de precio', 9, 4),
+(11, 7, 'Ejemplo de valoracion', 4, 4);
 
 --
 -- Índices para tablas volcadas
@@ -558,13 +567,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `valoraciones`
 --
 ALTER TABLE `valoraciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

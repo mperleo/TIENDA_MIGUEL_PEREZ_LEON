@@ -142,7 +142,7 @@ CREATE TABLE `pedidos` (
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
+  `descripcion` varchar(1000) DEFAULT NULL,
   `precio` double DEFAULT NULL,
   `stock` int(11) DEFAULT NULL,
   `fecha_alta` date NOT NULL,
