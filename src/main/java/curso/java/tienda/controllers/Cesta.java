@@ -227,10 +227,12 @@ public class Cesta {
 				Descuento descuento = (Descuento)session.getAttribute("descuento");
 				if(descuento != null) {
 					total = total * (1- (descuento.getDescuento()/100));
-					total = DoubleRounder.round(total, 3);
 					pedido.setDescuento(descuento.getDescuento());
 					pedido.setCodigoDescuento(descuento.getCodigo());
 				}
+				
+				// redondeo el total para que se guarde en la base de datos redondeado directamente
+				total = DoubleRounder.round(total, 3);
 				// meto los datos del pedido
 				pedido.setIdUsuario(usuario.getId());
 				pedido.setEstado("pendiente");
