@@ -21,6 +21,7 @@ import curso.java.tienda.models.entities.Pedido;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.DetallePedidoService;
 import curso.java.tienda.service.PedidoService;
+import curso.java.tienda.utils.PedidosUtil;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -31,6 +32,9 @@ public class PedidosUsuario {
 	
 	@Autowired
 	private DetallePedidoService dps;
+	
+	@Autowired
+	private PedidosUtil pu;
 	
 	private static Logger logger = LogManager.getLogger(PedidosUsuario.class);
 	
@@ -188,7 +192,7 @@ public class PedidosUsuario {
 			if(usuario.getId() == pedido.getIdUsuario()) {
 				List<DetallePedido> lineas = dps.getDetallePedidoXIdPedido(Integer.parseInt(id_pedido));
 				
-				//TODO: hacer el pdf y descargarlo
+				pu.generarPdf(pedido, lineas);
 				
 				model.addAttribute("pedido", pedido);
 				model.addAttribute("lineas", lineas);

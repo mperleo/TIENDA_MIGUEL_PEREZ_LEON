@@ -16,9 +16,8 @@
 			</div>
 
 			<div class="alert alert-danger" role="alert"
-				th:if="${mensaje != null or session.mensaje != null}">
-				<span th:text="${mensaje}"></span> <span
-					th:text="${session.mensaje}"></span>
+				th:if="${mensaje != null}">
+				<span th:text="${mensaje}"></span>
 			</div>
 
 			<div class="alert alert-success" role="alert"
