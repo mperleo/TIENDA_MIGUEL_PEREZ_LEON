@@ -1,7 +1,10 @@
 package curso.java.tienda.controllers;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.LogManager;
@@ -10,6 +13,7 @@ import org.decimal4j.util.DoubleRounder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +25,7 @@ import curso.java.tienda.models.entities.Pedido;
 import curso.java.tienda.models.entities.Usuario;
 import curso.java.tienda.service.DetallePedidoService;
 import curso.java.tienda.service.PedidoService;
+import curso.java.tienda.utils.PedidosUtil;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -31,6 +36,9 @@ public class PedidosUsuario {
 	
 	@Autowired
 	private DetallePedidoService dps;
+	
+	@Autowired
+	private PedidosUtil pu;
 	
 	private static Logger logger = LogManager.getLogger(PedidosUsuario.class);
 	
@@ -180,31 +188,41 @@ public class PedidosUsuario {
 	}
 	
 	@GetMapping("generarFactura/{id_pedido}")
-	public String generarFactura(HttpSession session, Model model, @PathVariable("id_pedido") String id_pedido) {
+	public void generarFactura(HttpSession session, HttpServletResponse response, Model model, @PathVariable("id_pedido") String id_pedido) {
 		Usuario usuario = (Usuario) session.getAttribute("usuario");
 		
 		if(usuario !=null) {
 			Pedido pedido = peds.getPedidoXId(Integer.parseInt(id_pedido));
 			if(usuario.getId() == pedido.getIdUsuario()) {
 				List<DetallePedido> lineas = dps.getDetallePedidoXIdPedido(Integer.parseInt(id_pedido));
-				
-				//TODO: hacer el pdf y descargarlo
-				
-				model.addAttribute("pedido", pedido);
-				model.addAttribute("lineas", lineas);
-				return "pedidos/pedidoUsuario";
+				String nombreArchivo = pu.generarPdf(pedido, lineas);
+				try {
+					// la funcion getDesktop no funciona en los navegadores en los que he probado el proyecto y para hacer que se decargue el fichero se mada por el response
+					// por esto la pagina se debe cargar en un enlace que vaya a una página con target blank
+					FileInputStream fis = new FileInputStream("./ficherosPdf/"+nombreArchivo);
+					String mimeType = "application/pdf";
+					response.setContentType(mimeType);
+					response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", nombreArchivo));
+					response.setContentLength(fis.available());
+					FileCopyUtils.copy(fis, response.getOutputStream());
+					
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					logger.error("Error al leer el fichero pdf para descargarlo , error: "+ e.getMessage());
+					e.printStackTrace();
+				}
+
+
 			}
 			else {
-				model.addAttribute("mensaje", "No tienes permiso para acceder a este pedido");
 				logger.error("Intento de acceder a un pedido de otro usuario, id_usuario"+usuario.getId()+" id_pedido:"+id_pedido);
-				return "error";
+				//return "error";
 			}
 				
 		}
 		else {
-			model.addAttribute("mensaje", "Para ver el detalle del pedido tienes que iniciar sesión");
 			logger.error("Intento de acceder al detalle de un pedido sin sesion iniciada, n_ped: "+id_pedido);
-			return "login/login";
+			//return "login/login";
 		}
 	}
 	

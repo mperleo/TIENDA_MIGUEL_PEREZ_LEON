@@ -16,9 +16,9 @@
 				</nav>
 			</div>
 			
-			<div class="alert alert-danger" role="alert" th:if="${mensaje != null or session.mensaje != null}">
+			<div class="alert alert-danger" role="alert"
+				th:if="${mensaje != null}">
 				<span th:text="${mensaje}"></span>
-				<span th:text="${session.mensaje}"></span>
 			</div>
 			
 			<div class="alert alert-success" role="alert" th:if="${mensajeOk != null}">
@@ -28,6 +28,8 @@
 			<div class="card mb-4" id="forms">
 				<div class="h4 card-header font-syne py-lg-4">Lista pedidos</div>
 				<div class="card-body">
+				
+					<a th:if="${pedido.estado == 'enviado'}" class="btn btn-primary" th:href="@{/pedidos/generarFactura/{pedID}/ (pedID = ${pedido.id})}" target="blank">Descargar factura en pdf</a>
 					
 					<div class="h3 py-lg-4">Detalles del pedido</div>
 					
