@@ -1,10 +1,13 @@
 package curso.java.tienda.utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.itextpdf.text.BaseColor;
@@ -21,7 +24,9 @@ import curso.java.tienda.models.entities.Pedido;
 
 @Component
 public class PedidosUtil {
-
+	
+	private static Logger logger = LogManager.getLogger(PedidosUtil.class);
+	
 	/**
 	 * Escribir pdf
 	 * @param args
@@ -33,7 +38,9 @@ public class PedidosUtil {
 		DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
 		PdfWriter writer = null;
 		Document documento = new Document(PageSize.A4, 20, 20, 70, 50);
+		//String nombreFichero = "./ficherosPdf/"+fecha.format(formatoFecha)+"-Pedido-"+pedido.getNum_factura()+".pdf";
 		String nombreFichero = "./ficherosPdf/"+fecha.format(formatoFecha)+"-Pedido-"+pedido.getNum_factura()+".pdf";
+		String nombreFicheroRetorno = fecha.format(formatoFecha)+"-Pedido-"+pedido.getNum_factura()+".pdf";
 	    try {      
 	    	//Obtenemos la instancia del archivo a utilizar
 	    	writer = PdfWriter.getInstance(documento, new FileOutputStream(nombreFichero));
@@ -138,8 +145,9 @@ public class PedidosUtil {
 		    documento.close(); //Cerramos el documento
 		    writer.close(); //Cerramos writer
 		    
-			return nombreFichero;
+			return nombreFicheroRetorno;
 	    } catch (Exception ex) {
+	    	logger.error("Error al crear el fichero pdf, error: "+ ex.getMessage());
 	    	ex.getMessage();
 	    	return null;
 	    }
